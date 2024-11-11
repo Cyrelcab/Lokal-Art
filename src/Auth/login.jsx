@@ -8,7 +8,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-screen bg-gray-100">
       <div className="relative w-full md:w-1/2">
         <div
           className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"

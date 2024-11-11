@@ -36,10 +36,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-screen bg-gray-100">
       {/*Signup field*/}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
-        <div className="w-full max-w-md border rounded-lg p-8 shadow-md">
+        <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
           <h1 className="text-3xl font-bold mb-8 text-center">Signup</h1>
 
           <form onSubmit={handleSubmit} className="space-y-4">
