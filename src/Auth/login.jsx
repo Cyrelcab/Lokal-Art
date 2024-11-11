@@ -1,4 +1,12 @@
+import { useEffect } from "react";
+import { setDocumentTitle } from "../utils/document";
+import { use } from "express/lib/router";
+
 const Login = () => {
+  useEffect(() => {
+    setDocumentTitle("Login | Lokal-Art");
+  }, []);
+
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <div className="relative w-full md:w-1/2">

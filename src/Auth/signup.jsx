@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { setDocumentTitle } from "../utils/document";
 
 const Signup = () => {
+  useEffect(() => {
+    setDocumentTitle("Signup | Lokal-Art");
+  }, []);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
