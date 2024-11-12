@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { setDocumentTitle } from "../utils/document.js";
 // import { use } from "./express/lib/router";
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -22,9 +23,12 @@ const Login = () => {
     }));
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your login logic here
+    navigate("/");
     console.log("Login attempt with:", formData);
   };
 
@@ -35,7 +39,7 @@ const Login = () => {
           className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"
           style={{ aspectRatio: "16/9" }}
         ></div>
-        <div className="absolute top-8 left-8">
+        <div className="absolute top-3 left-8">
           <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
         </div>
       </div>

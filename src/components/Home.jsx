@@ -3,14 +3,11 @@ import Profile from "./Profile"
 
 export default function Home(){
     return (
-        <div className="flex flex-col justify-center">
+        <div>
             <Navbar />
-            <Profile />
-                {/* <h1 className="text-3xl font-bold">
-                    Homepage
-                </h1> */}
-            
+            <div className="mt-[64px]">
+                <Profile />
+            </div>
         </div>
-
     )
 }
