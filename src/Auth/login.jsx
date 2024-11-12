@@ -1,11 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setDocumentTitle } from "../utils/document.js";
 // import { use } from "./express/lib/router";
+import { Icon } from "@iconify/react";
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [showPassword, setShowPassword] = useState(false);
+
   useEffect(() => {
     setDocumentTitle("Login | Lokal-Art");
   }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your login logic here
+    console.log("Login attempt with:", formData);
+  };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-100">
@@ -24,26 +45,38 @@ const Login = () => {
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
           <h1 className="text-3xl font-bold text-center mb-8">Login</h1>
 
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Email"
               className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
             <div className="relative">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
                 placeholder="Password"
                 className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <button className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                {/* Add eye icon for password visibility toggle */}
-                👁️
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2"
+              >
+                <Icon icon={showPassword ? "mdi:eye" : "mdi:eye-off"} />
               </button>
             </div>
 
-            <button className="w-full py-2 px-4 bg-cyan-400 text-white rounded-full hover:bg-cyan-500 transition-colors">
+            <button
+              type="submit"
+              className="w-full py-2 px-4 bg-cyan-400 text-white rounded-full hover:bg-cyan-500 transition-colors"
+            >
               Login
             </button>
 
@@ -53,7 +86,7 @@ const Login = () => {
                 Signup
               </a>
             </p>
-          </div>
+          </form>
         </div>
       </div>
     </div>

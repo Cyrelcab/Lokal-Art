@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 export default function Navbar(){
     return (
@@ -13,7 +14,9 @@ export default function Navbar(){
             <div className="flex items-center p-5">
                 <i className="fa-solid fa-bell hover:text-cyan-500 cursor-pointer text-xl mr-4"></i>
                 <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4"></div>
-                <button className="bg-cyan-500 h-8 w-20 rounded-2xl text-white hover:bg-cyan-300">Logout</button>
+                <button className="bg-cyan-500 h-8 w-20 rounded-2xl text-white hover:bg-cyan-300">
+                    <Link to={"/login"}>Logout</Link>
+                    </button>
             </div>
     </nav>
     );

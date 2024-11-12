@@ -3,7 +3,7 @@ import "./App.css";
 import Login from "./Auth/login";
 import Signup from "./Auth/signup";
 import Home from "./components/Home";
-import Navbar from "./components/Nav-bar";
+// import Navbar from "./components/Nav-bar";
 
 function App() {
   return (
