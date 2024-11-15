@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { setDocumentTitle } from "../utils/document";
+import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   // Set document title on mount
   useEffect(() => {
     setDocumentTitle("Signup | Lokal-Art");
   }, []);
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // State to manage form data
   const [formData, setFormData] = useState({
@@ -15,6 +20,16 @@ const Signup = () => {
     terms: false,
   });
 
+  useEffect(() => {
+    const termsAccepted = localStorage.getItem("termsAccepted") === "true";
+    if (termsAccepted) {
+      setFormData((prev) => ({
+        ...prev,
+        terms: true,
+      }));
+    }
+  }, []);
+
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -22,6 +37,12 @@ const Signup = () => {
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
+
+    // Save terms acceptance to localStorage when checkbox changes
+    if (name === "terms") {
+      localStorage.setItem("termsAccepted", checked);
+      console.log("Updated termsAccepted in localStorage:", checked);
+    }
   };
 
   // Handle form submission
@@ -71,7 +92,7 @@ const Signup = () => {
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
                 value={formData.password}
@@ -84,8 +105,9 @@ const Signup = () => {
                 type="button"
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
                 aria-label="Toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
               >
-                {/* Add your eye-slash/eye icon here */}
+                <Icon icon={showPassword ? "mdi:eye" : "mdi:eye-off"}></Icon>
               </button>
             </div>
 
@@ -95,7 +117,7 @@ const Signup = () => {
                 Confirm Password
               </label>
               <input
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
@@ -108,8 +130,11 @@ const Signup = () => {
                 type="button"
                 className="absolute right-3 top-1/2 transform -translate-y-1/2"
                 aria-label="Toggle confirm password visibility"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {/* Add your eye icon here */}
+                <Icon
+                  icon={showConfirmPassword ? "mdi:eye" : "mdi:eye-off"}
+                ></Icon>
               </button>
             </div>
 
@@ -121,10 +146,16 @@ const Signup = () => {
                 name="terms"
                 checked={formData.terms}
                 onChange={handleChange}
-                className="cursor-pointer"
+                className="cursor-pointer w-4 h-4"
               />
               <label htmlFor="terms" className="text-sm cursor-pointer">
-                I agree to the Terms and Conditions
+                I agree to the{" "}
+                <Link
+                  to="/terms-and-conditions"
+                  className="text-cyan-400 hover:underline"
+                >
+                  Terms and Conditions
+                </Link>
               </label>
             </div>
 
@@ -139,20 +170,17 @@ const Signup = () => {
             {/* Login Link */}
             <p className="text-center mt-4">
               Already have an account?{" "}
-              <a href="/login" className="text-cyan-400 hover:underline">
+              <Link to="/login" className="text-cyan-400 hover:underline">
                 Login
-              </a>
+              </Link>
             </p>
           </form>
         </div>
       </div>
 
       {/* Right Side - Image Section */}
-      <div className="relative w-full md:w-1/2">
-        <div
-          className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"
-          style={{ aspectRatio: "16/9" }}
-        ></div>
+      <div className="relative w-full md:w-1/2 h-screen">
+        <div className="bg-image w-full h-full bg-blue-100" />
         <div className="absolute top-3 right-8">
           <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
         </div>
