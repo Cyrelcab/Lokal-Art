@@ -6,7 +6,7 @@ export default function Home(){
         <div>
             <Navbar />
             <div className="mt-[64px]">
-                <Profile />
+            <Profile />
             </div>
         </div>
     )
