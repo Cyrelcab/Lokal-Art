@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { setDocumentTitle } from "../utils/document";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
   // Set document title on mount
@@ -12,23 +14,15 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   // State to manage form data
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    terms: false,
+    terms: localStorage.getItem("termsAccepted") === "true" || false,
   });
-
-  useEffect(() => {
-    const termsAccepted = localStorage.getItem("termsAccepted") === "true";
-    if (termsAccepted) {
-      setFormData((prev) => ({
-        ...prev,
-        terms: true,
-      }));
-    }
-  }, []);
 
   // Handle form input changes
   const handleChange = (e) => {
@@ -41,7 +35,6 @@ const Signup = () => {
     // Save terms acceptance to localStorage when checkbox changes
     if (name === "terms") {
       localStorage.setItem("termsAccepted", checked);
-      console.log("Updated termsAccepted in localStorage:", checked);
     }
   };
 
@@ -54,16 +47,30 @@ const Signup = () => {
       return;
     }
     if (!formData.terms) {
-      alert("Please accept the terms and conditions");
+      toast.error("Please accept the terms and conditions");
       return;
     }
 
     // Add signup logic here (e.g., API call)
+    navigate("/role");
     console.log("Form submitted:", formData);
   };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-100">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+        limit={1}
+        closeButton={false}
+      />
       {/* Signup Form Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
@@ -181,8 +188,10 @@ const Signup = () => {
       {/* Right Side - Image Section */}
       <div className="relative w-full md:w-1/2 h-screen">
         <div className="bg-image w-full h-full bg-blue-100" />
-        <div className="absolute top-3 right-8">
-          <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
+        <div className="absolute top-4 right-4">
+          <Link to="/">
+            <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
+          </Link>
         </div>
       </div>
     </div>

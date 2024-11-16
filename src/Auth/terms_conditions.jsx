@@ -1,12 +1,15 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const TermsConditions = () => {
   const navigate = useNavigate();
+  const [checked, setChecked] = useState(true);
 
   const handleAccept = () => {
     localStorage.setItem('termsAccepted', checked.toString());
     navigate('/signup');
   };
+
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-100 items-center justify-center p-8">
@@ -17,16 +20,7 @@ const TermsConditions = () => {
 
         <div className="space-y-4 text-sm">
           <p>
-            Welcome to Lokal-Art. By using our platform, you agree to be bound
-            by the following terms and conditions. Lokal-Art is an online social
-            media and portfolio platform that showcases and sells artwork while
-            providing creative services. To access certain features of the
-            Platform, users must register for an account and provide accurate
-            and complete information during registration. You are responsible
-            for maintaining the confidentiality of your login credentials and
-            for any activities that occur under your account. You must be at
-            least 18 years old to use the Platform. Minors may use the Platform
-            only under the supervision of a parent or legal guardian.
+            Welcome to Lokal-Art. By using our platform, you agree to be bound by the following terms and conditions. Lokal-Art is an online social media and portfolio platform that showcases and sells artwork while providing creative services. To access certain features of the Platform, users must register for an account and provide accurate and complete information during registration. You are responsible for maintaining the confidentiality of your login credentials and for any activities that occur under your account. You must be at least 18 years old to use the Platform. Minors may use the Platform only under the supervision of a parent or legal guardian.
           </p>
 
           <p>
