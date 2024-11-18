@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
+import FileUpload from "./Fileupload";
 //import ConfirmPopup from "./Confirmed";
 
 const ArtworkPopup = () => {
@@ -48,13 +49,7 @@ const ArtworkPopup = () => {
             </div>
 
             <div className="w-[45rem] h-[32rem] flex">
-              <div className="flex flex-col justify-center items-center border-2 border-gray-300 rounded w-[28rem] mr-2">
-                <Icon
-                  icon="carbon:add-filled"
-                  className="text-4xl text-cyan-500"
-                />
-                <h1>Upload an Image</h1>
-              </div>
+              <FileUpload/>
               <div className="flex justify-center items-center">
                 <div className="w-[18rem]">
                   <p className="pl-5 pb-2 ">Add Title</p>
@@ -106,7 +101,7 @@ const ArtworkPopup = () => {
                 className="size-36 text-cyan-400"
               />
               <h1 className="text-2xl font-bold">Upload Complete</h1>
-              <p className="pt-5">Your post has been uploaded successfully</p>
+              <p className="pt-5">Your artwork has been uploaded successfully</p>
             </div>
 
             <button

@@ -74,6 +74,7 @@ const EventsPopup = () => {
                       name="title"
                       placeholder="Address"
                       className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                     />
                   </div>
                 </div>
@@ -151,7 +152,7 @@ const EventsPopup = () => {
                   className="size-36 text-cyan-400"
                 />
                 <h1 className="text-2xl font-bold">Upload Complete</h1>
-                <p className="pt-5">Your post has been uploaded successfully</p>
+                <p className="pt-5">Your event has been uploaded successfully</p>
               </div>
 
               <button

@@ -107,8 +107,8 @@ export default function Upload() {
             {/* image container */}
             {/* this is where i left */}
             <div
-              className="w-inherit h-full pt-3
-                            grid grid-cols-3 justify-items-center"
+              className="h-full pt-3
+                            grid grid-cols-3 justify-items-center mr-1"
             >
               {/* image-card */}
               <div className="">
@@ -123,7 +123,7 @@ export default function Upload() {
                 <img
                   className="object-cover h-52 w-72 rounded-lg"
                   src="\images\Artist\img2.jpg"
-                  alt="Image1"
+                  alt="Image2"
                 />
                 <p className="font-medium">City at Night</p>
               </div>
@@ -131,7 +131,7 @@ export default function Upload() {
                 <img
                   className="object-cover h-52 w-72 rounded-lg"
                   src="\images\Artist\img3.jpg"
-                  alt="Image1"
+                  alt="Image3"
                 />
                 <p className="font-medium">Bus</p>
               </div>
@@ -139,7 +139,7 @@ export default function Upload() {
                 <img
                   className="object-cover h-52 w-72 rounded-lg"
                   src="\images\Artist\img15.jpg"
-                  alt="Image1"
+                  alt="Image4"
                 />
                 <p className="font-medium">Samurai</p>
               </div>
@@ -147,7 +147,7 @@ export default function Upload() {
                 <img
                   className="object-cover h-52 w-72 rounded-lg"
                   src="\images\Artist\img5.jpg"
-                  alt="Image1"
+                  alt="Image5"
                 />
                 <p className="font-medium">Model</p>
               </div>
@@ -155,7 +155,7 @@ export default function Upload() {
                 <img
                   className="object-cover h-52 w-72 rounded-lg"
                   src="\images\Artist\img12.jpg"
-                  alt="Image1"
+                  alt="Image6"
                 />
                 <p className="font-medium">Bow and Arrow</p>
               </div>
