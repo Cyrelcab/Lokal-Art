@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
+import UploadPopup from "./Popup";
 
 export default function Upload() {
   return (
-    <main>
+    <section>
       <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
         <div className="flex items-center">
           <img
@@ -24,55 +26,42 @@ export default function Upload() {
         </div>
         <div className="flex items-center p-5">
           <i className="fa-solid fa-bell hover:text-cyan-500 cursor-pointer text-xl mr-4"></i>
-          <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4"></div>
+          <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4">
+
+          </div>
           <button className="bg-cyan-500 h-8 w-20 rounded-2xl text-white hover:bg-cyan-300">
             <Link to={"/login"}>Logout</Link>
           </button>
         </div>
       </nav>
-
       {/* Profile Cover Photo*/}
-      <div class="mt-[64px]">
-        <div className="h-[200px] w-screen max-w-full overflow-hidden">
-          <img
-            className="w-screen"
-            src="/images/cover-photo.jpg"
-            alt="Cover Photo"
-          />
-        </div>
-        <div class="ml-16">
-          <img
-            className="cursor-pointer shadow-md object-cover mt-[-150px] rounded-full h-[200px] w-[200px]"
-            src="/images/profile-photo.jpg"
-            alt="Profile Photo"
-          />
+      <div className="h-[250px] w-screen max-w-full overflow-hidden">
+        <img
+          className="w-screen"
+          src="/images/cover-photo.jpg"
+          alt="Cover Photo"
+        />
+      </div>
+      <div className="mt-[45px]">
+        <img
+          className="cursor-pointer shadow-md object-cover mt-[-150px] ml-10 rounded-full h-[200px] w-[200px]"
+          src="/images/profile-photo.jpg"
+          alt="Profile Photo"
+        />
 
-          <div className="h-full w-[20rem] border-solid border-r-2 border-r-gray-300 flex flex-col justify-around gap-[50px] mt-5 pr-5">
+        {/* contents */}
+        <div className="flex flex-row gap-10">
+          <div className="h-full w-[20rem] border-solid border-r-2 border-r-gray-300 ml-1 flex flex-col justify-around gap-[50px] mt-5 px-5">
             {/* name */}
             <div>
-              <h1 className="text-2xl font-bold">John Doe</h1>
+              <h1 className="text-2xl flex font-bold">John Doe <Icon icon="akar-icons:edit" className="ml-2 mt-1 hover:text-cyan-500"/></h1>
               <p className="text-gray-500 ">Painter, Visual Artist</p>
               <p className="pt-7">
                 "If I could say it in words there would be no reason to paint.”
               </p>
             </div>
-
-            {/* buttons */}
-            <div className="flex flex-col w-60 items-center">
-              <div className="pb-2">
-                <button className="h-8 w-[6rem] bg-cyan-500 rounded-full text-white mr-1 hover:bg-cyan-400">
-                  Message
-                </button>
-                <button className="h-8 w-[6rem] bg-cyan-500 rounded-full text-white hover:bg-cyan-400">
-                  Follow
-                </button>
-                <br />
-              </div>
-              <button className="h-8 w-[12.3rem] bg-cyan-500 rounded-full text-white hover:bg-cyan-400">
-                Book a Transaction
-              </button>
-            </div>
-            <div>
+            
+            <div className="w-[20rem]">
               {/* information */}
               <i className="fa-solid fa-globe text-cyan-500 pr-2"></i>
               <span>Libertad, Butuan City, Philippines</span>
@@ -81,32 +70,99 @@ export default function Upload() {
               <span>January 19, 2003</span>
             </div>
             {/* works-followers-ratings */}
-            <div className="justify-around text-center">
-              <div class="flex space-x-4">
-                <div>
-                  {/* works */}
-                  <h1 className="text-4xl font-bold">9</h1>
-                  <i class="fa-solid fa-suitcase text-cyan-500"></i>{" "}
-                  <span>Works</span>
-                </div>
-                <div>
-                  {/* follower */}
-                  <h1 className="text-4xl font-bold">13.5k</h1>
-                  <i class="fa-solid fa-user-plus text-cyan-500"></i>{" "}
-                  <span>Followers</span>
-                </div>
-                <div>
-                  {/* ratings */}
-                  <h1 className="text-4xl font-bold">3.4</h1>
-                  <i class="fa-solid fa-star text-cyan-500"></i>{" "}
-                  <span>Ratings</span>
-                </div>
+            <div className="flex justify-around text-center space-x-3 left-0">
+              <div>
+                {/* works */}
+                <h1 className="text-3xl font-bold">9</h1>
+                <i class="fa-solid fa-suitcase text-cyan-500"></i>{" "}
+                <span>Works</span>
+              </div>
+              <div>
+                {/* follower */}
+                <h1 className="text-3xl font-bold">13.5k</h1>
+                <i class="fa-solid fa-user-plus text-cyan-500"></i>{" "}
+                <span>Followers</span>
+              </div>
+              <div>
+                {/* ratings */}
+                <h1 className="text-3xl font-bold">3.4</h1>
+                <i class="fa-solid fa-star text-cyan-500"></i>{" "}
+                <span>Ratings</span>
+              </div>
+            </div>
+          </div>
+          <div className="">
+            <div className="flex pt-5 w-[70vw]">
+              <span className="mr-20 font-bold hover:text-cyan-500">
+                <a href="#">Works</a>
+              </span>
+              <span className="mr-20 font-bold hover:text-cyan-500">
+                <a href="#">Followers</a>
+              </span>
+              <span className="mr-20 font-bold hover:text-cyan-500">
+                <a href="#">Events</a>
+              </span>
+              <UploadPopup />
+            </div>
+            {/* image container */}
+            {/* this is where i left */}
+            <div
+              className="w-inherit h-full pt-3
+                            grid grid-cols-3 justify-items-center"
+            >
+              {/* image-card */}
+              <div className="">
+                <img
+                  className="object-cover h-52 w-72 rounded-lg"
+                  src="\images\Artist\img1.jpg"
+                  alt="Image1"
+                />
+                <p className="font-medium">Student</p>
+              </div>
+              <div className="">
+                <img
+                  className="object-cover h-52 w-72 rounded-lg"
+                  src="\images\Artist\img2.jpg"
+                  alt="Image1"
+                />
+                <p className="font-medium">City at Night</p>
+              </div>
+              <div className="">
+                <img
+                  className="object-cover h-52 w-72 rounded-lg"
+                  src="\images\Artist\img3.jpg"
+                  alt="Image1"
+                />
+                <p className="font-medium">Bus</p>
+              </div>
+              <div className="">
+                <img
+                  className="object-cover h-52 w-72 rounded-lg"
+                  src="\images\Artist\img15.jpg"
+                  alt="Image1"
+                />
+                <p className="font-medium">Samurai</p>
+              </div>
+              <div className="">
+                <img
+                  className="object-cover h-52 w-72 rounded-lg"
+                  src="\images\Artist\img5.jpg"
+                  alt="Image1"
+                />
+                <p className="font-medium">Model</p>
+              </div>
+              <div className="">
+                <img
+                  className="object-cover h-52 w-72 rounded-lg"
+                  src="\images\Artist\img12.jpg"
+                  alt="Image1"
+                />
+                <p className="font-medium">Bow and Arrow</p>
               </div>
             </div>
           </div>
         </div>
-          
       </div>
-    </main>
+    </section>
   );
 }
