@@ -39,11 +39,11 @@ const Login = () => {
           className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"
           style={{ aspectRatio: "16/9" }}
         ></div>
-        <div className="absolute top-4 left-4">
-          <Link to="/">
-            <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
-          </Link>
-        </div>
+          <div className="absolute top-4 left-4">
+            <Link to="/">
+              <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
+            </Link>
+          </div>
       </div>
 
       {/*login field*/}

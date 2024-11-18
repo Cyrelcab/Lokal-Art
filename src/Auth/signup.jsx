@@ -18,6 +18,7 @@ const Signup = () => {
 
   // State to manage form data
   const [formData, setFormData] = useState({
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -41,6 +42,20 @@ const Signup = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (
+      !formData.username.trim() &&
+      !formData.email.trim() &&
+      !formData.password.trim() &&
+      !formData.confirmPassword.trim()
+    ) {
+      toast.error("All fields are required", {
+        style: {
+          color: "red",
+        },
+      });
+      return;
+    }
     // Basic validation
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
@@ -61,7 +76,7 @@ const Signup = () => {
       <ToastContainer
         position="top-center"
         autoClose={2000}
-        hideProgressBar={false}
+        hideProgressBar={true}
         newestOnTop={false}
         rtl={false}
         pauseOnFocusLoss
@@ -76,6 +91,21 @@ const Signup = () => {
         <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
           <h1 className="text-3xl font-bold mb-8 text-center">Signup</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/*Username Field*/}
+            <div>
+              <label htmlFor="username" className="sr-only">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                placeholder="Username"
+                className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="sr-only">
@@ -89,7 +119,6 @@ const Signup = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
             </div>
 
@@ -106,7 +135,6 @@ const Signup = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
               <button
                 type="button"
@@ -131,7 +159,6 @@ const Signup = () => {
                 onChange={handleChange}
                 placeholder="Confirm Password"
                 className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
               />
               <button
                 type="button"
