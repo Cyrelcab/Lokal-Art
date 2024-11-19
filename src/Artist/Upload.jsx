@@ -26,9 +26,7 @@ export default function Upload() {
         </div>
         <div className="flex items-center p-5">
           <i className="fa-solid fa-bell hover:text-cyan-500 cursor-pointer text-xl mr-4"></i>
-          <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4">
-
-          </div>
+          <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4"></div>
           <button className="bg-cyan-500 h-8 w-20 rounded-2xl text-white hover:bg-cyan-300">
             <Link to={"/login"}>Logout</Link>
           </button>
@@ -42,7 +40,7 @@ export default function Upload() {
           alt="Cover Photo"
         />
       </div>
-      <div className="mt-[45px]">
+      <div className="mt-[3px]">
         <img
           className="cursor-pointer shadow-md object-cover mt-[-150px] ml-10 rounded-full h-[200px] w-[200px]"
           src="/images/profile-photo.jpg"
@@ -54,13 +52,19 @@ export default function Upload() {
           <div className="h-full w-[20rem] border-solid border-r-2 border-r-gray-300 ml-1 flex flex-col justify-around gap-[50px] mt-5 px-5">
             {/* name */}
             <div>
-              <h1 className="text-2xl flex font-bold">John Doe <Icon icon="akar-icons:edit" className="ml-2 mt-1 hover:text-cyan-500"/></h1>
+              <h1 className="text-2xl flex font-bold">
+                John Doe{" "}
+                <Icon
+                  icon="akar-icons:edit"
+                  className="ml-2 mt-1 hover:text-cyan-500"
+                />
+              </h1>
               <p className="text-gray-500 ">Painter, Visual Artist</p>
               <p className="pt-7">
                 "If I could say it in words there would be no reason to paint.”
               </p>
             </div>
-            
+
             <div className="w-[20rem]">
               {/* information */}
               <i className="fa-solid fa-globe text-cyan-500 pr-2"></i>
@@ -102,7 +106,10 @@ export default function Upload() {
               <span className="mr-20 font-bold hover:text-cyan-500">
                 <a href="#">Events</a>
               </span>
+              <div className="z-50">
               <UploadPopup />
+              </div>
+              
             </div>
             {/* image container */}
             {/* this is where i left */}
@@ -111,53 +118,101 @@ export default function Upload() {
                             grid grid-cols-3 justify-items-center mr-1"
             >
               {/* image-card */}
-              <div className="">
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
                 <img
-                  className="object-cover h-52 w-72 rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                   src="\images\Artist\img1.jpg"
                   alt="Image1"
                 />
-                <p className="font-medium">Student</p>
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Student
+                </p>
               </div>
-              <div className="">
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
                 <img
-                  className="object-cover h-52 w-72 rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                   src="\images\Artist\img2.jpg"
-                  alt="Image2"
+                  alt="Image6"
                 />
-                <p className="font-medium">City at Night</p>
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  City Night
+                </p>
               </div>
-              <div className="">
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
                 <img
-                  className="object-cover h-52 w-72 rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                   src="\images\Artist\img3.jpg"
-                  alt="Image3"
+                  alt="Image6"
                 />
-                <p className="font-medium">Bus</p>
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Bus
+                </p>
               </div>
-              <div className="">
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
                 <img
-                  className="object-cover h-52 w-72 rounded-lg"
-                  src="\images\Artist\img15.jpg"
-                  alt="Image4"
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\img4.jpg"
+                  alt="Image6"
                 />
-                <p className="font-medium">Samurai</p>
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Eyes Down
+                </p>
               </div>
-              <div className="">
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
                 <img
-                  className="object-cover h-52 w-72 rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                   src="\images\Artist\img5.jpg"
-                  alt="Image5"
+                  alt="Image6"
                 />
-                <p className="font-medium">Model</p>
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Modeling
+                </p>
               </div>
-              <div className="">
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
                 <img
-                  className="object-cover h-52 w-72 rounded-lg"
+                  className="object-cover w-full h-full rounded-lg"
                   src="\images\Artist\img12.jpg"
                   alt="Image6"
                 />
-                <p className="font-medium">Bow and Arrow</p>
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Bow and Arrow
+                </p>
               </div>
             </div>
           </div>
