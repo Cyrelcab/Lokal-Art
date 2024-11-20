@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 export default function ArtistBox() {
   return (
-    <div className="grid grid-cols-2 gap-5">
+    <div className="pb-5 grid grid-cols-2 gap-5">
         {/* 1 */}
       <div className="border border-gray-500 bg-gray-100 flex w-[34rem] rounded-xl">
         {/* Profile Pic */}

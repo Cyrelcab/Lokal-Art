@@ -17,7 +17,7 @@ export default function Discover() {
           />
         </div>
         <div className="flex justify-center items-center p-5">
-          <a className="mr-10 hover:text-cyan-500 text-m" href="#">
+          <a className="mr-10 hover:text-cyan-500 text-m" href="/discover">
             Discover
           </a>
           <a className="mr-10 hover:text-cyan-500 text-m" href="#">
