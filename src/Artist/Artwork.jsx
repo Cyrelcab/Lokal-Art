@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
-import FileUpload from "./Fileupload";
+import FileUpload from "./FileUpload";
 //import ConfirmPopup from "./Confirmed";
 
 const ArtworkPopup = () => {
