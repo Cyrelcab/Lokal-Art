@@ -9,12 +9,17 @@ import Role from "./page/role";
 import ArtistProfile from "./page/Artist/artist-profile";
 import Dashboard from "./page/Artist/dashboard";
 
+import Upload from "./Artist/Upload";
+import Discover from "./Client/Discover"; 
 function App() {
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/discover" element={<Discover />} />
+          <Route path="/upload" element={<Upload />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
