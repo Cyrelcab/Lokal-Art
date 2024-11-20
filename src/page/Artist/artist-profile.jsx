@@ -171,7 +171,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                   className="w-40 h-40 rounded-full object-cover border-4 border-white"
                 />
               ) : (
-                <div className="w-40 h-40 rounded-full bg-gray-300 border-2 border-white flex flex-col items-center justify-center hover:bg-gray-400 transition-colors">
+                <div className="w-40 h-40 rounded-full bg-gray-200 border-2 border-white flex flex-col items-center justify-center hover:bg-gray-300 transition-colors">
                   <Icon
                     icon="mdi:account-plus"
                     width="40"
@@ -187,57 +187,87 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
 
         {/* User Information Section */}
         <div className="mt-20 px-8">
-          <div>
-            <div className="flex items-center space-x-4">
-              <h1 className="text-3xl font-bold">{username}</h1>
-              <button
-                className="p-2 text-gray-600 hover:text-cyan-500 rounded-full hover:bg-gray-100"
-                title="Edit Profile"
-                onClick={handleOpenModal}
-              >
-                <Icon icon="mdi:pencil" width="20" height="20" />
-              </button>
-            </div>
-            <p className="text-gray-600 mt-1">Painter, Visual Artist</p>
-          </div>
+          {/* Create a flex container to hold both sections */}
+          <div className="flex">
+            {/* Left section - existing user info */}
+            <div className="flex-1 max-w-md border-r border-black">
+              <div>
+                <div className="flex items-center space-x-4">
+                  <h1 className="text-3xl font-bold">{username}</h1>
+                  <button
+                    className="p-2 text-gray-600 hover:text-cyan-500 rounded-full hover:bg-gray-100"
+                    title="Edit Profile"
+                    onClick={handleOpenModal}
+                  >
+                    <Icon icon="mdi:pencil" width="20" height="20" />
+                  </button>
+                </div>
+                <p className="text-gray-600 mt-1">Painter, Visual Artist</p>
+              </div>
 
-          <div className="mt-6  space-y-2 text-gray-600">
-            <div className="flex items-center mb-6">
-              <i>"I want to sleep forever."</i>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Icon icon="mdi:map-marker" width="20" height="20" />
-              <span>Poblacion 7, Cabadbaran City, Agusan Del Norte</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Icon icon="mdi:calendar" width="20" height="20" />
-              <span>January 19, 2003</span>
-            </div>
-          </div>
+              <div className="mt-6 space-y-2 text-gray-600">
+                <div className="flex items-center mb-6">
+                  <i>"I want to sleep forever."</i>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Icon icon="mdi:map-marker" width="20" height="20" />
+                  <span>Poblacion 7, Cabadbaran City, Agusan Del Norte</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Icon icon="mdi:calendar" width="20" height="20" />
+                  <span>January 19, 2003</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Icon icon="mdi:email" width="20" height="20" />
+                  <span>johndoe@email.com</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Icon icon="mdi:phone" width="20" height="20" />
+                  <span>+63 912 345 6789</span>
+                </div>
+              </div>
+              {/* Stats Section - moved outside the flex container */}
+              <div className="mt-16 flex space-x-16">
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold">9</span>
+                  <div className="flex items-center space-x-1 text-gray-600 text-sm">
+                    <Icon icon="ix:workspace" width="16" height="16" />
+                    <span>Works</span>
+                  </div>
+                </div>
 
-          {/* Stats Section */}
-          <div className="mt-16 flex space-x-16">
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold">9</span>
-              <div className="flex items-center space-x-1 text-gray-600 text-sm">
-                <Icon icon="ix:workspace" width="16" height="16" />
-                <span>Works</span>
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold">13.5k</span>
+                  <div className="flex items-center space-x-1 text-gray-600 text-sm">
+                    <Icon icon="mdi:account-group" width="16" height="16" />
+                    <span>Followers</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <span className="text-2xl font-bold">3.4</span>
+                  <div className="flex items-center space-x-1 text-gray-600 text-sm">
+                    <Icon icon="mdi:star" width="16" height="16" />
+                    <span>Ratings</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold">13.5k</span>
-              <div className="flex items-center space-x-1 text-gray-600 text-sm">
-                <Icon icon="mdi:account-group" width="16" height="16" />
-                <span>Followers</span>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <span className="text-2xl font-bold">3.4</span>
-              <div className="flex items-center space-x-1 text-gray-600 text-sm">
-                <Icon icon="mdi:star" width="16" height="16" />
-                <span>Ratings</span>
+            {/* Right section with border - Fixed structure */}
+            <div className="w-96 pl-6 ml-6">
+              <div className="space-y-4">
+                <div className="flex space-x-8">
+                  <button className="font-semibold text-gray-700 pb-1 border-b-2 border-cyan-500 border-black">
+                    Works
+                  </button>
+                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
+                    Followers
+                  </button>
+                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
+                    Events
+                  </button>
+                </div>
               </div>
             </div>
           </div>

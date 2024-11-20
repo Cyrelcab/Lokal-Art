@@ -3,6 +3,8 @@ import { setDocumentTitle } from "../utils/document.js";
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -28,22 +30,44 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add your login logic here
-    navigate("/");
+    toast.success("Login Successfully", {
+      style: {
+        color: "green",
+      },
+    });
+
+    // Wait for toast to be visible before navigating
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
     console.log("Login attempt with:", formData);
   };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-100">
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+        limit={1}
+        closeButton={false}
+      />
       <div className="relative w-full md:w-1/2">
         <div
           className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"
           style={{ aspectRatio: "16/9" }}
         ></div>
-          <div className="absolute top-4 left-4">
-            <Link to="/">
-              <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
-            </Link>
-          </div>
+        <div className="absolute top-4 left-4">
+          <Link to="/">
+            <img src="/images/logo.png" alt="LokalArt Logo" className="w-48" />
+          </Link>
+        </div>
       </div>
 
       {/*login field*/}

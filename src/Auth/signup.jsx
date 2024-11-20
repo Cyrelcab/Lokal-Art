@@ -62,7 +62,11 @@ const Signup = () => {
       return;
     }
     if (!formData.terms) {
-      toast.error("Please accept the terms and conditions");
+      toast.error("Please accept the terms and conditions", {
+        style: {
+          color: "red",
+        },
+      });
       return;
     }
 
