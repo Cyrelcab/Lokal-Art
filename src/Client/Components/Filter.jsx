@@ -31,14 +31,14 @@ const FilterPopup = () => {
   };
 
   const categories = ["Painting", "Digital Artist", "Tattoo Artist"];
-  const locations = ["Butuan City", "Bayugan City"];
+  const locations = ["Butuan City"];
 
   return (
     <div>
       {/* Filter button */}
       <button
         onClick={togglePopup}
-        className=" hover:text-cyan-500 p-2 px-5 border border-gray-300 rounded-full"
+        className="hover:text-cyan-500 p-2 px-10 border border-gray-300 rounded-full bg-white  "
       >
         <div className="flex">
           <Icon icon="mage:filter" className="mt-1 text-lg" />
@@ -128,6 +128,11 @@ const FilterPopup = () => {
                   ))}
                 </div>
               )}
+            </div>
+            <div>
+              <button className="py-2 px-10 bg-cyan-500 text-white rounded-full w-full" onClick={togglePopup}>
+                <p>Done</p>
+              </button>
             </div>
           </div>
         </div>

@@ -39,7 +39,7 @@ export default function Discover() {
       <div className="mt-20 flex flex-col">
         {/* Search, Sort, and Artist Box */}
         <div>
-          <div className="flex justify-center items-center space-x-28">
+          <div className="fixed flex justify-center items-center space-x-28 w-full placeholder-cyan-500">
             {/* Filter */}
             <div>
               <FilterPopup />
@@ -57,7 +57,7 @@ export default function Discover() {
           {/* Artist Box */}
           <div className="h-full flex justify-center items-center">
             {/* Grid */}
-            <div className="py-7">
+            <div className="pt-16">
               <ArtistBox/>
             </div>
           </div>

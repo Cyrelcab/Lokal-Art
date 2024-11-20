@@ -106,7 +106,7 @@ export default function Upload() {
               <span className="mr-20 font-bold hover:text-cyan-500">
                 <a href="#">Events</a>
               </span>
-              <div className="z-50">
+              <div className="z-10">
               <UploadPopup />
               </div>
               

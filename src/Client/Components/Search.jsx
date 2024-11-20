@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 export default function Search(){
     return (
-      <div className="flex hover:text-cyan-500">
+      <div className="flex">
         <input
         type="text"
         name="title"
