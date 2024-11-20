@@ -7,6 +7,9 @@ const Role = () => {
   const navigate = useNavigate();
 
   const handleRole = (role) => {
+    // Store the role in localStorage
+    localStorage.setItem("userRole", role);
+
     if (role === "Client") {
       navigate("/client/setup-profile");
     } else if (role === "Artist") {

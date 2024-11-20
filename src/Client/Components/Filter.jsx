@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 
-const FilterPopup = () => {
+const FilterPopup = ({ onFilterChange }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
@@ -15,22 +15,24 @@ const FilterPopup = () => {
     setShowLocationDropdown(!showLocationDropdown);
 
   const handleCategoryChange = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((item) => item !== category)
-        : [...prev, category]
-    );
+    const newCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter((item) => item !== category)
+      : [...selectedCategories, category];
+
+    setSelectedCategories(newCategories);
+    onFilterChange("category", newCategories);
   };
 
   const handleLocationChange = (location) => {
-    setSelectedLocation((prev) =>
-      prev.includes(location)
-        ? prev.filter((item) => item !== location)
-        : [...prev, location]
-    );
+    const newLocations = selectedLocation.includes(location)
+      ? selectedLocation.filter((item) => item !== location)
+      : [...selectedLocation, location];
+
+    setSelectedLocation(newLocations);
+    onFilterChange("location", newLocations);
   };
 
-  const categories = ["Painting", "Digital Artist", "Tattoo Artist"];
+  const categories = ["Painter", "Digital Artist", "Tattoo Artist"];
   const locations = ["Butuan City"];
 
   return (
@@ -82,7 +84,10 @@ const FilterPopup = () => {
               {showCategoryDropdown && (
                 <div className="my-2 ml-6 space-y-2">
                   {categories.map((category, index) => (
-                    <div key={index} className="flex items-center hover:text-cyan-500">
+                    <div
+                      key={index}
+                      className="flex items-center hover:text-cyan-500"
+                    >
                       <input
                         type="checkbox"
                         id={`category-${index}`}
@@ -115,7 +120,10 @@ const FilterPopup = () => {
               {showLocationDropdown && (
                 <div className="my-2 ml-6 space-y-2">
                   {locations.map((location, index) => (
-                    <div key={index} className="flex items-center hover:text-cyan-500">
+                    <div
+                      key={index}
+                      className="flex items-center hover:text-cyan-500"
+                    >
                       <input
                         type="checkbox"
                         id={`location-${index}`}
@@ -130,7 +138,10 @@ const FilterPopup = () => {
               )}
             </div>
             <div>
-              <button className="py-2 px-10 bg-cyan-500 text-white rounded-full w-full" onClick={togglePopup}>
+              <button
+                className="py-2 px-10 bg-cyan-500 text-white rounded-full w-full"
+                onClick={togglePopup}
+              >
                 <p>Done</p>
               </button>
             </div>

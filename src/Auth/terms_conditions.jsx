@@ -6,7 +6,7 @@ const TermsConditions = () => {
   const [checked, setChecked] = useState(true);
 
   const handleAccept = () => {
-    localStorage.setItem('termsAccepted', checked.toString());
+    localStorage.setItem('terms', checked.toString());
     navigate('/signup');
   };
 

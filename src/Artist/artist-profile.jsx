@@ -3,21 +3,31 @@ import { Icon } from "@iconify/react";
 import { setDocumentTitle } from "@/utils/document";
 import { useState, useEffect } from "react";
 import Modal from "./modal";
+import UploadPopup from "./Popup";
 
 const ArtistProfile = ({ artistData: initialArtistData }) => {
   setDocumentTitle("Profile | Lokal-Art");
   const navigate = useNavigate();
-  const username = "John Doe";
+  const firstName = localStorage.getItem("first_name") || "John";
+  const lastName = localStorage.getItem("last_name") || "Doe";
+  const artistType =
+    localStorage.getItem("artist_type") || "Painter, Visual Artist";
+  const email =
+    localStorage.getItem("email") || "johndoe@email.com";
+  const address = localStorage.getItem("address") || "Address";
+  const bio = localStorage.getItem("bio") || "";
+  const birthday = localStorage.getItem("birthday") || "Birthdate";
+  const fullName = `${firstName} ${lastName}`;
   const [bannerImage, setBannerImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [artistData, setArtistData] = useState(
     initialArtistData || {
-      name: "Artist Name",
-      bio: "Artist Bio",
+      bio: localStorage.getItem("bio") || "",
       // Add other artist data as needed
     }
   );
+  const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
 
   const getInitials = (name) => {
     if (!name) return "";
@@ -31,6 +41,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   };
 
   const logoutBtn = () => {
+    localStorage.clear();
     navigate("/login");
   };
 
@@ -56,6 +67,10 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+  };
+
+  const handleUploadClick = () => {
+    setIsUploadPopupOpen(true);
   };
 
   useEffect(() => {
@@ -110,7 +125,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
             />
           </div>
           <div className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
-            {getInitials(username)}
+            {getInitials(fullName)}
           </div>
           <button
             onClick={logoutBtn}
@@ -191,35 +206,35 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
           <div className="flex">
             {/* Left section - existing user info */}
             <div className="flex-1 max-w-md border-r border-black">
-              <div>
-                <div className="flex items-center space-x-4">
-                  <h1 className="text-3xl font-bold">{username}</h1>
-                  <button
-                    className="p-2 text-gray-600 hover:text-cyan-500 rounded-full hover:bg-gray-100"
-                    title="Edit Profile"
-                    onClick={handleOpenModal}
-                  >
-                    <Icon icon="mdi:pencil" width="20" height="20" />
-                  </button>
-                </div>
-                <p className="text-gray-600 mt-1">Painter, Visual Artist</p>
+              <div className="flex items-center space-x-4">
+                <h1 className="text-3xl font-bold">{fullName}</h1>
+                <button
+                  className="p-2 text-gray-600 hover:text-cyan-500 rounded-full hover:bg-gray-100"
+                  title="Edit Profile"
+                  onClick={handleOpenModal}
+                >
+                  <Icon icon="mdi:pencil" width="20" height="20" />
+                </button>
               </div>
+              <p className="text-gray-600 mt-1">
+                {artistType.replace(/['"]+/g, "")}
+              </p>
 
               <div className="mt-6 space-y-2 text-gray-600">
                 <div className="flex items-center mb-6">
-                  <i>"I want to sleep forever."</i>
+                  {bio && <i>"{bio}"</i>}
                 </div>
                 <div className="flex items-center space-x-2">
                   <Icon icon="mdi:map-marker" width="20" height="20" />
-                  <span>Poblacion 7, Cabadbaran City, Agusan Del Norte</span>
+                  <span>{address}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Icon icon="mdi:calendar" width="20" height="20" />
-                  <span>January 19, 2003</span>
+                  <span>{birthday}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Icon icon="mdi:email" width="20" height="20" />
-                  <span>johndoe@email.com</span>
+                  <span>{email}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Icon icon="mdi:phone" width="20" height="20" />
@@ -258,14 +273,21 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
             <div className="w-96 pl-6 ml-6">
               <div className="space-y-4">
                 <div className="flex space-x-8">
-                  <button className="font-semibold text-gray-700 pb-1 border-b-2 border-cyan-500 border-black">
+                  <button className="font-semibold text-gray-700 pb-1 border-b-2 border-cyan-500">
                     Works
+                  </button>
+                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
+                    Events
                   </button>
                   <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
                     Followers
                   </button>
-                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
-                    Events
+                  <button
+                    onClick={handleUploadClick}
+                    className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2 flex items-center gap-1"
+                  >
+                    Upload
+                    <Icon icon="material-symbols:upload" />
                   </button>
                 </div>
               </div>
@@ -279,6 +301,10 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         artistData={artistData}
+      />
+      <UploadPopup
+        isOpen={isUploadPopupOpen}
+        onClose={() => setIsUploadPopupOpen(false)}
       />
     </div>
   );

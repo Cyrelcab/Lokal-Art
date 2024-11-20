@@ -6,19 +6,19 @@ import Signup from "./Auth/signup";
 import Home from "./page/components/Home";
 import TermsConditions from "./Auth/terms_conditions";
 import Role from "./page/role";
-import ArtistProfile from "./page/Artist/artist-profile";
-import Dashboard from "./page/Artist/dashboard";
+import ArtistProfile from "./Artist/artist-profile";
+import Dashboard from "./Artist/dashboard";
 
 import Upload from "./Artist/Upload";
-import Discover from "./Client/Discover"; 
+import Discover from "./Client/Discover";
 function App() {
   return (
     <>
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/client/discover" element={<Discover />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

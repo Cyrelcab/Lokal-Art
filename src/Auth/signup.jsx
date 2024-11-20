@@ -16,26 +16,29 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  // State to manage form data
+  // Updated initial state - confirmPassword is not retrieved from localStorage
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    terms: localStorage.getItem("termsAccepted") === "true" || false,
+    first_name: localStorage.getItem("first_name") || "",
+    last_name: localStorage.getItem("last_name") || "",
+    email: localStorage.getItem("email") || "",
+    password: localStorage.getItem("password") || "",
+    confirmPassword: "", // No localStorage for confirmPassword
+    terms: localStorage.getItem("terms") === "true" || false,
   });
 
-  // Handle form input changes
+  // Updated handleChange to exclude confirmPassword from localStorage
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    const newValue = type === "checkbox" ? checked : value;
+
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: newValue,
     }));
 
-    // Save terms acceptance to localStorage when checkbox changes
-    if (name === "terms") {
-      localStorage.setItem("termsAccepted", checked);
+    // Only save to localStorage if it's not the confirmPassword field
+    if (name !== "confirmPassword") {
+      localStorage.setItem(name, type === "checkbox" ? checked : value);
     }
   };
 
@@ -43,8 +46,16 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (
-      !formData.username.trim() &&
+    if (!formData.terms) {
+      toast.error("Please accept the terms and conditions", {
+        style: {
+          color: "red",
+        },
+      });
+      return;
+    } else if (
+      !formData.first_name.trim() &&
+      !formData.last_name.trim() &&
       !formData.email.trim() &&
       !formData.password.trim() &&
       !formData.confirmPassword.trim()
@@ -56,13 +67,10 @@ const Signup = () => {
       });
       return;
     }
+
     // Basic validation
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-    if (!formData.terms) {
-      toast.error("Please accept the terms and conditions", {
+      toast.error("Password does not match", {
         style: {
           color: "red",
         },
@@ -72,7 +80,6 @@ const Signup = () => {
 
     // Add signup logic here (e.g., API call)
     navigate("/role");
-    console.log("Form submitted:", formData);
   };
 
   return (
@@ -95,18 +102,33 @@ const Signup = () => {
         <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
           <h1 className="text-3xl font-bold mb-8 text-center">Signup</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/*Username Field*/}
+            {/*First Name Field*/}
             <div>
-              <label htmlFor="username" className="sr-only">
-                Username
+              <label htmlFor="first_name" className="sr-only">
+                First Name
               </label>
               <input
                 type="text"
-                id="username"
-                name="username"
-                value={formData.username}
+                id="first_name"
+                name="first_name"
+                value={formData.first_name}
                 onChange={handleChange}
-                placeholder="Username"
+                placeholder="First Name"
+                className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            {/*Last Name Field*/}
+            <div>
+              <label htmlFor="last_name" className="sr-only">
+                Last Name
+              </label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                placeholder="Last Name"
                 className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

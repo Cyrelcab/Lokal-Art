@@ -6,6 +6,10 @@ import FileUpload from "./Fileupload";
 const ArtworkPopup = () => {
   const [showArtworkPopup, setShowArtworkPopup] = useState(false);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+  });
 
   const toggleArtworkPopup = () => {
     setShowArtworkPopup(!showArtworkPopup);
@@ -18,6 +22,25 @@ const ArtworkPopup = () => {
 
   const closeConfirmPopup = () => {
     setShowConfirmPopup(false); // Close the confirmation popup
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async () => {
+    try {
+      // Here you would typically send the data to your backend
+      // Include the image file from FileUpload component
+      // await uploadArtwork({ ...formData, image: imageFile });
+      openConfirmPopup();
+    } catch (error) {
+      console.error("Error uploading artwork:", error);
+    }
   };
 
   return (
@@ -34,7 +57,7 @@ const ArtworkPopup = () => {
       {/* Artwork Popup */}
       {showArtworkPopup && (
         <div className="fixed top-9 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white w-[50rem] h-[32rem] rounded-md shadow-lg relative p-5 flex flex-col items-center">
+          <div className="bg-white w-[55rem] h-[32rem] rounded-md shadow-lg relative p-5 flex flex-col items-center">
             <button
               onClick={toggleArtworkPopup}
               className="absolute top-4 right-4 text-black hover:bg-red-600 hover:text-white p-2 rounded"
@@ -49,17 +72,20 @@ const ArtworkPopup = () => {
             </div>
 
             <div className="w-[45rem] h-[32rem] flex">
-              <FileUpload/>
-              <div className="flex justify-center items-center">
+              <FileUpload />
+              <div className="flex justify-center items-center ml-8">
                 <div className="w-[18rem]">
                   <p className="pl-5 pb-2 ">Add Title</p>
                   <form
-                  onSubmit={(e) => {
-                    e.preventDefault(); // Prevent the form from submitting and refreshing the page
-                  }}>
+                    onSubmit={(e) => {
+                      e.preventDefault(); // Prevent the form from submitting and refreshing the page
+                    }}
+                  >
                     <input
                       type="text"
                       name="title"
+                      value={formData.title}
+                      onChange={handleInputChange}
                       placeholder="Title"
                       className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
@@ -68,6 +94,8 @@ const ArtworkPopup = () => {
                   <form>
                     <textarea
                       name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
                       placeholder="Description"
                       className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                       rows="7" // Adjust the number of rows to your preference
@@ -78,7 +106,7 @@ const ArtworkPopup = () => {
                   <div className="flex justify-center items-center pt-7">
                     <a
                       href="#"
-                      onClick={openConfirmPopup}
+                      onClick={handleSubmit}
                       className="text-1xl font-bold mb-4 px-16 py-2 border-2 text-cyan-500 border-cyan-500 rounded-full hover:bg-cyan-500 hover:text-white"
                     >
                       Create
@@ -101,7 +129,9 @@ const ArtworkPopup = () => {
                 className="size-36 text-cyan-400"
               />
               <h1 className="text-2xl font-bold">Upload Complete</h1>
-              <p className="pt-5">Your artwork has been uploaded successfully</p>
+              <p className="pt-5">
+                Your artwork has been uploaded successfully
+              </p>
             </div>
 
             <button

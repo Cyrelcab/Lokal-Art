@@ -38,7 +38,7 @@ const Login = () => {
 
     // Wait for toast to be visible before navigating
     setTimeout(() => {
-      navigate("/");
+      navigate("/client/discover");
     }, 1000);
     console.log("Login attempt with:", formData);
   };
