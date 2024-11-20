@@ -56,7 +56,7 @@ export default function Upload() {
                 John Doe{" "}
                 <Icon
                   icon="akar-icons:edit"
-                  className="ml-2 mt-1 hover:text-cyan-500"
+                  className="ml-2 mt-1 hover:text-cyan-500 cursor-pointer"
                 />
               </h1>
               <p className="text-gray-500 ">Painter, Visual Artist</p>

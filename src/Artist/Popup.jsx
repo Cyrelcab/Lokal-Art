@@ -20,7 +20,7 @@ const UploadPopup = () => {
             Upload
             <Icon
               icon="material-symbols:upload"
-              className="ml-1 hover:text-cyan-500"
+              className="ml-1 hover:text-cyan-500 text-xl"
             />
           </a>
         </span>
