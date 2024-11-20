@@ -73,6 +73,15 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
     setIsUploadPopupOpen(true);
   };
 
+  const handleProfileUpdate = (updatedData) => {
+    const newData = { ...artistData, ...updatedData };
+    setArtistData(newData);
+    
+    Object.entries(updatedData).forEach(([key, value]) => {
+      localStorage.setItem(key, value);
+    });
+  };
+
   useEffect(() => {
     return () => {
       // Cleanup object URLs when component unmounts
@@ -301,6 +310,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         artistData={artistData}
+        onUpdate={handleProfileUpdate}
       />
       <UploadPopup
         isOpen={isUploadPopupOpen}

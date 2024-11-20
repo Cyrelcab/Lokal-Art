@@ -16,17 +16,17 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  // Updated initial state - confirmPassword is not retrieved from localStorage
+  // Updated initial state to use sessionStorage
   const [formData, setFormData] = useState({
-    first_name: localStorage.getItem("first_name") || "",
-    last_name: localStorage.getItem("last_name") || "",
-    email: localStorage.getItem("email") || "",
-    password: localStorage.getItem("password") || "",
-    confirmPassword: "", // No localStorage for confirmPassword
-    terms: localStorage.getItem("terms") === "true" || false,
+    first_name: sessionStorage.getItem("first_name") || "",
+    last_name: sessionStorage.getItem("last_name") || "",
+    email: sessionStorage.getItem("email") || "",
+    password: sessionStorage.getItem("password") || "",
+    confirmPassword: "", // No sessionStorage for confirmPassword
+    terms: sessionStorage.getItem("terms") === "true" || false,
   });
 
-  // Updated handleChange to exclude confirmPassword from localStorage
+  // Updated handleChange to use sessionStorage
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -36,9 +36,9 @@ const Signup = () => {
       [name]: newValue,
     }));
 
-    // Only save to localStorage if it's not the confirmPassword field
+    // Only save to sessionStorage if it's not the confirmPassword field
     if (name !== "confirmPassword") {
-      localStorage.setItem(name, type === "checkbox" ? checked : value);
+      sessionStorage.setItem(name, type === "checkbox" ? checked : value);
     }
   };
 
