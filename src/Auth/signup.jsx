@@ -16,26 +16,16 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  // Safe storage getter function
-  const getStorageItem = (key) => {
-    try {
-      return sessionStorage.getItem(key) || "";
-    } catch (error) {
-      return "";
-    }
-  };
-
-  // Updated initial state with safe storage access
+  // Updated initial state to check localStorage for all fields
   const [formData, setFormData] = useState({
-    first_name: getStorageItem("first_name"),
-    last_name: getStorageItem("last_name"),
-    email: getStorageItem("email"),
-    password: getStorageItem("password"),
-    confirmPassword: "",
-    terms: getStorageItem("terms") === "true" || false,
+    first_name: localStorage.getItem("first_name") || "",
+    last_name: localStorage.getItem("last_name") || "",
+    email: localStorage.getItem("email") || "",
+    password: localStorage.getItem("password") || "",
+    terms: localStorage.getItem("terms") === "true" || false,
   });
 
-  // Updated handleChange with safe storage setter
+  // Updated handleChange to save all form inputs to localStorage
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const newValue = type === "checkbox" ? checked : value;
@@ -45,15 +35,8 @@ const Signup = () => {
       [name]: newValue,
     }));
 
-    // Safely try to save to storage
-    if (name !== "confirmPassword") {
-      try {
-        sessionStorage.setItem(name, type === "checkbox" ? checked : value);
-      } catch (error) {
-        // Silently fail if storage is not available
-        console.log("Storage not available");
-      }
-    }
+    // Save all form inputs to localStorage
+    localStorage.setItem(name, type === "checkbox" ? checked : value);
   };
 
   // Handle form submission
