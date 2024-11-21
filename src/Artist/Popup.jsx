@@ -4,12 +4,14 @@ import EventsPopup from "./Events";
 import { Icon } from "@iconify/react";
 
 
-const UploadPopup = () => {
+const UploadPopup = ({ isOpen, onClose }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
+
+  if (!isOpen) return null;
 
   return (
     <div>
@@ -27,16 +29,16 @@ const UploadPopup = () => {
       </div>
 
       {/* Popup */}
-      {showPopup && (
+      {isOpen && (
         <div
           className="fixed top-9 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
-          onClick={togglePopup} // Clicking outside closes popup
+          onClick={onClose}
         >
           <div className="bg-white w-[30rem] h-[20rem] rounded-md shadow-lg relative p-5 flex flex-col items-center"
           onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={togglePopup}
+              onClick={onClose}
               className="absolute top-4 right-4 text-black hover:bg-red-600 hover:text-white p-2 rounded"
             >
               <Icon icon="material-symbols:close" />

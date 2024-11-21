@@ -4,8 +4,28 @@ import DropdownMenu from "./Components/Sort";
 import { Icon } from "@iconify/react";
 import Search from "./Components/Search";
 import ArtistBox from "./Components/ArtistBox";
+import { useState } from "react";
+import { setDocumentTitle } from "@/utils/document";
 
 export default function Discover() {
+  setDocumentTitle("Discover | LokalArt");
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState([]);
+  const [locationFilter, setLocationFilter] = useState([]);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const handleFilterChange = (type, value) => {
+    if (type === "category") {
+      setCategoryFilter(value);
+    } else if (type === "location") {
+      setLocationFilter(value);
+    }
+  };
+
   return (
     <section>
       <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
@@ -17,7 +37,10 @@ export default function Discover() {
           />
         </div>
         <div className="flex justify-center items-center p-5">
-          <a className="mr-10 hover:text-cyan-500 text-m" href="/discover">
+          <a
+            className="mr-10 border-b-2 border-cyan-500 text-m"
+            href="/client/discover"
+          >
             Discover
           </a>
           <a className="mr-10 hover:text-cyan-500 text-m" href="#">
@@ -36,29 +59,27 @@ export default function Discover() {
         </div>
       </nav>
 
-      <div className="mt-20 flex flex-col">
-        {/* Search, Sort, and Artist Box */}
+      <div className="flex flex-col">
         <div>
-          <div className="fixed flex justify-center items-center space-x-28 w-full placeholder-cyan-500">
-            {/* Filter */}
+          <div className="fixed top-[60px] flex justify-center items-center space-x-28 w-full placeholder-cyan-500 bg-white py-6 mt-2">
             <div>
-              <FilterPopup />
+              <FilterPopup onFilterChange={handleFilterChange} />
             </div>
-            {/* Search */}
             <div>
-              <Search />
+              <Search onSearch={handleSearch} />
             </div>
-            {/* Sort */}
             <div>
               <DropdownMenu />
             </div>
           </div>
 
-          {/* Artist Box */}
-          <div className="h-full flex justify-center items-center">
-            {/* Grid */}
+          <div className="h-full mt-28 flex justify-center items-center">
             <div className="pt-16">
-              <ArtistBox/>
+              <ArtistBox 
+                searchQuery={searchQuery}
+                categoryFilter={categoryFilter}
+                locationFilter={locationFilter}
+              />
             </div>
           </div>
         </div>
