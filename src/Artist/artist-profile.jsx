@@ -4,46 +4,30 @@ import { setDocumentTitle } from "@/utils/document";
 import { useState, useEffect } from "react";
 import Modal from "./modal";
 import UploadPopup from "./Popup";
+import Navbar from "./navbar";
 
 const ArtistProfile = ({ artistData: initialArtistData }) => {
   setDocumentTitle("Profile | Lokal-Art");
-  const navigate = useNavigate();
   const firstName = localStorage.getItem("first_name") || "John";
   const lastName = localStorage.getItem("last_name") || "Doe";
   const artistType =
     localStorage.getItem("artist_type") || "Painter, Visual Artist";
-  const email =
-    localStorage.getItem("email") || "johndoe@email.com";
+  const email = localStorage.getItem("email") || "johndoe@email.com";
   const address = localStorage.getItem("address") || "Address";
   const bio = localStorage.getItem("bio") || "";
   const birthday = localStorage.getItem("birthday") || "Birthdate";
   const fullName = `${firstName} ${lastName}`;
+  const [artwork, setArtwork] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [artistData, setArtistData] = useState(
     initialArtistData || {
       bio: localStorage.getItem("bio") || "",
-      // Add other artist data as needed
+      // Add zzother artist data as needed
     }
   );
   const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
-
-  const getInitials = (name) => {
-    if (!name) return "";
-    return name
-      .trim()
-      .split(" ")
-      .filter((word) => word.length > 0)
-      .map((word) => word[0] || "")
-      .join("")
-      .toUpperCase();
-  };
-
-  const logoutBtn = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
 
   const handleBannerUpload = (event) => {
     const file = event.target.files[0];
@@ -76,13 +60,18 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   const handleProfileUpdate = (updatedData) => {
     const newData = { ...artistData, ...updatedData };
     setArtistData(newData);
-    
+
     Object.entries(updatedData).forEach(([key, value]) => {
       localStorage.setItem(key, value);
     });
   };
 
   useEffect(() => {
+    const storedArtwork = JSON.parse(localStorage.getItem("artworkData"));
+    console.log("Retrieved artwork data from localStorage:", storedArtwork);
+    if (storedArtwork) {
+      setArtwork(storedArtwork);
+    }
     return () => {
       // Cleanup object URLs when component unmounts
       if (bannerImage) URL.revokeObjectURL(bannerImage);
@@ -91,60 +80,8 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   }, [bannerImage, profileImage]);
 
   return (
-    <div className="h-screen bg-gray-100">
-      <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm fixed top-0 w-full z-50">
-        <div className="flex items-center">
-          <img
-            src="/images/logo-blue.png"
-            alt="LokalArt Logo"
-            className="h-10"
-          />
-        </div>
-
-        <div className="flex-1 px-8">
-          <ul className="flex justify-center space-x-8">
-            <li>
-              <Link to="/dashboard" className="text-black hover:text-cyan-500">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/transactions"
-                className="text-black hover:text-cyan-500"
-              >
-                My Transactions
-              </Link>
-            </li>
-            <li>
-              <Link to="/messages" className="text-black hover:text-cyan-500">
-                Messages
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="flex items-center space-x-6">
-          <div className="cursor-pointer">
-            <Icon
-              icon="mdi:bell"
-              width="24"
-              height="24"
-              className="text-cyan-500"
-            />
-          </div>
-          <div className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
-            {getInitials(fullName)}
-          </div>
-          <button
-            onClick={logoutBtn}
-            className="px-4 py-2 text-white bg-[#00D1FF] rounded-full hover:bg-[#00b8e6]"
-          >
-            Logout
-          </button>
-        </div>
-      </nav>
-
+    <div className="h-full bg-gray-100">
+      <Navbar fullName={fullName} />
       <main className="pt-10">
         {/* Banner Photo Upload Section */}
         <div className="relative w-full h-48 bg-gray-200 mb-16">
@@ -214,7 +151,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
           {/* Create a flex container to hold both sections */}
           <div className="flex">
             {/* Left section - existing user info */}
-            <div className="flex-1 max-w-md border-r border-black">
+            <div className="flex-1 max-w-md border-r border-black pr-10">
               <div className="flex items-center space-x-4">
                 <h1 className="text-3xl font-bold">{fullName}</h1>
                 <button
@@ -251,7 +188,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                 </div>
               </div>
               {/* Stats Section - moved outside the flex container */}
-              <div className="mt-16 flex space-x-16">
+              <div className="mt-16 flex space-x-8">
                 <div className="flex flex-col items-center">
                   <span className="text-2xl font-bold">9</span>
                   <div className="flex items-center space-x-1 text-gray-600 text-sm">
@@ -279,7 +216,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
             </div>
 
             {/* Right section with border - Fixed structure */}
-            <div className="w-96 pl-6 ml-6">
+            <div className="w-full pl-6 ml-6">
               <div className="space-y-4">
                 <div className="flex space-x-8">
                   <button className="font-semibold text-gray-700 pb-1 border-b-2 border-cyan-500">
@@ -298,6 +235,30 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                     Upload
                     <Icon icon="material-symbols:upload" />
                   </button>
+                </div>
+                {/* Display the Uploaded Artwork */}
+                <div className="h-full pt-3 grid grid-cols-3 justify-items-center gap-5">
+                  {artwork ? (
+                    <div
+                      className="relative w-64 h-52"
+                      style={{
+                        textShadow:
+                          "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                      }}
+                    >
+                      <img
+                        src={artwork.image}
+                        className="object-cover w-full h-full rounded-lg"
+                      />
+                      <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                        {artwork.title || "Untitled"}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-gray-500 text-center">
+                      No artwork uploaded yet.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>

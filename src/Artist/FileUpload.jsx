@@ -18,6 +18,7 @@ const FileUpload = ({ onImageUpload }) => {
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setImagePreview(previewUrl);
+      onImageUpload(file);
 
       // Create an Image object to get the natural dimensions
       const img = new Image();
@@ -35,7 +36,6 @@ const FileUpload = ({ onImageUpload }) => {
           }
         }
       };
-      onImageUpload(file);
     }
   };
 
@@ -58,7 +58,7 @@ const FileUpload = ({ onImageUpload }) => {
         {imagePreview ? (
           <div className="image-container overflow-hidden mr-8">
             <img
-              src={imagePreview}
+              src={imagePreview || ""}
               alt="Preview"
               className="w-full h-full object-contain"
             />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import FileUpload from "./FileUpload";
-//import ConfirmPopup from "./Confirmed";
 
 const ArtworkPopup = () => {
   const [showArtworkPopup, setShowArtworkPopup] = useState(false);
@@ -10,6 +9,7 @@ const ArtworkPopup = () => {
     title: "",
     description: "",
   });
+  const [uploadedImage, setUploadedImage] = useState(null);
 
   const toggleArtworkPopup = () => {
     setShowArtworkPopup(!showArtworkPopup);
@@ -32,14 +32,30 @@ const ArtworkPopup = () => {
     }));
   };
 
-  const handleSubmit = async () => {
+  const handleImageUpload = (imageFile) => {
+    setUploadedImage(imageFile);
+  };
+
+  const handleSubmit = () => {
+    console.log("Form Data:", formData); // Debugging log
+    console.log("Uploaded Image:", uploadedImage); // Debugging log
+    if (!uploadedImage || !formData.title || !formData.description) {
+      alert("Please complete all fields before submitting.");
+      return;
+    }
+
     try {
-      // Here you would typically send the data to your backend
-      // Include the image file from FileUpload component
-      // await uploadArtwork({ ...formData, image: imageFile });
+      // Store the artwork data in localStorage
+      const artworkData = {
+        title: formData.title,
+        description: formData.description,
+        image: URL.createObjectURL(uploadedImage),
+      };
+  
+      localStorage.setItem("artworkData", JSON.stringify(artworkData));
       openConfirmPopup();
     } catch (error) {
-      console.error("Error uploading artwork:", error);
+      console.error("Error saving artwork data:", error);
     }
   };
 
@@ -72,13 +88,13 @@ const ArtworkPopup = () => {
             </div>
 
             <div className="w-[45rem] h-[32rem] flex">
-              <FileUpload />
+              <FileUpload onImageUpload={handleImageUpload} />
               <div className="flex justify-center items-center ml-8">
                 <div className="w-[18rem]">
                   <p className="pl-5 pb-2 ">Add Title</p>
                   <form
                     onSubmit={(e) => {
-                      e.preventDefault(); // Prevent the form from submitting and refreshing the page
+                      e.preventDefault(); // Prevent form submission
                     }}
                   >
                     <input
@@ -98,7 +114,7 @@ const ArtworkPopup = () => {
                       onChange={handleInputChange}
                       placeholder="Description"
                       className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      rows="7" // Adjust the number of rows to your preference
+                      rows="7"
                     />
                   </form>
 

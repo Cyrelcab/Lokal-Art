@@ -6,6 +6,7 @@ import Search from "./Components/Search";
 import ArtistBox from "./Components/ArtistBox";
 import { useState } from "react";
 import { setDocumentTitle } from "@/utils/document";
+import Navbar from "@/Artist/navbar";
 
 export default function Discover() {
   setDocumentTitle("Discover | LokalArt");
@@ -28,7 +29,7 @@ export default function Discover() {
 
   return (
     <section>
-      <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
+      {/* <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
         <div className="flex items-center">
           <img
             src="/images/logo-blue.png"
@@ -57,8 +58,8 @@ export default function Discover() {
             <Link to={"/login"}>Logout</Link>
           </button>
         </div>
-      </nav>
-
+      </nav> */}
+      <Navbar/>
       <div className="flex flex-col">
         <div>
           <div className="fixed top-[60px] flex justify-center items-center space-x-28 w-full placeholder-cyan-500 bg-white py-6 mt-2">
