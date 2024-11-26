@@ -3,16 +3,14 @@
 export default function Profile(){
     return (
         <>
-        <section>
+        <main>
             {/* Profile Cover Photo*/}
             <div className="h-[200px] w-screen max-w-full overflow-hidden">
                 <img className="w-screen" src="/images/cover-photo.jpg" alt="Cover Photo" />
             </div>
             <img className="cursor-pointer shadow-md object-cover mt-[-150px] ml-20 rounded-full h-[200px] w-[200px]" 
             src="/images/profile-photo.jpg" alt="Profile Photo" />
-
-            {/* contents */}
-            <div className="flex flex-row gap-10">
+            <div className="flex flex-row">
                 <div className="h-full w-[20rem] border-solid border-r-2 border-r-gray-300 ml-20 flex flex-col justify-around gap-[50px] mt-5 pr-5">
                     {/* name */}
                     <div>
@@ -53,46 +51,14 @@ export default function Profile(){
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div className="pt-5 w-[70vw]">
-                        <span className="mr-20 font-bold hover:text-cyan-500"><a href="#">Works</a></span>
-                        <span className="mr-20 font-bold hover:text-cyan-500"><a href="#">Followers</a></span>
-                        <span className="mr-20 font-bold hover:text-cyan-500"><a href="#">Events</a></span>
-                    </div>
-                     {/* image container */}
-                     {/* this is where i left */}
-                    <div className="w-inherit h-full pt-10
-                                    grid grid-cols-3 justify-items-center"> 
-                       {/* image-card */}
-                        <div className="">
-                            <img className="object-cover h-52 w-72 rounded-lg" src="\images\image1.jfif" alt="Image1" />
-                            <p className="font-medium">Ocean Serenity</p>
-                        </div>
-                        <div className="">
-                            <img className="object-cover h-52 w-72 rounded-lg" src="\images\image1.jfif" alt="Image1" />
-                            <p className="font-medium">Ocean Serenity</p>
-                        </div>
-                        <div className="">
-                            <img className="object-cover h-52 w-72 rounded-lg" src="\images\image1.jfif" alt="Image1" />
-                            <p className="font-medium">Ocean Serenity</p>
-                        </div>
-                        <div className="">
-                            <img className="object-cover h-52 w-72 rounded-lg" src="\images\image1.jfif" alt="Image1" />
-                            <p className="font-medium">Ocean Serenity</p>
-                        </div>
-                        <div className="">
-                            <img className="object-cover h-52 w-72 rounded-lg" src="\images\image1.jfif" alt="Image1" />
-                            <p className="font-medium">Ocean Serenity</p>
-                        </div>
-                        <div className="">
-                            <img className="object-cover h-52 w-72 rounded-lg" src="\images\image1.jfif" alt="Image1" />
-                            <p className="font-medium">Ocean Serenity</p>
-                        </div>
-                        
-                    </div>
+                <div className="h-10 w-full border-solid border-red-500 border-2 font-bold">
+                    <span className="ml-10 mr-10"><a href="#">Works</a></span>
+                    <span className="mr-10"><a href="#">Followers</a></span>
+                    <span className="mr-10"><a href="#">Events</a></span>
                 </div>
             </div>
-        </section>
+        </main>
+
         </>
     )
 
