@@ -3,8 +3,8 @@ const ArtBox = ({ isOpen, onClose, artwork }) => {
   
     return (
       <div>
-        <div className="bg-white p-5 rounded-lg w-full overflow-auto">
-          <div className="h-full pt-3 grid grid-cols-3 justify-items-center gap-5">
+        <div className="bg-white px-5 py-5 rounded-lg w-full overflow-auto">
+          <div className="h-full grid grid-cols-3 justify-items-center gap-5">
             {artwork ? (
               <div
                 className="relative w-64 h-52"

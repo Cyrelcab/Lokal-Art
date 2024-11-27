@@ -18,7 +18,7 @@ export default function Search({ onSearch = () => {} }) {
         value={searchTerm}
         onChange={handleInputChange}
         placeholder="Search Artists"
-        className="w-96 px-4 py-2 border-b-2 shadow-md border-gray-300 rounded-2xl focus:outline-none hover:shadow-cyan-200"
+        className="w-96 px-4 py-2 border-b-2 shadow-md border-gray-300 rounded-2xl focus:outline-none hover:shadow-black"
       />
       <Icon
         icon="material-symbols:search"

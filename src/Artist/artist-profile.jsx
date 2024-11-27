@@ -20,7 +20,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   const birthday = localStorage.getItem("birthday") || "Birthdate";
   const fullName = `${firstName} ${lastName}`;
   const [artwork, setArtworks] = useState(null);
-
+  const [events, setEvents] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,8 +31,8 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
     }
   );
   const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
-  const [isEventOpen, setIsEventOpen] = useState(false);
-  const [isArtBoxOpen, setIsArtBoxOpen] = useState(false);
+  const [isEventBoxOpen, setIsEventBoxOpen] = useState(false);
+  const [isArtBoxOpen, setIsArtBoxOpen] = useState(true);
 
   const handleBannerUpload = (event) => {
     const file = event.target.files[0];
@@ -51,6 +51,13 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   };
   const toggleArtBox = () => {
     setIsArtBoxOpen((prev) => !prev);
+    setIsEventBoxOpen(false);
+    
+  };  
+
+  const toggleEventBox = () => {
+    setIsEventBoxOpen((prev) => !prev);
+    setIsArtBoxOpen(false);
   };  
 
   const handleCloseModal = () => {
@@ -64,10 +71,6 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   const handleUploadClick = () => {
     setIsUploadPopupOpen(true);
   };
-  const handleEventClick = () => {
-    setIsEventOpen(true);
-  };
-
   const handleProfileUpdate = (updatedData) => {
     const newData = { ...artistData, ...updatedData };
     setArtistData(newData);
@@ -83,6 +86,15 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
     if (storedArtworkData) {
       const parsedData = JSON.parse(storedArtworkData);
       setArtworks(parsedData); // Set the artworks array to state
+    }
+  }, []);
+
+  useEffect(() => {
+    // Retrieve the artwork data from localStorage
+    const storedEventsData = sessionStorage.getItem("eventDetails");
+    if (storedEventsData) {
+      const parsedData = JSON.parse(storedEventsData);
+      setEvents(parsedData); // Set the artworks array to state
     }
   }, []);
 
@@ -236,15 +248,15 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                 <div className="flex space-x-8">
                   <button
                     onClick={toggleArtBox}
-                    className="font-semibold text-gray-700 pb-1 hover:border-b-2 hover:border-cyan-500"
+                    className="font-semibold text-gray-700 pb-1 hover:border-b-2 hover:border-cyan-500 hover:text-cyan-500"
                   >
                     Works
                   </button>
 
                   <button
-                    onClick={handleEventClick}
-                    className="font-semibold text-gray-700 hover:text-cyan-500 pb-2 hover:border-b-2 hover:border-cyan-500"
-                  >
+                    onClick={toggleEventBox}
+                    className="font-semibold text-gray-700 pb-1 hover:border-b-2 hover:border-cyan-500 hover:text-cyan-500"
+                    >
                     Events
                   </button>
                   <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
@@ -258,10 +270,10 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                     <Icon icon="material-symbols:upload" />
                   </button>
                 </div>
-                <div className="bg-white p-5 rounded-md h-screen">
+                <div>
                   <EventBox
-                    isOpen={isEventOpen}
-                    onClose={() => setIsEventOpen(false)}
+                    isOpen={isEventBoxOpen}
+                    events={events}
                   />
                 </div>
 

@@ -4,18 +4,39 @@ import { Icon } from "@iconify/react";
 const EventsPopup = () => {
   const [showEventsPopup, setShowEventsPopup] = useState(false);
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [eventDetails, setEventDetails] = useState({
+    title: "",
+    address: "",
+    startDate: "",
+    startTime: "",
+    endDate: "",
+    endTime: "",
+    description: "",
+  });
 
   const toggleEventsPopup = () => {
     setShowEventsPopup(!showEventsPopup);
   };
 
   const openConfirmPopup = () => {
-    setShowEventsPopup(false); // Close the artwork popup
-    setShowConfirmPopup(true); // Open the confirmation popup
+    // Save to sessionStorage
+    sessionStorage.setItem("eventDetails", JSON.stringify(eventDetails));
+    
+    // Open confirmation popup
+    setShowEventsPopup(false);
+    setShowConfirmPopup(true);
   };
 
   const closeConfirmPopup = () => {
-    setShowConfirmPopup(false); // Close the confirmation popup
+    setShowConfirmPopup(false);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEventDetails((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
   };
 
   return (
@@ -49,8 +70,8 @@ const EventsPopup = () => {
                 <div className="flex space-x-3">
                   <div className="w-full">
                     <label
-                      for="start-datetime"
-                      class="block text-md font-bold text-gray-700 mb-1 ml-4"
+                      htmlFor="title"
+                      className="block text-md font-bold text-gray-700 mb-1 ml-4"
                     >
                       Event Title
                     </label>
@@ -58,75 +79,116 @@ const EventsPopup = () => {
                       type="text"
                       id="title"
                       name="title"
+                      value={eventDetails.title}
+                      onChange={handleChange}
                       placeholder="Title"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
                     />
                   </div>
                   <div className="w-full">
                     <label
-                      for="description"
-                      class="block text-md font-bold text-gray-700 mb-1 ml-4"
+                      htmlFor="address"
+                      className="block text-md font-bold text-gray-700 mb-1 ml-4"
                     >
                       Address
                     </label>
                     <input
                       type="text"
-                      name="title"
+                      id="address"
+                      name="address"
+                      value={eventDetails.address}
+                      onChange={handleChange}
                       placeholder="Address"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
                     />
                   </div>
                 </div>
 
                 <div className="w-full flex space-x-3">
-                  <div class=" w-full my-4">
+                  <div className="w-full my-4">
                     <label
-                      for="start-datetime"
-                      class="block text-md font-bold text-gray-700 mb-1 ml-4"
+                      htmlFor="startDateTime"
+                      className="block text-md font-bold text-gray-700 mb-1 ml-4"
                     >
-                      Start Date and Time
+                      Start Date
                     </label>
                     <input
-                      type="datetime-local"
-                      id="start-datetime"
-                      name="start-datetime"
-                      class="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      type="date"
+                      id="startDate"
+                      name="startDate"
+                      value={eventDetails.startDate}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                    />
+                  </div>
+                  <div className="w-full my-4">
+                    <label
+                      htmlFor="startDateTime"
+                      className="block text-md font-bold text-gray-700 mb-1 ml-4"
+                    >
+                      Start Time
+                    </label>
+                    <input
+                      type="time"
+                      id="startTime"
+                      name="startTime"
+                      value={eventDetails.startTime}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
                     />
                   </div>
 
-                  <div class="w-full my-4">
+                  <div className="w-full my-4">
                     <label
-                      for="end-datetime"
-                      class="block text-md font-bold text-gray-700 mb-1 ml-4"
+                      htmlFor="endDateTime"
+                      className="block text-md font-bold text-gray-700 mb-1 ml-4"
                     >
-                      End Date and Time
+                      End Date
                     </label>
                     <input
-                      type="datetime-local"
-                      id="end-datetime"
-                      name="end-datetime"
-                      class="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      type="date"
+                      id="endDate"
+                      name="endDate"
+                      value={eventDetails.endDate}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                    />
+                  </div>
+
+                  <div className="w-full my-4">
+                    <label
+                      htmlFor="startDateTime"
+                      className="block text-md font-bold text-gray-700 mb-1 ml-4"
+                    >
+                      End Time
+                    </label>
+                    <input
+                      type="time"
+                      id="endTime"
+                      name="endTime"
+                      value={eventDetails.endTime}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <div>
-                    <label
-                      for="description"
-                      class="block text-md font-bold text-gray-700 mb-1 ml-4"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      name="description"
-                      id="description"
-                      placeholder="Description"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      rows="5" // Adjust the number of rows to your preference
-                    />
-                  </div>
+                  <label
+                    htmlFor="description"
+                    className="block text-md font-bold text-gray-700 mb-1 ml-4"
+                  >
+                    Description
+                  </label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={eventDetails.description}
+                    onChange={handleChange}
+                    placeholder="Description"
+                    className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none shadow hover:shadow-cyan-500"
+                    rows="5"
+                  />
                 </div>
                 <div className="flex justify-center items-center pt-5">
                   <a
