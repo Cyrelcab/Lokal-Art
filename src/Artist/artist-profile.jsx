@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Modal from "./modal";
 import UploadPopup from "./Popup";
 import Navbar from "./navbar";
+import EventBox from "./EventBox";
+import ArtBox from "./ArtBox";
 
 const ArtistProfile = ({ artistData: initialArtistData }) => {
   setDocumentTitle("Profile | Lokal-Art");
@@ -17,7 +19,8 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   const bio = localStorage.getItem("bio") || "";
   const birthday = localStorage.getItem("birthday") || "Birthdate";
   const fullName = `${firstName} ${lastName}`;
-  const [artwork, setArtwork] = useState(null);
+  const [artwork, setArtworks] = useState(null);
+
   const [bannerImage, setBannerImage] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,6 +31,8 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
     }
   );
   const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
+  const [isEventOpen, setIsEventOpen] = useState(false);
+  const [isArtBoxOpen, setIsArtBoxOpen] = useState(false);
 
   const handleBannerUpload = (event) => {
     const file = event.target.files[0];
@@ -44,6 +49,9 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
       setProfileImage(imageUrl);
     }
   };
+  const toggleArtBox = () => {
+    setIsArtBoxOpen((prev) => !prev);
+  };  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -56,6 +64,9 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   const handleUploadClick = () => {
     setIsUploadPopupOpen(true);
   };
+  const handleEventClick = () => {
+    setIsEventOpen(true);
+  };
 
   const handleProfileUpdate = (updatedData) => {
     const newData = { ...artistData, ...updatedData };
@@ -67,11 +78,15 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   };
 
   useEffect(() => {
-    const storedArtwork = JSON.parse(localStorage.getItem("artworkData"));
-    console.log("Retrieved artwork data from localStorage:", storedArtwork);
-    if (storedArtwork) {
-      setArtwork(storedArtwork);
+    // Retrieve the artwork data from localStorage
+    const storedArtworkData = sessionStorage.getItem("artworkData");
+    if (storedArtworkData) {
+      const parsedData = JSON.parse(storedArtworkData);
+      setArtworks(parsedData); // Set the artworks array to state
     }
+  }, []);
+
+  useEffect(() => {
     return () => {
       // Cleanup object URLs when component unmounts
       if (bannerImage) URL.revokeObjectURL(bannerImage);
@@ -219,10 +234,17 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
             <div className="w-full pl-6 ml-6">
               <div className="space-y-4">
                 <div className="flex space-x-8">
-                  <button className="font-semibold text-gray-700 pb-1 border-b-2 border-cyan-500">
+                  <button
+                    onClick={toggleArtBox}
+                    className="font-semibold text-gray-700 pb-1 hover:border-b-2 hover:border-cyan-500"
+                  >
                     Works
                   </button>
-                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
+
+                  <button
+                    onClick={handleEventClick}
+                    className="font-semibold text-gray-700 hover:text-cyan-500 pb-2 hover:border-b-2 hover:border-cyan-500"
+                  >
                     Events
                   </button>
                   <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
@@ -236,30 +258,21 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                     <Icon icon="material-symbols:upload" />
                   </button>
                 </div>
-                {/* Display the Uploaded Artwork */}
-                <div className="h-full pt-3 grid grid-cols-3 justify-items-center gap-5">
-                  {artwork ? (
-                    <div
-                      className="relative w-64 h-52"
-                      style={{
-                        textShadow:
-                          "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
-                      }}
-                    >
-                      <img
-                        src={artwork.image}
-                        className="object-cover w-full h-full rounded-lg"
-                      />
-                      <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
-                        {artwork.title || "Untitled"}
-                      </p>
-                    </div>
-                  ) : (
-                    <p className="text-gray-500 text-center">
-                      No artwork uploaded yet.
-                    </p>
-                  )}
+                <div className="bg-white p-5 rounded-md h-screen">
+                  <EventBox
+                    isOpen={isEventOpen}
+                    onClose={() => setIsEventOpen(false)}
+                  />
                 </div>
+
+                {/* Display the Uploaded Artwork */}
+                <div>
+                  <ArtBox
+                    isOpen={isArtBoxOpen}
+                    artwork={artwork}
+                  />
+                </div>
+                <div></div>
               </div>
             </div>
           </div>

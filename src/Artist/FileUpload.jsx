@@ -20,6 +20,16 @@ const FileUpload = ({ onImageUpload }) => {
       setImagePreview(previewUrl);
       onImageUpload(file);
 
+      // Convert the image to Base64 string
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Base64 encoded image data
+        const base64Image = reader.result;
+        console.log("Base64 Image:", base64Image); // You can use this to store in the JSON
+      };
+
+      reader.readAsDataURL(file);
+
       // Create an Image object to get the natural dimensions
       const img = new Image();
       img.src = previewUrl;

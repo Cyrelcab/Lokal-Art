@@ -33,27 +33,37 @@ const ArtworkPopup = () => {
   };
 
   const handleImageUpload = (imageFile) => {
-    setUploadedImage(imageFile);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUploadedImage(reader.result); // This will store the Base64 image data
+    };
+    reader.readAsDataURL(imageFile); // Convert the image file to Base64
   };
 
   const handleSubmit = () => {
     console.log("Form Data:", formData); // Debugging log
     console.log("Uploaded Image:", uploadedImage); // Debugging log
+
     if (!uploadedImage || !formData.title || !formData.description) {
       alert("Please complete all fields before submitting.");
       return;
     }
 
     try {
-      // Store the artwork data in localStorage
+      // Store the artwork data in an object
       const artworkData = {
         title: formData.title,
         description: formData.description,
-        image: URL.createObjectURL(uploadedImage),
+        image: uploadedImage, // Image URL for display purposes
       };
   
-      localStorage.setItem("artworkData", JSON.stringify(artworkData));
-      openConfirmPopup();
+      // Convert the artwork data to a JSON string
+      const artworkJSON = JSON.stringify(artworkData, null, 2);
+  
+      // Store the artwork data in localStorage
+      sessionStorage.setItem("artworkData", artworkJSON);
+  
+      openConfirmPopup();// Show confirmation popup
     } catch (error) {
       console.error("Error saving artwork data:", error);
     }
