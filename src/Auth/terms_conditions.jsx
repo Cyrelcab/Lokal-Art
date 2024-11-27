@@ -1,15 +1,17 @@
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { setDocumentTitle } from "@/utils/document";
 
 const TermsConditions = () => {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(true);
 
-  const handleAccept = () => {
-    localStorage.setItem('terms', checked.toString());
-    navigate('/signup');
-  };
+  setDocumentTitle("Terms and Conditions | Lokal-Art");
 
+  const handleAccept = () => {
+    localStorage.setItem("terms", checked.toString());
+    navigate("/signup");
+  };
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-100 items-center justify-center p-8">
@@ -20,7 +22,16 @@ const TermsConditions = () => {
 
         <div className="space-y-4 text-sm">
           <p>
-            Welcome to Lokal-Art. By using our platform, you agree to be bound by the following terms and conditions. Lokal-Art is an online social media and portfolio platform that showcases and sells artwork while providing creative services. To access certain features of the Platform, users must register for an account and provide accurate and complete information during registration. You are responsible for maintaining the confidentiality of your login credentials and for any activities that occur under your account. You must be at least 18 years old to use the Platform. Minors may use the Platform only under the supervision of a parent or legal guardian.
+            Welcome to Lokal-Art. By using our platform, you agree to be bound
+            by the following terms and conditions. Lokal-Art is an online social
+            media and portfolio platform that showcases and sells artwork while
+            providing creative services. To access certain features of the
+            Platform, users must register for an account and provide accurate
+            and complete information during registration. You are responsible
+            for maintaining the confidentiality of your login credentials and
+            for any activities that occur under your account. You must be at
+            least 18 years old to use the Platform. Minors may use the Platform
+            only under the supervision of a parent or legal guardian.
           </p>
 
           <p>
@@ -76,7 +87,7 @@ const TermsConditions = () => {
           </p>
         </div>
 
-        <button 
+        <button
           onClick={handleAccept}
           className="mt-6 px-8 py-2 bg-cyan-500 text-white rounded-md w-fit mx-auto hover:bg-cyan-600 transition-colors"
         >

@@ -32,20 +32,20 @@ export default function Navbar({ fullName }) {
       <div className="flex-1 px-8">
         <ul className="flex justify-center space-x-14">
           <li>
-            <Link to="/artist/dashboard" className="text-black hover:text-cyan-500">
-              Dashboard
+            <Link to="/client/discover" className="text-black hover:text-cyan-500">
+              Discover
             </Link>
           </li>
           <li>
             <Link
-              to="/transactions"
+              to="/client/transactions"
               className="text-black hover:text-cyan-500"
             >
-              My Transactions
+              Transactions
             </Link>
           </li>
           <li>
-            <Link to="/messages" className="text-black hover:text-cyan-500">
+            <Link to="/client/messages" className="text-black hover:text-cyan-500">
               Messages
             </Link>
           </li>
@@ -61,9 +61,9 @@ export default function Navbar({ fullName }) {
             className="text-cyan-500"
           />
         </div>
-        <div className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
+        <Link to="/client/profile" className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
           {getInitials(fullName)}
-        </div>
+        </Link>
         <button
           onClick={logoutBtn}
           className="px-4 py-2 text-white bg-[#00D1FF] rounded-full hover:bg-[#00b8e6]"

@@ -1,0 +1,18 @@
+[
+  {
+    "first_name": "JC",
+    "last_name": "Ladia",
+    "email": "cabodbodcyrel2003@gmail.com",
+    "password": "jcladia123",
+    "role": "Artist"
+  },
+  {
+    "first_name": "Cyrel",
+    "last_name": "Caboodbod",
+    "email": "mariagejaks@gmail.com",
+    "password": "$2b$10$sL9Ze.ptPjcvLYbXm6Kv5OAsk1dZax1rqr3eYy1t5whYeoe4.My6u",
+    "role": "Client",
+    "profile_image": null,
+    "banner_image": null
+  }
+]

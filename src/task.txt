@@ -1,0 +1,5 @@
+1. Artist upload/sell artwork
+2. Artist create account
+3. Artist approved sold art / requested events
+4. Client create account / authenticate
+5. Client buy art

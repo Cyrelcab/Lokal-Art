@@ -1,21 +1,52 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { setDocumentTitle } from "@/utils/document";
 
 const Role = () => {
   setDocumentTitle("Signup | Role Preferences");
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const handleRole = (role) => {
-    // Store the role in localStorage
-    localStorage.setItem("userRole", role);
+  const formData = location.state;
 
-    if (role === "Client") {
-      navigate("/client/setup-profile");
-    } else if (role === "Artist") {
-      navigate("/artist/setup-profile");
+  const handleRole = async (role) => {
+    if (!formData) {
+      console.error("No user data received");
+      return;
+    }
+
+    // Add role to formData
+    const userData = { ...formData, role };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/signup",
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        //store the email in the local storage
+        localStorage.setItem("email", userData.email);
+        // Navigate based on role
+        if (role === "Client") {
+          navigate("/client/profile");
+        } else if (role === "Artist") {
+          navigate("/artist/setup-profile");
+        }
+      } else {
+        alert("Failed to save user. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error saving user:", error);
+      alert("Failed to save user. Please try again.");
     }
   };
+
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-100">
       <div className="absolute top-4 left-4">
@@ -27,7 +58,6 @@ const Role = () => {
           />
         </Link>
       </div>
-      {/* Signup Form Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
           <h1 className="text-3xl font-bold mb-8">Role Preferences</h1>
@@ -48,8 +78,6 @@ const Role = () => {
           </div>
         </div>
       </div>
-
-      {/* Right Side - Image Section */}
       <div className="relative w-full md:w-1/2 h-screen">
         <div className="bg-image w-full h-full bg-blue-100" />
       </div>

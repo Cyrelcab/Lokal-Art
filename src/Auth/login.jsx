@@ -27,20 +27,45 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // Declare handleSubmit as an async function
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
-    toast.success("Login Successfully", {
-      style: {
-        color: "green",
-      },
-    });
 
-    // Wait for toast to be visible before navigating
-    setTimeout(() => {
-      navigate("/client/discover");
-    }, 1000);
-    console.log("Login attempt with:", formData);
+    try {
+      // Send data to the backend
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Login failed.");
+      }
+
+      const data = await response.json();
+
+      toast.success("Login Successfully", {
+        style: {
+          color: "green",
+        },
+      });
+
+      // Navigate to the appropriate page based on role
+      setTimeout(() => {
+        if (data.role === "Client") {
+          navigate("/client/discover");
+        } else if (data.role === "Artist") {
+          navigate("/artist/dashboard");
+        }
+      }, 1000);
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error(error.message || "Failed to login. Please try again.");
+    }
   };
 
   return (
@@ -70,7 +95,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/*login field*/}
+      {/* Login field */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
           <h1 className="text-3xl font-bold text-center mb-8">Login</h1>
@@ -112,9 +137,9 @@ const Login = () => {
 
             <p className="text-center mt-4">
               Don't have an account?{" "}
-              <a href="/signup" className="text-cyan-400 hover:underline">
+              <Link to="/signup" className="text-cyan-400 hover:underline">
                 Signup
-              </a>
+              </Link>
             </p>
           </form>
         </div>

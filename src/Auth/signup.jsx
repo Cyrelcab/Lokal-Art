@@ -16,67 +16,61 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
-  // Updated initial state to check localStorage for all fields
+  // Initial state without localStorage
   const [formData, setFormData] = useState({
-    first_name: localStorage.getItem("first_name") || "",
-    last_name: localStorage.getItem("last_name") || "",
-    email: localStorage.getItem("email") || "",
-    password: localStorage.getItem("password") || "",
-    terms: localStorage.getItem("terms") === "true" || false,
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    terms: false,
   });
 
-  // Updated handleChange to save all form inputs to localStorage
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    const newValue = type === "checkbox" ? checked : value;
-
     setFormData((prev) => ({
       ...prev,
-      [name]: newValue,
+      [name]: type === "checkbox" ? checked : value,
     }));
-
-    // Save all form inputs to localStorage
-    localStorage.setItem(name, type === "checkbox" ? checked : value);
   };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Validation for terms and conditions
     if (!formData.terms) {
       toast.error("Please accept the terms and conditions", {
-        style: {
-          color: "red",
-        },
+        style: { color: "red" },
       });
       return;
-    } else if (
-      !formData.first_name.trim() &&
-      !formData.last_name.trim() &&
-      !formData.email.trim() &&
-      !formData.password.trim() &&
+    }
+
+    // Validation for empty fields
+    if (
+      !formData.first_name.trim() ||
+      !formData.last_name.trim() ||
+      !formData.email.trim() ||
+      !formData.password.trim() ||
       !formData.confirmPassword.trim()
     ) {
       toast.error("All fields are required", {
-        style: {
-          color: "red",
-        },
+        style: { color: "red" },
       });
       return;
     }
 
-    // Basic validation
+    // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
-      toast.error("Password does not match", {
-        style: {
-          color: "red",
-        },
+      toast.error("Passwords do not match", {
+        style: { color: "red" },
       });
       return;
     }
 
-    // Add signup logic here (e.g., API call)
-    navigate("/role");
+    // Navigate to the /role page with form data
+    navigate("/role", { state: { ...formData } });
   };
 
   return (
@@ -99,7 +93,7 @@ const Signup = () => {
         <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
           <h1 className="text-3xl font-bold mb-8 text-center">Signup</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/*First Name Field*/}
+            {/* First Name Field */}
             <div>
               <label htmlFor="first_name" className="sr-only">
                 First Name
@@ -114,7 +108,7 @@ const Signup = () => {
                 className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            {/*Last Name Field*/}
+            {/* Last Name Field */}
             <div>
               <label htmlFor="last_name" className="sr-only">
                 Last Name
@@ -144,7 +138,6 @@ const Signup = () => {
                 className="w-full px-4 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-
             {/* Password Field */}
             <div className="relative">
               <label htmlFor="password" className="sr-only">
@@ -165,10 +158,9 @@ const Signup = () => {
                 aria-label="Toggle password visibility"
                 onClick={() => setShowPassword(!showPassword)}
               >
-                <Icon icon={showPassword ? "mdi:eye" : "mdi:eye-off"}></Icon>
+                <Icon icon={showPassword ? "mdi:eye" : "mdi:eye-off"} />
               </button>
             </div>
-
             {/* Confirm Password Field */}
             <div className="relative">
               <label htmlFor="confirmPassword" className="sr-only">
@@ -189,12 +181,9 @@ const Signup = () => {
                 aria-label="Toggle confirm password visibility"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                <Icon
-                  icon={showConfirmPassword ? "mdi:eye" : "mdi:eye-off"}
-                ></Icon>
+                <Icon icon={showConfirmPassword ? "mdi:eye" : "mdi:eye-off"} />
               </button>
             </div>
-
             {/* Terms and Conditions Checkbox */}
             <div className="flex items-center gap-2 justify-center pt-4">
               <input
@@ -215,7 +204,6 @@ const Signup = () => {
                 </Link>
               </label>
             </div>
-
             {/* Submit Button */}
             <button
               type="submit"
@@ -223,7 +211,6 @@ const Signup = () => {
             >
               Signup
             </button>
-
             {/* Login Link */}
             <p className="text-center mt-4">
               Already have an account?{" "}
@@ -234,7 +221,6 @@ const Signup = () => {
           </form>
         </div>
       </div>
-
       {/* Right Side - Image Section */}
       <div className="relative w-full md:w-1/2 h-screen">
         <div className="bg-image w-full h-full bg-blue-100" />
