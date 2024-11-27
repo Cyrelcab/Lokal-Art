@@ -50,13 +50,13 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
     }
   };
   const toggleArtBox = () => {
-    setIsArtBoxOpen((prev) => !prev);
+    setIsArtBoxOpen(true);
     setIsEventBoxOpen(false);
     
   };  
 
   const toggleEventBox = () => {
-    setIsEventBoxOpen((prev) => !prev);
+    setIsEventBoxOpen(true);
     setIsArtBoxOpen(false);
   };  
 
