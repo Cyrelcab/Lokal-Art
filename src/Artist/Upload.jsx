@@ -1,9 +1,34 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react"; 
 import { Icon } from "@iconify/react";
 import UploadPopup from "./Popup";
 import Navbar from "./navbar";
 
 export default function Upload() {
+
+  useEffect(() => {
+    // Add the Chatling Chatbot script dynamically
+    const configScript = document.createElement("script");
+    configScript.type = "text/javascript";
+    configScript.innerHTML = `
+      window.chtlConfig = { chatbotId: "4156178122" };
+    `;
+
+    const embedScript = document.createElement("script");
+    embedScript.src = "https://chatling.ai/js/embed.js";
+    embedScript.type = "text/javascript";
+    embedScript.async = true;
+    embedScript.dataset.id = "4156178122";
+    embedScript.id = "chatling-embed-script";
+
+    document.body.appendChild(configScript);
+    document.body.appendChild(embedScript);
+
+    // Clean up scripts on component unmount
+    return () => {
+      document.body.removeChild(configScript);
+      document.body.removeChild(embedScript);
+    };
+  }, []);
   return (
     <section>
       <Navbar/>
@@ -193,6 +218,7 @@ export default function Upload() {
           </div>
         </div>
       </div>
+
     </section>
   );
 }
