@@ -3,11 +3,13 @@ import { Icon } from "@iconify/react";
 import { setDocumentTitle } from "@/utils/document";
 import Navbar from "./Components/Navbar";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Client = () => {
   const [clientData, setClientData] = useState(null);
   const [profileImage, setProfileImage] = useState(null);
   const [bannerImage, setBannerImage] = useState(null);
+  const navigate = useNavigate();
 
   // Set the document title
   useEffect(() => {
@@ -22,6 +24,7 @@ const Client = () => {
 
         if (!loggedInEmail) {
           console.error("No logged-in email found.");
+          navigate("/login");
           return;
         }
 
@@ -36,14 +39,16 @@ const Client = () => {
           setBannerImage(client.banner_image); // Set initial banner image
         } else {
           console.error("User not found in the database.");
+          navigate("/login");
         }
       } catch (error) {
         console.error("Error loading client data:", error);
+        navigate("/login");
       }
     };
 
     fetchClientData();
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     return () => {
@@ -109,7 +114,7 @@ const Client = () => {
   };
 
   if (!clientData) {
-    return <div>Loading...</div>;
+    return null;
   }
 
   const { first_name, last_name, email } = clientData;

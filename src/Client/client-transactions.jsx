@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Navbar from "./Components/navbar";
+import { useNavigate } from "react-router-dom";
 
 const ClientTransactions = () => {
   const [clientData, setClientData] = useState(null);
+  const navigate = useNavigate();
 
   // Fetch client data
   useEffect(() => {
@@ -12,6 +14,7 @@ const ClientTransactions = () => {
 
         if (!loggedInEmail) {
           console.error("No logged-in email found.");
+          navigate("/login");
           return;
         }
 
@@ -27,22 +30,20 @@ const ClientTransactions = () => {
           setClientData(client);
         } else {
           console.error("User not found in the database.");
+          navigate("/login");
         }
       } catch (error) {
         console.error("Error loading client data:", error);
+        navigate("/login");
       }
     };
 
     fetchClientData();
-  }, []);
+  }, [navigate]);
 
-  // Conditionally render the component
+  // Redirect or show loading screen until clientData is available
   if (!clientData) {
-    return (
-      <div className="h-full bg-gray-100 flex items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
+    return null; // Render nothing while redirecting or loading
   }
 
   const { first_name, last_name, email } = clientData;

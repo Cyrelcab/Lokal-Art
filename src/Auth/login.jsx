@@ -157,7 +157,7 @@ const Login = () => {
               className="w-full py-2 px-4 bg-cyan-400 text-white rounded-full hover:bg-cyan-500 transition-colors"
               disabled={loading}
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Login" : "Login"}
             </button>
 
             <p className="text-center mt-4">
