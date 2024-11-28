@@ -5,6 +5,7 @@ import DropdownMenu from "./Components/Sort";
 import { Icon } from "@iconify/react";
 import Search from "./Components/Search";
 import ArtistBox from "./Components/ArtistBox";
+import { useState, useEffect } from "react";
 import Navbar from "./Components/navbar";
 import { setDocumentTitle } from "@/utils/document";
 
@@ -28,6 +29,31 @@ export default function Discover() {
       setLocationFilter(value);
     }
   };
+
+  useEffect(() => {
+    // Add the Chatling Chatbot script dynamically
+    const configScript = document.createElement("script");
+    configScript.type = "text/javascript";
+    configScript.innerHTML = `
+      window.chtlConfig = { chatbotId: "4156178122" };
+    `;
+
+    const embedScript = document.createElement("script");
+    embedScript.src = "https://chatling.ai/js/embed.js";
+    embedScript.type = "text/javascript";
+    embedScript.async = true;
+    embedScript.dataset.id = "4156178122";
+    embedScript.id = "chatling-embed-script";
+
+    document.body.appendChild(configScript);
+    document.body.appendChild(embedScript);
+
+    // Clean up scripts on component unmount
+    return () => {
+      document.body.removeChild(configScript);
+      document.body.removeChild(embedScript);
+    };
+  }, []);
 
   // Fetch client data
   useEffect(() => {

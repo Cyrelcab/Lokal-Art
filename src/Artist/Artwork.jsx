@@ -101,7 +101,7 @@ const ArtworkPopup = () => {
               <FileUpload onImageUpload={handleImageUpload} />
               <div className="flex justify-center items-center ml-8">
                 <div className="w-[18rem]">
-                  <p className="pl-5 pb-2 ">Add Title</p>
+                  <p className="pl-5 pb-2 font-bold">Add Title</p>
                   <form
                     onSubmit={(e) => {
                       e.preventDefault(); // Prevent form submission
@@ -113,17 +113,17 @@ const ArtworkPopup = () => {
                       value={formData.title}
                       onChange={handleInputChange}
                       placeholder="Title"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none  shadow-md hover:shadow-cyan-500 "
                     />
                   </form>
-                  <p className="pl-5 pt-5 pb-2">Add Description</p>
+                  <p className="pl-5 pt-5 pb-2 font-bold">Add Description</p>
                   <form>
                     <textarea
                       name="description"
                       value={formData.description}
                       onChange={handleInputChange}
                       placeholder="Description"
-                      className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-4 py-2 border-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                       rows="7"
                     />
                   </form>

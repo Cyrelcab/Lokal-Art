@@ -5,21 +5,21 @@ export default function EventBox({ isOpen, onClose, events }) {
 
   return (
     <div>
-      <div className="bg-white border border-gray-500 rounded-md w-full p-4 relative">
+      <div className="bg-white rounded-md w-full p-4 relative">
         {events ? (
-          <div>
-            <div className="flex border-gray-300 pb-2 py-4">
+          <div className="border border-gray-500 p-3 rounded-xl">
+            <div className="flex">
               <p className="text-2xl text-cyan-500 font-bold border-r border-gray-700 pr-3 mr-2">
                 {events.title || "Event Title"}
               </p>
               <div>
               <div className="flex items-center text-xl">
-              <Icon icon="lsicon:location-outline" className="text-cyan-500 mr-1" />
+              {/* <Icon icon="lsicon:location-outline" className="text-cyan-500 mr-1" /> */}
               <p>{events.address || "Address not provided"}</p>
             </div>
             </div>
             </div>
-            <div className="flex items-center mb-2">
+            <div className="flex items-center my-2">
                 <p className="font-bold text-green-500">Start: </p>
                 <span className="pl-2">{events.startDate || "N/A"},</span>
                 <span className="pl-2">{events.startTime || "N/A"}</span>

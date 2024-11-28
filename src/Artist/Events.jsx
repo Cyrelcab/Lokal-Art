@@ -82,7 +82,7 @@ const EventsPopup = () => {
                       value={eventDetails.title}
                       onChange={handleChange}
                       placeholder="Title"
-                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                    className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     />
                   </div>
                   <div className="w-full">
@@ -99,7 +99,7 @@ const EventsPopup = () => {
                       value={eventDetails.address}
                       onChange={handleChange}
                       placeholder="Address"
-                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     />
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const EventsPopup = () => {
                       name="startDate"
                       value={eventDetails.startDate}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     />
                   </div>
                   <div className="w-full my-4">
@@ -134,7 +134,7 @@ const EventsPopup = () => {
                       name="startTime"
                       value={eventDetails.startTime}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     />
                   </div>
 
@@ -151,7 +151,7 @@ const EventsPopup = () => {
                       name="endDate"
                       value={eventDetails.endDate}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     />
                   </div>
 
@@ -168,7 +168,7 @@ const EventsPopup = () => {
                       name="endTime"
                       value={eventDetails.endTime}
                       onChange={handleChange}
-                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow hover:shadow-cyan-500"
+                      className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     />
                   </div>
                 </div>
@@ -186,7 +186,7 @@ const EventsPopup = () => {
                     value={eventDetails.description}
                     onChange={handleChange}
                     placeholder="Description"
-                    className="w-full px-4 py-2 border-2 border-gray-300 rounded focus:outline-none shadow hover:shadow-cyan-500"
+                    className="w-full px-4 py-2 border-1 border-gray-300 rounded-2xl focus:outline-none shadow-md hover:shadow-cyan-500"
                     rows="5"
                   />
                 </div>
