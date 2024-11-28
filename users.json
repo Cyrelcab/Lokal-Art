@@ -10,9 +10,9 @@
     "first_name": "Cyrel",
     "last_name": "Caboodbod",
     "email": "mariagejaks@gmail.com",
-    "password": "$2b$10$sL9Ze.ptPjcvLYbXm6Kv5OAsk1dZax1rqr3eYy1t5whYeoe4.My6u",
+    "password": "test",
     "role": "Client",
-    "profile_image": null,
-    "banner_image": null
+    "profile_image": "/uploads/cyrel-caboodbod/profile_image-uploaded-image-cyrel-caboodbod.webp",
+    "banner_image": "/uploads/cyrel-caboodbod/banner_image-uploaded-image-cyrel-caboodbod.jpg"
   }
 ]

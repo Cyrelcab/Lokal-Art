@@ -4,9 +4,9 @@ import DropdownMenu from "./Components/Sort";
 import { Icon } from "@iconify/react";
 import Search from "./Components/Search";
 import ArtistBox from "./Components/ArtistBox";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Added useEffect import
 import { setDocumentTitle } from "@/utils/document";
-import Navbar from "@/Artist/navbar";
+import Navbar from "./Components/navbar";
 
 export default function Discover() {
   setDocumentTitle("Discover | LokalArt");
@@ -14,6 +14,7 @@ export default function Discover() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [locationFilter, setLocationFilter] = useState([]);
+  const [clientData, setClientData] = useState(null); // For client data
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -27,42 +28,49 @@ export default function Discover() {
     }
   };
 
+  // Fetch client data
+  useEffect(() => {
+    const fetchClientData = async () => {
+      try {
+        const loggedInEmail = localStorage.getItem("email");
+
+        if (!loggedInEmail) {
+          console.error("No logged-in email found.");
+          return;
+        }
+
+        const response = await fetch("/users.json");
+        const users = await response.json();
+
+        const client = users.find((user) => user.email === loggedInEmail);
+
+        if (client) {
+          setClientData(client);
+        } else {
+          console.error("User not found in the database.");
+        }
+      } catch (error) {
+        console.error("Error loading client data:", error);
+      }
+    };
+
+    fetchClientData();
+  }, []);
+
+  // If client data is not loaded, show a loading message
+  if (!clientData) {
+    return <div></div>;
+  }
+
+  // Destructure clientData only when it is available
+  const { first_name, last_name, email } = clientData;
+
   return (
     <section>
-      {/* <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
-        <div className="flex items-center">
-          <img
-            src="/images/logo-blue.png"
-            alt="LokalArt Logo"
-            className="w-48"
-          />
-        </div>
-        <div className="flex justify-center items-center p-5">
-          <a
-            className="mr-10 border-b-2 border-cyan-500 text-m"
-            href="/client/discover"
-          >
-            Discover
-          </a>
-          <a className="mr-10 hover:text-cyan-500 text-m" href="#">
-            Transaction
-          </a>
-          <a className="hover:text-cyan-500 text-m" href="#">
-            Messages
-          </a>
-        </div>
-        <div className="flex items-center p-5">
-          <i className="fa-solid fa-bell hover:text-cyan-500 cursor-pointer text-xl mr-4"></i>
-          <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4"></div>
-          <button className="bg-cyan-500 h-8 w-20 rounded-2xl text-white hover:bg-cyan-300">
-            <Link to={"/login"}>Logout</Link>
-          </button>
-        </div>
-      </nav> */}
-      <Navbar/>
+      <Navbar fullName={`${first_name} ${last_name}`} />
       <div className="flex flex-col">
         <div>
-          <div className="fixed top-[60px] flex justify-center items-center space-x-28 w-full placeholder-cyan-500 bg-white py-6 mt-2">
+          <div className="fixed top-[60px] flex justify-center items-center space-x-28 w-full placeholder-cyan-500 bg-white py-6 mt-2 shadow-sm">
             <div>
               <FilterPopup onFilterChange={handleFilterChange} />
             </div>
@@ -76,7 +84,7 @@ export default function Discover() {
 
           <div className="h-full mt-28 flex justify-center items-center">
             <div className="pt-16">
-              <ArtistBox 
+              <ArtistBox
                 searchQuery={searchQuery}
                 categoryFilter={categoryFilter}
                 locationFilter={locationFilter}

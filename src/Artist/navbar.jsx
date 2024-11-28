@@ -6,7 +6,7 @@ export default function Navbar({ fullName }) {
 
   const getInitials = (name) => {
     if (!name) return "";
-    return name 
+    return name
       .trim()
       .split(" ")
       .map((word) => word[0])
@@ -22,25 +22,21 @@ export default function Navbar({ fullName }) {
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm fixed top-0 w-full z-50">
       <div className="flex items-center">
-        <img
-          src="/images/logo-blue.png"
-          alt="LokalArt Logo"
-          className="h-10"
-        />
+        <img src="/images/logo-blue.png" alt="LokalArt Logo" className="h-10" />
       </div>
 
       <div className="flex-1 px-8">
         <ul className="flex justify-center space-x-14">
           <li>
-            <Link to="/artist/dashboard" className="text-black hover:text-cyan-500">
+            <Link
+              to="/artist/dashboard"
+              className="text-black hover:text-cyan-500"
+            >
               Dashboard
             </Link>
           </li>
           <li>
-            <Link
-              to="/transactions"
-              className="text-black hover:text-cyan-500"
-            >
+            <Link to="/transactions" className="text-black hover:text-cyan-500">
               My Transactions
             </Link>
           </li>
@@ -62,7 +58,9 @@ export default function Navbar({ fullName }) {
           />
         </div>
         <div className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
+          <Link to="/artist/profile">
           {getInitials(fullName)}
+          </Link>
         </div>
         <button
           onClick={logoutBtn}

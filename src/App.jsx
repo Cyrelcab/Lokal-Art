@@ -11,7 +11,8 @@ import Dashboard from "./Artist/dashboard";
 
 import Upload from "./Artist/Upload";
 import Discover from "./Client/Discover";
-import Client from "./Client/client-profile"
+import ClientTransactions from "./Client/client-transactions";
+import Client from "./Client/client-profile";
 function App() {
   return (
     <>
@@ -25,10 +26,11 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/role" element={<Role />} />
-          <Route path="/artist/setup-profile" element={<ArtistProfile />} />
+          <Route path="/artist/profile" element={<ArtistProfile />} />
           <Route path="/artist/dashboard" element={<Dashboard />} />
 
           <Route path="/client/profile" element={<Client />} />
+          <Route path="/client/transactions" element={<ClientTransactions />} />
 
           {/*this is the route for viewing the artist profile specific to the artist id*/}
           <Route path="/view-artist/:id" element={<Home />} />

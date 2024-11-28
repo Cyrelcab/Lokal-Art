@@ -3,8 +3,21 @@
 @tailwind utilities;
 
 .bg-image {
-  background-image: url('/images/hero-image-1.jpg');
+  background-image: url("/images/hero-image-1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+/* Hide scrollbar for the entire page */
+html,
+body {
+  overflow: scroll; /* Ensure scrolling is enabled */
+  -ms-overflow-style: none; /* For Internet Explorer */
+  scrollbar-width: none; /* For Firefox */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Hide the scrollbar for Chrome, Safari, and newer versions of Edge */
 }

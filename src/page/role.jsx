@@ -18,6 +18,9 @@ const Role = () => {
     // Add role to formData
     const userData = { ...formData, role };
 
+    console.log("FormData:", userData);
+    console.log("Role:", role);
+
     try {
       const response = await axios.post(
         "http://localhost:5000/signup",
@@ -30,7 +33,7 @@ const Role = () => {
       );
 
       if (response.status === 200) {
-        //store the email in the local storage
+        // Store the email in the local storage
         localStorage.setItem("email", userData.email);
         // Navigate based on role
         if (role === "Client") {
@@ -39,10 +42,11 @@ const Role = () => {
           navigate("/artist/setup-profile");
         }
       } else {
+        console.error("Failed to save user:", response.data);
         alert("Failed to save user. Please try again.");
       }
     } catch (error) {
-      console.error("Error saving user:", error);
+      console.error("Error saving user:", error.response ? error.response.data : error.message);
       alert("Failed to save user. Please try again.");
     }
   };

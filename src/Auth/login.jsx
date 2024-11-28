@@ -12,6 +12,9 @@ const Login = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setDocumentTitle("Login | Lokal-Art");
@@ -25,14 +28,26 @@ const Login = () => {
     }));
   };
 
-  const navigate = useNavigate();
+  const validateForm = () => {
+    if (!formData.email.trim()) {
+      toast.error("Email is required.");
+      return false;
+    }
+    if (!formData.password.trim()) {
+      toast.error("Password is required.");
+      return false;
+    }
+    return true;
+  };
 
-  // Declare handleSubmit as an async function
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateForm()) return;
+
+    setLoading(true); // Start loading
+
     try {
-      // Send data to the backend
       const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
@@ -41,12 +56,11 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Login failed.");
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed.");
+      }
 
       toast.success("Login Successfully", {
         style: {
@@ -54,7 +68,10 @@ const Login = () => {
         },
       });
 
-      // Navigate to the appropriate page based on role
+      // Save user email in localStorage
+      localStorage.setItem("email", data.email);
+
+      // Redirect based on role
       setTimeout(() => {
         if (data.role === "Client") {
           navigate("/client/discover");
@@ -65,6 +82,8 @@ const Login = () => {
     } catch (error) {
       console.error("Error during login:", error);
       toast.error(error.message || "Failed to login. Please try again.");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -83,6 +102,8 @@ const Login = () => {
         limit={1}
         closeButton={false}
       />
+
+      {/* Left Image Section */}
       <div className="relative w-full md:w-1/2">
         <div
           className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"
@@ -95,12 +116,13 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Login field */}
+      {/* Login Form Section */}
       <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
           <h1 className="text-3xl font-bold text-center mb-8">Login</h1>
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Email Input */}
             <input
               type="email"
               name="email"
@@ -110,6 +132,7 @@ const Login = () => {
               className="w-full px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
 
+            {/* Password Input */}
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -128,11 +151,13 @@ const Login = () => {
               </button>
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               className="w-full py-2 px-4 bg-cyan-400 text-white rounded-full hover:bg-cyan-500 transition-colors"
+              disabled={loading}
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </button>
 
             <p className="text-center mt-4">
