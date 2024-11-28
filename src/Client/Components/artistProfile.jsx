@@ -12,9 +12,8 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
   setDocumentTitle("Profile | Lokal-Art");
   const navigate = useNavigate();
   const artist = ArtistsData.artists.find((artist) => artist.id === parseInt(id));
+  // console.log("", artist);
   const category = artist.categories.map((category) => category);
-  console.log(category);
-  console.log(artist)
   const firstName = localStorage.getItem("first_name") || "John";
   const lastName = localStorage.getItem("last_name") || "Doe";
   const artistType =
@@ -155,63 +154,16 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
       <main className="pt-10">
         {/* Banner Photo Upload Section */}
         <div className="relative w-full h-48 bg-gray-200 mb-16">
-          <input
-            type="file"
-            accept="image/*"
-            className="hidden"
-            id="banner-upload"
-            onChange={handleBannerUpload}
-          />
-          {bannerImage ? (
-            <img
-              src={bannerImage}
-              alt="Banner"
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <label
-              htmlFor="banner-upload"
-              className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors"
-            >
-              <Icon
-                icon="mdi:image-plus"
-                width="48"
-                height="48"
-                className="text-gray-400 mb-2"
-              />
-              <span className="text-gray-600">
-                Click to upload banner photo
-              </span>
-            </label>
-          )}
 
           {/* Profile Photo Upload Section */}
           <div className="absolute -bottom-16 left-8">
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              id="profile-upload"
-              onChange={handleProfileUpload}
-            />
-            <label htmlFor="profile-upload" className="cursor-pointer">
-              {profileImage ? (
+
+            <label htmlFor="profile-upload" className="">
                 <img
-                  src={profileImage}
+                  src={artist.profilePic}
                   alt="Profile"
                   className="w-40 h-40 rounded-full object-cover border-4 border-white"
                 />
-              ) : (
-                <div className="w-40 h-40 rounded-full bg-gray-200 border-2 border-white flex flex-col items-center justify-center hover:bg-gray-300 transition-colors">
-                  <Icon
-                    icon="mdi:account-plus"
-                    width="40"
-                    height="40"
-                    className="text-gray-400 mb-1"
-                  />
-                  <span className="text-xs text-gray-600">Add photo</span>
-                </div>
-              )}
             </label>
           </div>
         </div>
