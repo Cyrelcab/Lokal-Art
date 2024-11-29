@@ -74,6 +74,7 @@ const Client = () => {
       if (!file) return;
 
       clientData[type] = file;
+      console.log(clientData);
 
       const { data } = await axios.post(
         "http://localhost:5000/upload-images",

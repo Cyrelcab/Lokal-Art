@@ -12,13 +12,15 @@ const PORT = 5000;
 
 // Get the root directory and set it to 'public'
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.join(path.dirname(__filename), "../public");
+const __dirname = path.join(path.dirname(__filename), "../");
 
-console.log(__dirname);
+// Log directory for debugging purposes
+console.log("Server directory:", __dirname);
 
+// Use cors and body parsers
 app.use(cors()); // Enable CORS for all origins
 app.use(bodyParser.json());
-app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Correct path for serving files
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads"))); // Correct path for serving files
 
 const DATA_FILE = "./users.json";
 
@@ -47,7 +49,7 @@ const storage = multer.diskStorage({
     const formattedName = `${first_name}-${last_name}`
       .toLowerCase()
       .replace(/\s+/g, "-");
-    const userFolder = path.join(__dirname, "uploads", formattedName); // Save under public/uploads/first-last
+    const userFolder = path.join(__dirname, "public/uploads", formattedName); // Save under public/uploads/first-last
 
     if (!fs.existsSync(userFolder)) {
       fs.mkdirSync(userFolder, { recursive: true });
@@ -122,7 +124,7 @@ app.post("/signup", async (req, res) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Image upload endpoint
+// File upload route
 app.post("/upload-images", upload, async (req, res) => {
   try {
     const { email, first_name, last_name } = req.body;
@@ -131,6 +133,9 @@ app.post("/upload-images", upload, async (req, res) => {
       return res.status(400).json({ error: "Email is required" });
     }
 
+    // Log incoming files as a JSON string for better readability
+    console.log("Received files:", JSON.stringify(req.files, null, 2));
+
     // Load users from file
     const users = loadData();
     const user = users.find((u) => u.email === email);
@@ -138,12 +143,6 @@ app.post("/upload-images", upload, async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-
-    const userFolder = path.join(
-      __dirname,
-      "uploads",
-      `${first_name.toLowerCase()}-${last_name.toLowerCase()}`
-    );
 
     const responseData = {};
 
@@ -163,7 +162,7 @@ app.post("/upload-images", upload, async (req, res) => {
       }`;
 
       // Delete the old profile image if it exists
-      if (user.profile_image) {
+      if (fs.existsSync(user.profile_image)) {
         await deleteOldFile(user.profile_image);
       }
 
@@ -173,12 +172,16 @@ app.post("/upload-images", upload, async (req, res) => {
 
     // Process banner_image
     if (req.files.banner_image && req.files.banner_image[0]) {
+      console.log("Processing banner image...");
       const bannerImagePath = `/uploads/${first_name.toLowerCase()}-${last_name.toLowerCase()}/${
         req.files.banner_image[0].filename
       }`;
 
+      // Log the banner image path to ensure it's being processed correctly
+      console.log("Banner Image Path:", bannerImagePath);
+
       // Delete the old banner image if it exists
-      if (user.banner_image) {
+      if (fs.existsSync(user.banner_image)) {
         await deleteOldFile(user.banner_image);
       }
 

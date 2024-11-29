@@ -5,7 +5,6 @@ import DropdownMenu from "./Components/Sort";
 import { Icon } from "@iconify/react";
 import Search from "./Components/Search";
 import ArtistBox from "./Components/ArtistBox";
-import { useState, useEffect } from "react";
 import Navbar from "./Components/navbar";
 import { setDocumentTitle } from "@/utils/document";
 
