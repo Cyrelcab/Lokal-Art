@@ -22,8 +22,28 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-
-
+import {ToastContainer, toast} from "react-toastify";
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
 
 
 const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
@@ -34,9 +54,28 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
   const artist = ArtistsData.artists.find((artist) => artist.id === parseInt(id));
   const category = artist.categories.map((category) => category);
 
+  const handleMessage = (e) => {
+    e.preventDefault();
+    toast.success('Message Sent');
+  }
+
+  const [date, setDate] = useState(new Date())
 
   return (
     <div className="h-full max-h-screen bg-gray-100">
+            <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+        limit={1}
+        closeButton={false}
+      />
       <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
         <div className="flex items-center">
           <img
@@ -105,13 +144,103 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
                 </div>
 
                 <div className="mt-4 flex w-full flex-col gap-2 p-5">
-                  <Button className="w-full">Message</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                    <Button className="w-full">Message</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Message</DialogTitle>
+                      </DialogHeader>
+                      <DialogDescription>Send your message for Transactions and Bookings</DialogDescription>
+                      <Textarea placeholder="Type message here..."></Textarea>
+                      <Button type="submit" onClick={handleMessage}>Send</Button>
+                    </DialogContent>
+                  </Dialog>
+                 
                   <Button variant="outline" className="w-full">
                     Unfollow
                   </Button>
-                  <Button variant="secondary" className="w-full">
-                    Book a Transaction
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="secondary" className="w-full">
+                      Book a Transaction
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader><DialogTitle>Transaction Information</DialogTitle></DialogHeader>
+                      <DialogDescription>Input necessary information for transactions</DialogDescription>
+                        <div className="grid w-full items-center gap-1.5">
+                          <Label htmlFor='name'>Customer Name</Label>
+                          <Input id='name' type='text'/>
+                        </div>
+                        <div className="grid w-full items-center gap-1.5">
+                          <Label htmlFor='serviceType'>Service Type</Label>
+                          <Input id='serviceType' type='text'/>
+                        </div>
+                        <div className="grid w-full items-center gap-1.5">
+                          <Label htmlFor='date'>Date</Label>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-[280px] justify-start text-left font-normal",
+                                  !date && "text-muted-foreground"
+                                )}
+                              >
+                                <CalendarIcon />
+                                {date ? format(date, "PPP") : <span>Pick a date</span>}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0">
+                              <Calendar
+                                mode="single"
+                                selected={date}
+                                onSelect={setDate}
+                                initialFocus
+                              />
+                            </PopoverContent>
+                          </Popover>
+                        </div>
+                        <Label htmlFor='payment'>Payment Method</Label>
+                        <Select>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select a payment method" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup>
+                              <SelectLabel>Methods</SelectLabel>
+                              <SelectItem value="gcash">GCash</SelectItem>
+                              <SelectItem value="paymaya">Paymaya</SelectItem>
+                              <SelectItem value="paypal">Paypal</SelectItem>
+                              <SelectItem value="bdo">BDO</SelectItem>
+                              <SelectItem value="metrobank">MetroBank</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                        <div className="grid w-full items-center gap-1.5">
+                          <Label htmlFor='amount'>Payment amount</Label>
+                          <Input id='serviceType' type='number'/>
+                        </div>
+                        <div className="grid w-full items-center gap-1.5">
+                          <Label htmlFor='amount'>Contact number</Label>
+                          <Input id='serviceType' type='number'/>
+                        </div>
+                        <div className="flex justify-center items-center space-x-2">
+                          <Checkbox id="terms" />
+                          <label
+                            htmlFor="terms"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            Accept terms and conditions
+                          </label>
+                        </div>
+                        <Button>Done</Button>
+                    </DialogContent>
+                    
+                  </Dialog>
+                  
                 </div>
 
                 <div className="flex items-center space-x-2">
