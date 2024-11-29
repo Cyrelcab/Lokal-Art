@@ -13,7 +13,8 @@ const artistsData = [
       "/images/Artist/img2.jpg",
       "/images/Artist/img14.jpg",
       "/images/Artist/img16.jpg"
-    ]
+    ],
+    route: "/artist-1"
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ const artistsData = [
       "/images/Artist/tattoo1.jpg",
       "/images/Artist/tattoo3.jpg",
       "/images/Artist/tattoo4.jpg"
-    ]
+    ],
+    route: "/upload"
   },
   {
     id: 3,
@@ -37,7 +39,8 @@ const artistsData = [
       "/images/Artist/paint1.jpg",
       "/images/Artist/paint2.jpg",
       "/images/Artist/paint3.jpg"
-    ]
+    ],
+    route: "/upload"
   },
   {
     id: 4,
@@ -49,7 +52,8 @@ const artistsData = [
       "/images/Artist/tattoo4.jpg",
       "/images/Artist/mecha1.jpg",
       "/images/Artist/tattoo5.jpg"
-    ]
+    ],
+    route: "/upload"
   },
   {
     id: 5,
@@ -61,7 +65,8 @@ const artistsData = [
       "/images/Artist/img15.jpg",
       "/images/Artist/mecha3.jpg",
       "/images/Artist/mecha6.jpg"
-    ]
+    ],
+    route: "/upload"
   },
   {
     id: 6,
@@ -73,7 +78,8 @@ const artistsData = [
       "/images/Artist/tattoo9.jpg",
       "/images/Artist/img13.jpg",
       "/images/Artist/paint5.jpg"
-    ]
+    ],
+    route: "/upload"
   }
 ];
 
@@ -108,7 +114,9 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
   return (
     <div className="pb-5 grid grid-cols-2 gap-5">
       {filteredArtists.map((artist) => (
-        <div key={artist.id} className="border border-gray-500 bg-gray-100 flex w-[34rem] rounded-xl">
+        <div key={artist.id}>
+          <a href={artist.route}>
+          <div className="border border-gray-500 bg-gray-100 flex w-[34rem] rounded-xl">
           {/* Profile Pic */}
           <div>
             <img
@@ -153,6 +161,9 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
             </div>
           </div>
         </div>
+          </a>
+        </div>
+        
       ))}
     </div>
   );

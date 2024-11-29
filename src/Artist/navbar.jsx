@@ -32,8 +32,8 @@ export default function Navbar({ fullName }) {
       <div className="flex-1 px-8">
         <ul className="flex justify-center space-x-14">
           <li>
-            <Link to="/dashboard" className="text-black hover:text-cyan-500">
-              Dashboard
+            <Link to="/client/discover" className="text-black hover:text-cyan-500">
+              Discover
             </Link>
           </li>
           <li>

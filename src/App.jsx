@@ -7,7 +7,7 @@ import Home from "./page/components/Home";
 import TermsConditions from "./Auth/terms_conditions";
 import Role from "./page/role";
 import ArtistProfile from "./Artist/artist-profile";
-import Dashboard from "./Artist/dashboard";
+
 
 import Upload from "./Artist/Upload";
 import Discover from "./Client/Discover";
@@ -28,6 +28,8 @@ function App() {
 
           {/*this is the route for viewing the artist profile specific to the artist id*/}
           <Route path="/view-artist/:id" element={<Home />} />
+
+
         </Routes>
       </Router>
     </>
