@@ -307,7 +307,7 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
                             </CardContent>
                           </Card>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[425px]">
+                        <DialogContent className="sm:max-w-[320px]">
                           <DialogTitle>Art Title</DialogTitle>
                           <CardContent className="p-0">
                             <img
