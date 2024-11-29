@@ -9,7 +9,6 @@ import Role from "./page/role";
 import ArtistProfile from "./Artist/artist-profile";
 import Dashboard from "./Artist/dashboard";
 import ArtistFromData from '@/Client/Components/artistProfile'
-// i-update sab ni idugang tong route sa artists link
 import Upload from "./Artist/Upload";
 import Discover from "./Client/Discover";
 function App() {
@@ -18,7 +17,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Home />} />
+          {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/client/discover" element={<Discover />} />
           {/* diri nawala and route */}
           <Route path="/artists/artist/:id" element={<ArtistFromData />} />

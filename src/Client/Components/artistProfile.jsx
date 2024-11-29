@@ -2,151 +2,67 @@ import { useNavigate, Link, useParams } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { setDocumentTitle } from "@/utils/document";
 import { useState, useEffect } from "react";
-import Modal from "@/Artist/modal";
-import UploadPopup from "@/Artist/Popup";
 import ArtistsData from "@/utils/db_artists";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button";
+
+
+
 
 const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
     
-    const { id } = useParams()
+  const { id } = useParams()
   setDocumentTitle("Profile | Lokal-Art");
   const navigate = useNavigate();
   const artist = ArtistsData.artists.find((artist) => artist.id === parseInt(id));
-  // console.log("", artist);
   const category = artist.categories.map((category) => category);
-  const firstName = localStorage.getItem("first_name") || "John";
-  const lastName = localStorage.getItem("last_name") || "Doe";
-  const artistType =
-    localStorage.getItem("artist_type") || "Painter, Visual Artist";
-  const email =
-    localStorage.getItem("email") || "johndoe@email.com";
-  const address = localStorage.getItem("address") || "Address";
-  const bio = localStorage.getItem("bio") || "";
-  const birthday = localStorage.getItem("birthday") || "Birthdate";
-  const fullName = `${firstName} ${lastName}`;
-  const [bannerImage, setBannerImage] = useState(null);
-  const [profileImage, setProfileImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [artistData, setArtistData] = useState(
-    initialArtistData || {
-      bio: localStorage.getItem("bio") || "",
-      // Add other artist data as needed
-    }
-  );
-  const [isUploadPopupOpen, setIsUploadPopupOpen] = useState(false);
 
-  const getInitials = (name) => {
-    if (!name) return "";
-    return name
-      .trim()
-      .split(" ")
-      .filter((word) => word.length > 0)
-      .map((word) => word[0] || "")
-      .join("")
-      .toUpperCase();
-  };
-
-  const logoutBtn = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
-
-  const handleBannerUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setBannerImage(imageUrl);
-    }
-  };
-
-  const handleProfileUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleUploadClick = () => {
-    setIsUploadPopupOpen(true);
-  };
-
-  const handleProfileUpdate = (updatedData) => {
-    const newData = { ...artistData, ...updatedData };
-    setArtistData(newData);
-    
-    Object.entries(updatedData).forEach(([key, value]) => {
-      localStorage.setItem(key, value);
-    });
-  };
-
-  useEffect(() => {
-    return () => {
-      // Cleanup object URLs when component unmounts
-      if (bannerImage) URL.revokeObjectURL(bannerImage);
-      if (profileImage) URL.revokeObjectURL(profileImage);
-    };
-  }, [bannerImage, profileImage]);
 
   return (
     <div className="h-screen bg-gray-100">
-      <nav className="flex items-center justify-between px-8 py-4 bg-white shadow-sm fixed top-0 w-full z-50">
+      <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
         <div className="flex items-center">
           <img
             src="/images/logo-blue.png"
             alt="LokalArt Logo"
-            className="h-10"
+            className="w-48"
           />
         </div>
-
-        <div className="flex-1 px-8">
-          <ul className="flex justify-center space-x-8">
-            <li>
-              <Link to="/dashboard" className="text-black hover:text-cyan-500">
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/transactions"
-                className="text-black hover:text-cyan-500"
-              >
-                My Transactions
-              </Link>
-            </li>
-            <li>
-              <Link to="/messages" className="text-black hover:text-cyan-500">
-                Messages
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="flex items-center space-x-6">
-          <div className="cursor-pointer">
-            <Icon
-              icon="mdi:bell"
-              width="24"
-              height="24"
-              className="text-cyan-500"
-            />
-          </div>
-          <div className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
-            {getInitials(fullName)}
-          </div>
-          <button
-            onClick={logoutBtn}
-            className="px-4 py-2 text-white bg-[#00D1FF] rounded-full hover:bg-[#00b8e6]"
+        <div className="flex justify-center items-center p-5">
+          <a
+            className="mr-10 border-b-2 border-cyan-500 text-m"
+            href="/client/discover"
           >
-            Logout
+            Discover
+          </a>
+          <a className="mr-10 hover:text-cyan-500 text-m" href="#">
+            Transaction
+          </a>
+          <a className="hover:text-cyan-500 text-m" href="#">
+            Messages
+          </a>
+        </div>
+        <div className="flex items-center p-5">
+          <i className="fa-solid fa-bell hover:text-cyan-500 cursor-pointer text-xl mr-4"></i>
+          <div className="bg-cyan-900 rounded-full h-8 w-8 mr-4"></div>
+          <button className="bg-cyan-500 h-8 w-20 rounded-2xl text-white hover:bg-cyan-300">
+            <Link to={"/login"}>Logout</Link>
           </button>
         </div>
       </nav>
@@ -173,27 +89,30 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
           {/* Create a flex container to hold both sections */}
           <div className="flex">
             {/* Left section - existing user info */}
-            <div className="flex-1 max-w-md border-r border-black">
+            <div className=" flex-1 max-w-md w-[20rem] max-h-96 border-r border-slate-400 mr-4">
               <div className="flex items-center space-x-4">
                 <h1 className="text-3xl font-bold">{artist.name}</h1>
-                <button
-                  className="p-2 text-gray-600 hover:text-cyan-500 rounded-full hover:bg-gray-100"
-                  title="Edit Profile"
-                  onClick={handleOpenModal}
-                >
-                  <Icon icon="mdi:pencil" width="20" height="20" />
-                </button>
               </div>
               <p className="text-gray-600 mt-1">
                 {category.join(", ")}
-                {/* {artistType.replace(/['"]+/g, "")} */}
               </p>
 
               <div className="mt-6 space-y-2 text-gray-600">
                 <div className="flex items-center mb-6">
                     {artist.bio}
-                  {bio && <i>"{bio}"</i>}
+                  {/* {bio && <i>"{bio}"</i>} */}
                 </div>
+
+                <div className="mt-4 flex w-full flex-col gap-2 p-5">
+                  <Button className="w-full">Message</Button>
+                  <Button variant="outline" className="w-full">
+                    Unfollow
+                  </Button>
+                  <Button variant="secondary" className="w-full">
+                    Book a Transaction
+                  </Button>
+                </div>
+
                 <div className="flex items-center space-x-2">
                   <Icon icon="mdi:map-marker" width="20" height="20" />
                   <span>{artist.location}</span>
@@ -202,17 +121,10 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
                   <Icon icon="mdi:calendar" width="20" height="20" />
                   <span>{artist.birthday}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Icon icon="mdi:email" width="20" height="20" />
-                  <span>{artist.email}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Icon icon="mdi:phone" width="20" height="20" />
-                  <span>{artist.contact}</span>
-                </div>
               </div>
+
               {/* Stats Section - moved outside the flex container */}
-              <div className="mt-16 flex space-x-16">
+              <div className="mt-16 flex space-x-11">
                 <div className="flex flex-col items-center">
                   <span className="text-2xl font-bold">9</span>
                   <div className="flex items-center space-x-1 text-gray-600 text-sm">
@@ -240,43 +152,70 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
             </div>
 
             {/* Right section with border - Fixed structure */}
-            <div className="w-96 pl-6 ml-6">
-              <div className="space-y-4">
-                <div className="flex space-x-8">
-                  <button className="font-semibold text-gray-700 pb-1 border-b-2 border-cyan-500">
-                    Works
-                  </button>
-                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
-                    Events
-                  </button>
-                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
-                    Followers
-                  </button>
-                  <button
-                    onClick={handleUploadClick}
-                    className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2 flex items-center gap-1"
-                  >
-                    Upload
-                    <Icon icon="material-symbols:upload" />
-                  </button>
+            <div className="md:col-span-3">
+            <Tabs defaultValue="works" className="w-full h-full">
+              <TabsList className="flex justify-start gap-1 w-[14.7rem]">
+                <TabsTrigger value="works">Works</TabsTrigger>
+                <TabsTrigger value="followers">Followers</TabsTrigger>
+                <TabsTrigger value="events">Events</TabsTrigger>
+              </TabsList>
+              <TabsContent value="works" className="mt-6">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {artist.works.map((_, i) => (
+                    <div key={i} className="space-y-4">
+                      <Dialog>
+                        <DialogTrigger>
+                          <Card>
+                            <CardContent className="p-0">
+                              <img
+                                src={artist.works[i]}
+                                alt="Ocean Serenity"
+                                width={400}
+                                height={300}
+                                className="aspect-[4/3] object-cover"
+                              />
+                            </CardContent>
+                          </Card>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[425px]">
+                          <DialogTitle>Art Title</DialogTitle>
+                          <CardContent className="p-0">
+                            <img
+                              src={artist.works[i]}
+                              alt="Ocean Serenity"
+                              className="object-cover"
+                            />
+                          </CardContent>
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            </div>
+              </TabsContent>
+              <TabsContent value="followers">
+                <div className="text-center text-muted-foreground">No followers to display</div>
+              </TabsContent>
+              <TabsContent value="events">
+                <div className="text-center text-muted-foreground">No events to display</div>
+              </TabsContent>
+            </Tabs>
+
+          </div>
           </div>
         </div>
       </main>
 
       {/* Add Modal */}
-      <Modal
+      {/* <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         artistData={artistData}
         onUpdate={handleProfileUpdate}
-      />
-      <UploadPopup
+      /> */}
+      {/* <UploadPopup
         isOpen={isUploadPopupOpen}
         onClose={() => setIsUploadPopupOpen(false)}
-      />
+      /> */}
     </div>
   );
 };
