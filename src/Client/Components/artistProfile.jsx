@@ -21,6 +21,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 
 
@@ -35,7 +36,7 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
 
 
   return (
-    <div className="h-screen bg-gray-100">
+    <div className="h-full max-h-screen bg-gray-100">
       <nav className="h-15 font-bold flex justify-between items-center shadow-md font-sans px-8 fixed top-0 w-full z-50 bg-white">
         <div className="flex items-center">
           <img
@@ -87,9 +88,9 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
         {/* User Information Section */}
         <div className="mt-20 px-8">
           {/* Create a flex container to hold both sections */}
-          <div className="flex">
+          <div className="flex text-sm">
             {/* Left section - existing user info */}
-            <div className=" flex-1 max-w-md w-[20rem] max-h-96 border-r border-slate-400 mr-4">
+            <div className=" flex-1 max-w-[20rem] w-[20rem] max-h-96 border-r border-slate-400 mr-4">
               <div className="flex items-center space-x-4">
                 <h1 className="text-3xl font-bold">{artist.name}</h1>
               </div>
@@ -124,7 +125,7 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
               </div>
 
               {/* Stats Section - moved outside the flex container */}
-              <div className="mt-16 flex space-x-11">
+              <div className="mt-5 flex space-x-11">
                 <div className="flex flex-col items-center">
                   <span className="text-2xl font-bold">9</span>
                   <div className="flex items-center space-x-1 text-gray-600 text-sm">
@@ -169,7 +170,7 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
                             <CardContent className="p-0">
                               <img
                                 src={artist.works[i]}
-                                alt="Ocean Serenity"
+                                alt="Art Title"
                                 width={400}
                                 height={300}
                                 className="aspect-[4/3] object-cover"
@@ -182,9 +183,17 @@ const ArtistProfileFromData = ({ artistData: initialArtistData }) => {
                           <CardContent className="p-0">
                             <img
                               src={artist.works[i]}
-                              alt="Ocean Serenity"
+                              alt="Art Title"
                               className="object-cover"
                             />
+                            <p className="font-bold">Artist: {artist.name}</p>
+                            <p className="font-bold mb-2">Description: {artist.description}</p>
+                            <div className="mt-5">
+                              <Textarea placeholder="Type your comment here.."/>
+                            </div>
+                            <div className="mt-5 flex justify-end">
+                              <Button className="">Comment</Button>
+                            </div>
                           </CardContent>
                         </DialogContent>
                       </Dialog>
