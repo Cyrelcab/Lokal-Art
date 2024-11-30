@@ -51,7 +51,15 @@ export default function Navbar({ fullName }) {
     navigate("/login");
   };
 
-  const isActive = (path) => location.pathname === path;
+  // Helper function to check if the current path is active
+  const isActive = (path) => {
+    // Handle dynamic routes
+    if (path.includes(":id")) {
+      const basePath = path.split("/:id")[0];
+      return location.pathname.startsWith(basePath);
+    }
+    return location.pathname === path;
+  };
 
   return (
     <nav className="flex items-center justify-between px-8 py-4 bg-white fixed top-0 w-full z-50">
@@ -65,7 +73,8 @@ export default function Navbar({ fullName }) {
             <Link
               to="/client/discover"
               className={`text-black hover:text-cyan-500 ${
-                isActive("/client/discover")
+                isActive("/client/discover") ||
+                isActive("/client/view-artist/:id")
                   ? "border-b-2 border-cyan-500 pb-1"
                   : ""
               }`}

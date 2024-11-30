@@ -7,12 +7,12 @@
     "role": "Artist"
   },
   {
-    "first_name": "Cyrel",
-    "last_name": "Caboodbod",
+    "first_name": "John",
+    "last_name": "Cabodbod",
     "email": "mariagejaks@gmail.com",
     "password": "test",
     "role": "Client",
     "profile_image": "/uploads/cyrel-caboodbod/profile_image-uploaded-image-cyrel-caboodbod.webp",
-    "banner_image": "/uploads/cyrel-caboodbod/banner_image-uploaded-image-cyrel-caboodbod.jpg"
+    "banner_image": "/uploads/john-cabodbod/banner_image-uploaded-image-john-cabodbod.jpg"
   }
 ]

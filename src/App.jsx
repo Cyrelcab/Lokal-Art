@@ -19,11 +19,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/client/discover" element={<Discover />} />
-          {/* diri nawala and route */}
-          <Route path="/artists/artist/:id" element={<ArtistFromData />} />
           <Route path="/upload" element={<Upload />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -36,7 +34,7 @@ function App() {
           <Route path="/client/transactions" element={<ClientTransactions />} />
 
           {/*this is the route for viewing the artist profile specific to the artist id*/}
-          <Route path="/view-artist/:id" element={<Home />} />
+          <Route path="/client/view-artist/:id" element={<ArtistFromData  />} />
         </Routes>
       </Router>
     </>

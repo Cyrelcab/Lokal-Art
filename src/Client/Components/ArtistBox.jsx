@@ -41,7 +41,7 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
         <div key={artist.id} className="border border-gray-500 bg-gray-100 flex w-[34rem] rounded-xl">
           {/* Profile Pic */}
           <div>
-            <Link to={`/artists/artist/${artist.id}`} ><img
+            <Link to={`/client/view-artist/${artist.id}`} ><img
               className="cursor-pointer shadow-md object-cover mx-5 my-5 rounded-full h-[100px] w-[100px]"
               src={artist.profilePic}
               alt="Profile Photo"
@@ -51,7 +51,7 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
           <div>
             {/* Name */}
             <div className="flex mt-5 mr-5 text-lg">
-              <Link to={`/artists/artist/${artist.id}`} className="pr-1 font-bold hover:text-cyan-500">{artist.name}</Link>
+              <Link to={`/client/view-artist/${artist.id}`} className="pr-1 font-bold hover:text-cyan-500">{artist.name}</Link>
               <p className="border-l-2 border-gray-300 ml-1 pl-1 text-gray-400">
                 {artist.categories.join(", ")}
               </p>

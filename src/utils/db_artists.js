@@ -6,6 +6,9 @@ export default {
       categories: ["Painter", "Digital Artist"],
       location: "Butuan City",
       profilePic: "/images/profile-photo.jpg",
+      bannerPic: "/images/cover-photo.jpg",
+      bio: "I want to go sleep forever",
+      birthday: "January 19, 2003",
       works: [
         "/images/Artist/img2.jpg",
         "/images/Artist/img14.jpg",
@@ -18,6 +21,9 @@ export default {
       categories: ["Tattoo Artist"],
       location: "Butuan City",
       profilePic: "/images/Artist/prof1.jpg",
+      bannerPic: "/images/cover-photo.jpg",
+      bio: "I want to go sleep forever",
+      birthday: "January 19, 2003",
       works: [
         "/images/Artist/tattoo1.jpg",
         "/images/Artist/tattoo3.jpg",
@@ -30,6 +36,9 @@ export default {
       categories: ["Painter"],
       location: "Butuan City",
       profilePic: "/images/Artist/prof2.jpg",
+      bannerPic: "/images/cover-photo.jpg",
+      bio: "I want to go sleep forever",
+      birthday: "January 19, 2003",
       works: [
         "/images/Artist/paint1.jpg",
         "/images/Artist/paint2.jpg",
@@ -42,6 +51,9 @@ export default {
       categories: ["Tattoo Artist", "Digital Artist"],
       location: "Butuan City",
       profilePic: "/images/Artist/prof3.jpg",
+      bannerPic: "/images/cover-photo.jpg",
+      bio: "I want to go sleep forever",
+      birthday: "January 19, 2003",
       works: [
         "/images/Artist/tattoo4.jpg",
         "/images/Artist/mecha1.jpg",
@@ -54,6 +66,9 @@ export default {
       categories: ["Digital Artist"],
       location: "Butuan City",
       profilePic: "/images/Artist/prof5.jpg",
+      bannerPic: "/images/cover-photo.jpg",
+      bio: "I want to go sleep forever",
+      birthday: "January 19, 2003",
       works: [
         "/images/Artist/img15.jpg",
         "/images/Artist/mecha3.jpg",
@@ -66,6 +81,9 @@ export default {
       categories: ["Painter", "Digital", "Tattoo Artist"],
       location: "Butuan City",
       profilePic: "/images/Artist/prof4.jpg",
+      bannerPic: "/images/cover-photo.jpg",
+      bio: "I want to go sleep forever",
+      birthday: "January 19, 2003",
       works: [
         "/images/Artist/tattoo9.jpg",
         "/images/Artist/img13.jpg",
