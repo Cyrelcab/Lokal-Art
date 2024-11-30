@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react";
 
-export default function EventBox({ isOpen, onClose, events }) {
+export default function EventBox({ isOpen, events }) {
   if (!isOpen) return null;
 
   return (
