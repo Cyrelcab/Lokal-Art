@@ -5,86 +5,7 @@ import {Link} from "react-router-dom"
 //i-Update sab ni dri kay nawala
 
 // Move artist data to a separate array
-const artistsData = [
-  {
-    id: 1,
-    name: "Jonathan Wick",
-    categories: ["Painter", "Digital Artist"],
-    location: "Butuan City",
-    profilePic: "/images/profile-photo.jpg",
-    works: [
-      "/images/Artist/img2.jpg",
-      "/images/Artist/img14.jpg",
-      "/images/Artist/img16.jpg"
-    ],
-    route: "/artist-1"
-  },
-  {
-    id: 2,
-    name: "John Doe",
-    categories: ["Tattoo Artist"],
-    location: "Butuan City",
-    profilePic: "/images/Artist/prof1.jpg",
-    works: [
-      "/images/Artist/tattoo1.jpg",
-      "/images/Artist/tattoo3.jpg",
-      "/images/Artist/tattoo4.jpg"
-    ],
-    route: "/upload"
-  },
-  {
-    id: 3,
-    name: "Melissa Hudson",
-    categories: ["Painter"],
-    location: "Butuan City",
-    profilePic: "/images/Artist/prof2.jpg",
-    works: [
-      "/images/Artist/paint1.jpg",
-      "/images/Artist/paint2.jpg",
-      "/images/Artist/paint3.jpg"
-    ],
-    route: "/upload"
-  },
-  {
-    id: 4,
-    name: "Mark Steel",
-    categories: ["Tattoo Artist", "Digital Artist"],
-    location: "Butuan City",
-    profilePic: "/images/Artist/prof3.jpg",
-    works: [
-      "/images/Artist/tattoo4.jpg",
-      "/images/Artist/mecha1.jpg",
-      "/images/Artist/tattoo5.jpg"
-    ],
-    route: "/upload"
-  },
-  {
-    id: 5,
-    name: "Spider-Man",
-    categories: ["Digital Artist"],
-    location: "Butuan City",
-    profilePic: "/images/Artist/prof5.jpg",
-    works: [
-      "/images/Artist/img15.jpg",
-      "/images/Artist/mecha3.jpg",
-      "/images/Artist/mecha6.jpg"
-    ],
-    route: "/upload"
-  },
-  {
-    id: 6,
-    name: "Lance Lancer",
-    categories: ["Painter", "Digital", "Tattoo Artist"],
-    location: "Butuan City",
-    profilePic: "/images/Artist/prof4.jpg",
-    works: [
-      "/images/Artist/tattoo9.jpg",
-      "/images/Artist/img13.jpg",
-      "/images/Artist/paint5.jpg"
-    ],
-    route: "/upload"
-  }
-];
+
 
 export default function ArtistBox({ searchQuery, categoryFilter, locationFilter }) {
   const artists = artistsData.artists
@@ -118,25 +39,18 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
   return (
     <div className="pb-5 grid grid-cols-1 gap-6 xl:grid-cols-2 justify-center items-center border">
       {filteredArtists.map((artist) => (
-        <div key={artist.id} className="flex flex-col justify-center items-center">
-          <a href={artist.route}>
-          <div className="border border-gray-500 bg-gray-100 flex w-[24rem] md:w-[35rem] rounded-xl">
+        <div className="border border-gray-500 bg-gray-100 flex w-[24rem] md:w-[35rem] rounded-xl">
           {/* Profile Pic */}
           <div>
             <img
               className="cursor-pointer shadow-md object-cover mx-5 my-5 rounded-full h-[50px] w-[50px] lg:h-[100px] lg:w-[100px]"
-            <Link to={`/client/view-artist/${artist.id}`} ><img
-              className="cursor-pointer shadow-md object-cover mx-5 my-5 rounded-full h-[100px] w-[100px]"
               src={artist.profilePic}
               alt="Profile Photo"
-            /></Link>
+            />
           </div>
           {/* Name, Category, Works */}
           <div>
             {/* Name */}
-            <div className="flex mt-5 text-[1rem] md:text-lg">
-              <p className="pr-1 font-bold">{artist.name}</p>
-              <p className="border-l-2 border-gray-300 ml-1 pl-1 text-gray-400 text-[0.8rem] md:text-lg">
             <div className="flex mt-5 mr-5 text-lg">
               <Link to={`/client/view-artist/${artist.id}`} className="pr-1 font-bold hover:text-cyan-500">{artist.name}</Link>
               <p className="border-l-2 border-gray-300 ml-1 pl-1 text-gray-400">
@@ -170,9 +84,6 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
             </div>
           </div>
         </div>
-          </a>
-        </div>
-        
       ))}
     </div>
   );
