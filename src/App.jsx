@@ -10,6 +10,7 @@ import ArtistProfile from "./Artist/artist-profile";
 import Upload from "./Artist/Upload";
 import Discover from "./Client/Discover";
 import Artist_1 from "./Artist/Profile/Artist_1";
+import MyTransactions from "./Client/MyTransaction";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/terms-and-conditions" element={<TermsConditions />} />
           <Route path="/role" element={<Role />} />
           <Route path="/artist/setup-profile" element={<ArtistProfile />} />
+          <Route path="/transactions" element={<MyTransactions />} />
 
           {/*this is the route for viewing the artist profile specific to the artist id*/}
           <Route path="/view-artist/:id" element={<Home />} />

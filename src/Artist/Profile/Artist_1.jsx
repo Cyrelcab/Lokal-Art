@@ -37,6 +37,12 @@ export default function Artist_1() {
     };
   }, []);
 
+  useEffect(() => {
+    // Store the name in session storage
+    const name = "Jonathan Wick";
+    sessionStorage.setItem("userName", name);
+  }, []);
+
   return (
     <section>
       <Navbar />
@@ -141,6 +147,93 @@ export default function Artist_1() {
                   City Night
                 </p>
               </div>
+
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\img14.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Beach
+                </p>
+              </div>
+
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\img16.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Sunlight
+                </p>
+              </div>
+
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\img1.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  School
+                </p>
+              </div>
+
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\img12.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Bow and Arrow
+                </p>
+              </div>
+
+              <div
+                className="relative w-64 h-52"
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\img6.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Model
+                </p>
+              </div>
+
+              
               {/* Additional images can be added here */}
             </div>
           </div>

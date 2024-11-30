@@ -1,50 +1,87 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 
 export default function Transaction() {
   const [isOpen, setIsOpen] = useState(false);
   const [isServiceOpen, setServiceIsOpen] = useState(false);
   const [showArtworkPopup, setShowArtworkPopup] = useState(false);
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Payment");
+  const [customerName, setCustomerName] = useState("");
+  const [paymentAmount, setPaymentAmount] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+  const [date, setDate] = useState("");
 
   const options = ["G-Cash", "Paypal", "Pay Maya"]; // Define dropdown options
-  const services = ["Illustration Services", "Custom Tattoo", "Temporary Tattoo", "Custom Painting"];
+  const services = [
+    "Illustration Services",
+    "Custom Tattoo",
+    "Temporary Tattoo",
+    "Custom Painting",
+  ];
 
-  // Toggle Service Dropdown
+  // Set initial values from session storage when the component mounts
+  useEffect(() => {
+    setCustomerName(sessionStorage.getItem("customerName") || "");
+    setPaymentAmount(sessionStorage.getItem("paymentAmount") || "");
+    setContactNumber(sessionStorage.getItem("contactNumber") || "");
+    setSelectedService(sessionStorage.getItem("selectedService") || "");
+    setDate(sessionStorage.getItem("date") || "");
+    setSelectedOption(sessionStorage.getItem("selectedOption") || "Payment");
+  }, []);
+
   const toggleServiceDropdown = () => {
     setServiceIsOpen(!isServiceOpen);
-    // Close the Payment dropdown if it's open
     if (isOpen) setIsOpen(false);
   };
 
-  // Toggle Payment Dropdown
   const togglePaymentDropdown = () => {
     setIsOpen(!isOpen);
-    // Close the Service dropdown if it's open
     if (isServiceOpen) setServiceIsOpen(false);
   };
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setIsOpen(false); // Close the dropdown after selecting an option
+    sessionStorage.setItem("selectedOption", option); // Store the selected payment method
+    setIsOpen(false);
   };
 
   const handleServiceClick = (service) => {
-    setSelectedOption(service);
-    setServiceIsOpen(false); // Close the dropdown after selecting an option
+    setSelectedService(service);
+    sessionStorage.setItem("selectedService", service); // Store the selected service
+    setServiceIsOpen(false);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === "customerName") {
+      setCustomerName(value);
+      sessionStorage.setItem("customerName", value);
+    } else if (name === "paymentAmount") {
+      setPaymentAmount(value);
+      sessionStorage.setItem("paymentAmount", value);
+    } else if (name === "contactNumber") {
+      setContactNumber(value);
+      sessionStorage.setItem("contactNumber", value);
+    } else if (name === "date") {
+      setDate(value);
+      sessionStorage.setItem("date", value);
+    }
   };
 
   const handleClosePopup = () => {
-    setShowArtworkPopup(false); // Close the popup when close button is clicked
+    setShowArtworkPopup(false);
+    setShowConfirmPopup(false);
   };
 
   const openPopup = () => {
-    setShowArtworkPopup(true); // Open the popup when Book a Transaction button is clicked
+    setShowArtworkPopup(true);
   };
 
   return (
     <div>
-      {/* Book a Transaction Button */}
       <button
         onClick={openPopup}
         className="p-2 bg-cyan-400 px-[53px] text-white rounded-full hover:bg-cyan-500 mt-4"
@@ -52,17 +89,18 @@ export default function Transaction() {
         Book a Transaction
       </button>
 
-      {/* Popup */}
       {showArtworkPopup && (
         <div className="fixed top-9 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
           <div className="bg-white p-5 rounded-md space-y-3 w-[60%] max-h-[500px] overflow-y-auto">
             <div className="relative">
-              {/* Transaction Information */}
               <div className="flex flex-col justify-center items-center">
-                <h1 className="text-2xl text-cyan-400">Transaction Information</h1>
-                <p className="text-sm text-gray-400">Input the necessary information for the transaction</p>
+                <h1 className="text-2xl text-cyan-400">
+                  Transaction Information
+                </h1>
+                <p className="text-sm text-gray-400">
+                  Input the necessary information for the transaction
+                </p>
               </div>
-              {/* Close Button */}
               <button
                 onClick={handleClosePopup}
                 className="absolute top-0 right-0 text-black hover:bg-red-600 hover:text-white p-2 rounded"
@@ -73,19 +111,18 @@ export default function Transaction() {
 
             <div className="inline-flex space-x-6 ">
               <div className="justify-center items-center space-y-4 ">
-                {/* Customer Name Input */}
                 <div className="pt-2">
                   <label className="text-gray-600">Customer Name</label>
                   <input
                     type="text"
-                    id="customerName"
                     name="customerName"
+                    value={customerName}
+                    onChange={handleInputChange}
                     placeholder="Name"
                     className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-xl focus:outline-none shadow hover:shadow-cyan-500"
                   />
                 </div>
 
-                {/* Services Dropdown */}
                 <div className="flex flex-col">
                   <label className="text-gray-600">Services</label>
                   <div className="relative inline-block text-left">
@@ -93,7 +130,7 @@ export default function Transaction() {
                       onClick={toggleServiceDropdown}
                       className="hover:text-cyan-500 inline-flex justify-center w-full px-4 py-3 text-sm font-bold text-gray-700 bg-white border-b-2 border-gray-300 rounded-xl shadow hover:shadow-cyan-500"
                     >
-                      {selectedOption}
+                      {selectedService || "Select Service"}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="ml-2 h-5 w-5"
@@ -110,7 +147,11 @@ export default function Transaction() {
 
                     {isServiceOpen && (
                       <div className="absolute z-10 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        <div className="py-1" role="menu" aria-orientation="vertical">
+                        <div
+                          className="py-1"
+                          role="menu"
+                          aria-orientation="vertical"
+                        >
                           {services.map((service, index) => (
                             <button
                               key={index}
@@ -127,19 +168,18 @@ export default function Transaction() {
                   </div>
                 </div>
 
-                {/* Date Input */}
                 <div className="pt-2">
                   <label className="text-gray-600">Date</label>
                   <input
                     type="date"
-                    id="date"
                     name="date"
+                    value={date}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-xl focus:outline-none shadow hover:shadow-cyan-500"
                   />
                 </div>
               </div>
 
-              {/* Payment Method Dropdown */}
               <div className="justify-center items-center space-y-4">
                 <div className="flex flex-col">
                   <label className="text-gray-600">Payment Method</label>
@@ -165,7 +205,11 @@ export default function Transaction() {
 
                     {isOpen && (
                       <div className="absolute z-10 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        <div className="py-1" role="menu" aria-orientation="vertical">
+                        <div
+                          className="py-1"
+                          role="menu"
+                          aria-orientation="vertical"
+                        >
                           {options.map((option, index) => (
                             <button
                               key={index}
@@ -182,48 +226,90 @@ export default function Transaction() {
                   </div>
                 </div>
 
-                {/* Payment Amount Input */}
                 <div className="pt-2">
-                  <label className="text-gray-600">Payment Amount</label>
+                  <label className="text-gray-600">Amount</label>
                   <input
                     type="number"
-                    id="number"
-                    name="payment number"
-                    placeholder="₱"
+                    name="paymentAmount"
+                    value={paymentAmount}
+                    onChange={handleInputChange}
+                    placeholder="Amount"
                     className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-xl focus:outline-none shadow hover:shadow-cyan-500"
                   />
                 </div>
 
-                {/* Contact Number Input */}
                 <div className="pt-2">
                   <label className="text-gray-600">Contact Number</label>
                   <input
-                    type="number"
-                    id="number"
-                    name="payment number"
-                    placeholder="#"
+                    type="tel"
+                    name="contactNumber"
+                    value={contactNumber}
+                    onChange={handleInputChange}
+                    placeholder="Contact Number"
                     className="w-full px-4 py-2 border-b-2 border-gray-300 rounded-xl focus:outline-none shadow hover:shadow-cyan-500"
                   />
                 </div>
               </div>
             </div>
-
-            {/* Terms and Conditions */}
-            <div className="flex flex-col items-center justify-center pt-5">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  className="form-checkbox h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-                />
-                <span className="ml-2 text-gray-500 text-sm">
-                  Accept Terms and Conditions
+            <div className="flex flex-col justify-center items-center">
+              <div className="inline-flex">
+                <span className="text-gray-400 text-sm">
+                  <input type="checkbox" className="mr-2" />
+                  Agree to Terms and Conditions
                 </span>
-              </label>
+              </div>
 
-              <button className="mt-3 p-2 bg-cyan-400 w-[50%] text-white rounded-lg hover:bg-cyan-500">
-                Done
+              <button
+                onClick={() => {
+                  // Save all current state values to session storage
+                  sessionStorage.setItem("customerName", customerName);
+                  sessionStorage.setItem("paymentAmount", paymentAmount);
+                  sessionStorage.setItem("contactNumber", contactNumber);
+                  sessionStorage.setItem("selectedService", selectedService);
+                  sessionStorage.setItem("date", date);
+                  sessionStorage.setItem("selectedOption", selectedOption);
+
+                  // Clear all input fields and dropdowns
+                  setCustomerName("");
+                  setPaymentAmount("");
+                  setContactNumber("");
+                  setSelectedService("Services");
+                  setDate("");
+                  setSelectedOption("Payment");
+
+                  // Optionally show a confirmation popup or navigate to another page
+                  setShowConfirmPopup(true);
+                  setShowArtworkPopup(false);
+                }}
+                className="p-3 bg-cyan-400 text-white rounded-full mt-2 w-[35%] hover:bg-cyan-500"
+              >
+                Confirm Booking
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {showConfirmPopup && (
+        <div className="fixed top-9 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
+          <div className="bg-white w-[30rem] h-[20rem] rounded-md shadow-lg relative p-5 flex flex-col items-center">
+            <div className="flex flex-col justify-center items-center flex-grow">
+              <Icon
+                icon="lets-icons:check-fill"
+                className="size-36 text-cyan-400"
+              />
+              <h1 className="text-2xl font-bold">Transaction Complete</h1>
+              <p className="pt-5">
+                Your transaction has been processed successfully
+              </p>
+            </div>
+
+            <button
+              onClick={handleClosePopup}
+              className="text-cyan-500 border-2 border-cyan-500 hover:bg-cyan-600 hover:text-white mt-5 py-3 px-7 rounded-full"
+            >
+              Done
+            </button>
           </div>
         </div>
       )}
