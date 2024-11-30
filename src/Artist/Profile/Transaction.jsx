@@ -21,6 +21,8 @@ export default function Transaction() {
     "Custom Painting",
   ];
 
+  
+
   // Set initial values from session storage when the component mounts
   useEffect(() => {
     setCustomerName(sessionStorage.getItem("customerName") || "");
@@ -74,11 +76,28 @@ export default function Transaction() {
   const handleClosePopup = () => {
     setShowArtworkPopup(false);
     setShowConfirmPopup(false);
+
+    setCustomerName("");
+    setPaymentAmount("");
+    setContactNumber("");
+    setSelectedService("Services");
+    setDate("");
+    setSelectedOption("Payment");
   };
+
 
   const openPopup = () => {
     setShowArtworkPopup(true);
   };
+
+  useEffect(() => {
+    setCustomerName("");
+    setPaymentAmount("");
+    setContactNumber("");
+    setSelectedService("");
+    setDate("");
+    setSelectedOption("Payment");
+  }, []);
 
   return (
     <div>
@@ -269,17 +288,16 @@ export default function Transaction() {
                   sessionStorage.setItem("date", date);
                   sessionStorage.setItem("selectedOption", selectedOption);
 
-                  // Clear all input fields and dropdowns
+                  // Optionally show a confirmation popup or navigate to another page
+                  setShowConfirmPopup(true);
+                  setShowArtworkPopup(false);
+
                   setCustomerName("");
                   setPaymentAmount("");
                   setContactNumber("");
                   setSelectedService("Services");
                   setDate("");
                   setSelectedOption("Payment");
-
-                  // Optionally show a confirmation popup or navigate to another page
-                  setShowConfirmPopup(true);
-                  setShowArtworkPopup(false);
                 }}
                 className="p-3 bg-cyan-400 text-white rounded-full mt-2 w-[35%] hover:bg-cyan-500"
               >
