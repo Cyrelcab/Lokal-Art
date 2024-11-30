@@ -40,17 +40,17 @@ const FilterPopup = ({ onFilterChange }) => {
       {/* Filter button */}
       <button
         onClick={togglePopup}
-        className="hover:text-cyan-500 p-2 px-10 border border-gray-300 rounded-full bg-white  "
+        className="hover:text-cyan-500 py-[0.50rem] px-[0.70rem] md:px-10 border border-gray-300 rounded-full bg-white"
       >
         <div className="flex">
           <Icon icon="mage:filter" className="mt-1 text-lg" />
-          <p className="font-bold ml-2">Filter</p>
+          <p className="font-bold ml-2 lg:text-md hidden lg:block">Filter</p>
         </div>
       </button>
 
       {/* Popup */}
       {showPopup && (
-        <div className="bg-gray-100 pl-10 p-5 fixed top-20 h-full left-0 w-80 rounded-tr-2xl border-2 border-gray-300">
+        <div className="bg-gray-100 pl-10 p-5 fixed top-20 left-0 md:h-full w-80 rounded-tr-2xl rounded-br-2xl border-2 border-gray-300 z-10">
           {/* Popup header */}
           <div className="flex items-center justify-between border-b pb-4">
             <div className="flex items-center">

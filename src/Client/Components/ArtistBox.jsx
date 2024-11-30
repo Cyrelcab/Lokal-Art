@@ -112,15 +112,15 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
   }
 
   return (
-    <div className="pb-5 grid grid-cols-2 gap-5">
+    <div className="pb-5 grid grid-cols-1 gap-6 xl:grid-cols-2 justify-center items-center border">
       {filteredArtists.map((artist) => (
-        <div key={artist.id}>
+        <div key={artist.id} className="flex flex-col justify-center items-center">
           <a href={artist.route}>
-          <div className="border border-gray-500 bg-gray-100 flex w-[34rem] rounded-xl">
+          <div className="border border-gray-500 bg-gray-100 flex w-[24rem] md:w-[35rem] rounded-xl">
           {/* Profile Pic */}
           <div>
             <img
-              className="cursor-pointer shadow-md object-cover mx-5 my-5 rounded-full h-[100px] w-[100px]"
+              className="cursor-pointer shadow-md object-cover mx-5 my-5 rounded-full h-[50px] w-[50px] lg:h-[100px] lg:w-[100px]"
               src={artist.profilePic}
               alt="Profile Photo"
             />
@@ -128,31 +128,31 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
           {/* Name, Category, Works */}
           <div>
             {/* Name */}
-            <div className="flex mt-5 mr-5 text-lg">
+            <div className="flex mt-5 text-[1rem] md:text-lg">
               <p className="pr-1 font-bold">{artist.name}</p>
-              <p className="border-l-2 border-gray-300 ml-1 pl-1 text-gray-400">
+              <p className="border-l-2 border-gray-300 ml-1 pl-1 text-gray-400 text-[0.8rem] md:text-lg">
                 {artist.categories.join(", ")}
               </p>
             </div>
             {/* Category */}
-            <div className="flex text-gray-400">
-              <Icon icon="lsicon:location-outline" className="text-xl mt-1" />
+            <div className="flex text-gray-400 text-[0.9rem] md:text-lg">
+              <Icon icon="lsicon:location-outline" className="mt-1" />
               <p className="text-gray-400">{artist.location}</p>
             </div>
             {/* Works */}
             <div className="mt-4">
-              <div className="flex font-bold">
-                <p>Works</p>
+              <div className="flex font-bold text-[1rem] md:text-lg">
+                <p>Works</p>  
                 <Icon
                   icon="simple-line-icons:arrow-right"
                   className="mt-1 ml-1"
                 />
               </div>
-              <div className="mt-2 mb-5 grid grid-cols-3 gap-3">
+              <div className="mt-2 mb-5 grid grid-cols-3 gap-5">
                 {artist.works.map((work, index) => (
                   <img
                     key={index}
-                    className="object-cover w-28 h-20 rounded-lg"
+                    className="object-cover w-[5rem] h-[4.5rem] md:w-[7rem] md:h-[5rem] rounded-lg"
                     src={work}
                     alt="Image6"
                   />

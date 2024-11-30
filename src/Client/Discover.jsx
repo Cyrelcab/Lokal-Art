@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
-import FilterPopup from "./Components/Filter";
-import DropdownMenu from "./Components/Sort";
-import { Icon } from "@iconify/react";
-import Search from "./Components/Search";
-import ArtistBox from "./Components/ArtistBox";
 import { useState, useEffect } from "react";
 import { setDocumentTitle } from "@/utils/document";
 import Navbar from "@/Artist/navbar";
+import FilterPopup from "./Components/Filter";
+import DropdownMenu from "./Components/Sort";
+import Search from "./Components/Search";
+import ArtistBox from "./Components/ArtistBox";
 
 export default function Discover() {
   setDocumentTitle("Discover | LokalArt");
@@ -28,12 +26,9 @@ export default function Discover() {
   };
 
   useEffect(() => {
-    // Add the Chatling Chatbot script dynamically
     const configScript = document.createElement("script");
     configScript.type = "text/javascript";
-    configScript.innerHTML = `
-      window.chtlConfig = { chatbotId: "4156178122" };
-    `;
+    configScript.innerHTML = `window.chtlConfig = { chatbotId: "4156178122" };`;
 
     const embedScript = document.createElement("script");
     embedScript.src = "https://chatling.ai/js/embed.js";
@@ -45,7 +40,6 @@ export default function Discover() {
     document.body.appendChild(configScript);
     document.body.appendChild(embedScript);
 
-    // Clean up scripts on component unmount
     return () => {
       document.body.removeChild(configScript);
       document.body.removeChild(embedScript);
@@ -54,29 +48,23 @@ export default function Discover() {
 
   return (
     <section>
-      <Navbar/>
+      <Navbar />
       <div className="flex flex-col">
-        <div>
-          <div className="fixed top-[60px] flex justify-center items-center space-x-28 w-full placeholder-cyan-500 bg-white py-6 mt-2">
-            <div>
-              <FilterPopup onFilterChange={handleFilterChange} />
-            </div>
-            <div>
-              <Search onSearch={handleSearch} />
-            </div>
-            <div>
-              <DropdownMenu />
-            </div>
-          </div>
+        {/* Filter, Search, and Sort Section */}
+        <div className="fixed top-[60px] flex flex-wrap justify-center items-center gap-6 px-4 w-full py-4 pt-5 z-10 bg-white">
+          <FilterPopup onFilterChange={handleFilterChange} />
+          <Search onSearch={handleSearch} />
+          <DropdownMenu />
+        </div>
 
-          <div className="h-full mt-28 flex justify-center items-center">
-            <div className="pt-16">
-              <ArtistBox 
-                searchQuery={searchQuery}
-                categoryFilter={categoryFilter}
-                locationFilter={locationFilter}
-              />
-            </div>
+        {/* Artist Box Section */}
+        <div className="h-full mt-[140px] px-4 flex justify-center">
+          <div className="pt-6 w-full max-w-6xl">
+            <ArtistBox
+              searchQuery={searchQuery}
+              categoryFilter={categoryFilter}
+              locationFilter={locationFilter}
+            />
           </div>
         </div>
       </div>
