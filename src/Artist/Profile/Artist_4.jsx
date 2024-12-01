@@ -6,8 +6,8 @@ import Navbar from "../navbar";
 import Transaction from "./Transaction";
 import Message from "../Message";
 
-export default function Artist_2() {
-  setDocumentTitle("John Doe | LokalArt");
+export default function Artist_4() {
+  setDocumentTitle("Mark Steel| LokalArt");
   const [isTransactionOpen, setIsTransactionOpen] = useState(false);
   const firstName = localStorage.getItem("first_name") || "John";
   const lastName = localStorage.getItem("last_name") || "Doe";
@@ -61,8 +61,8 @@ export default function Artist_2() {
   }, []);
 
   useEffect(() => {
-    const name = "John Doe";
-    const profilePic = "/images/Artist/prof1.jpg";
+    const name = "Mark Steel";
+    const profilePic = "/images/Artist/prof3.jpg";
     sessionStorage.setItem("userName", name);
     sessionStorage.setItem("profilePic", profilePic);
   }, []);
@@ -86,13 +86,13 @@ export default function Artist_2() {
           <div className="w-full lg:w-1/4  border-gray-500 ">
             <img
               className="cursor-pointer mt-[-150px] shadow-md object-cover mx-auto lg:ml-10 rounded-full h-[200px] w-[200px]"
-              src="/images/Artist/prof1.jpg"
+              src="/images/Artist/prof3.jpg"
               alt="Profile Photo"
             />
             <div className="mt-4 border-r-2 border-gray-400">
               <div className="text-center lg:text-left px-4">
-                <h1 className="text-xl lg:text-2xl font-bold">John Doe</h1>
-                <p className="text-gray-500">Tattoo Artist</p>
+                <h1 className="text-xl lg:text-2xl font-bold">Mark Steel</h1>
+                <p className="text-gray-500">Tattoo Artist, Digital Artist</p>
                 <p className="mt-4">
                   "If I could say it in words there would be no reason to do
                   tattoos.”
@@ -123,7 +123,7 @@ export default function Artist_2() {
                 </p>
                 <p>
                   <i className="fa-solid fa-envelope text-cyan-500 pr-2"></i>
-                  jonathanWick@email.com
+                  marksteel@email.com
                 </p>
                 <p>
                   <i className="fa-solid fa-phone text-cyan-500 pr-2"></i>
@@ -145,7 +145,7 @@ export default function Artist_2() {
                   </div>
                 </div>
                 <div>
-                  <h1 className="text-lg font-bold">4.5k</h1>
+                  <h1 className="text-lg font-bold">12.5k</h1>
                   <div className="inline-flex space-x-1">
                     <Icon
                       icon="mdi:account-group"
@@ -192,46 +192,6 @@ export default function Artist_2() {
               <div
                 className="cursor-pointer relative w-64 h-52"
                 onClick={() =>
-                  handleImageClick("/images/Artist/tattoo1.jpg", "TV Person")
-                }
-                style={{
-                  textShadow:
-                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
-                }}
-              >
-                <img
-                  className="object-cover w-full h-full rounded-lg"
-                  src="\images\Artist\tattoo1.jpg"
-                  alt="Image1"
-                />
-                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
-                  TV Person
-                </p>
-              </div>
-
-              <div
-                className="cursor-pointer relative w-64 h-52"
-                onClick={() =>
-                  handleImageClick("/images/Artist/tattoo3.jpg", "Brain'scream")
-                }
-                style={{
-                  textShadow:
-                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
-                }}
-              >
-                <img
-                  className="object-cover w-full h-full rounded-lg"
-                  src="\images\Artist\tattoo3.jpg"
-                  alt="Image1"
-                />
-                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
-                  Brain'scream
-                </p>
-              </div>
-
-              <div
-                className="cursor-pointer relative w-64 h-52"
-                onClick={() =>
                   handleImageClick("/images/Artist/tattoo4.jpg", "Peacock")
                 }
                 style={{
@@ -249,11 +209,54 @@ export default function Artist_2() {
                 </p>
               </div>
 
+              <div
+                className="cursor-pointer relative w-64 h-52"
+                onClick={() =>
+                  handleImageClick(
+                    "/images/Artist/mecha1.jpg",
+                    "Claw"
+                  )
+                }
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\mecha1.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                  Claw
+                </p>
+              </div>
+
+              <div
+                className="cursor-pointer relative w-64 h-52"
+                onClick={() =>
+                  handleImageClick("/images/Artist/tattoo8.jpg", "Memento Mori")
+                }
+                style={{
+                  textShadow:
+                    "1px 1px 2px black, -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black",
+                }}
+              >
+                <img
+                  className="object-cover w-full h-full rounded-lg"
+                  src="\images\Artist\tattoo8.jpg"
+                  alt="Image1"
+                />
+                <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
+                Memento Mori
+                </p>
+              </div>
+
               <div>
                 <div
                   className="cursor-pointer relative w-64 h-52"
                   onClick={() =>
-                    handleImageClick("/images/Artist/tattoo2.jpg", "Skull")
+                    handleImageClick("/images/Artist/mecha2.jpg", "Mecha Feet")
                   }
                   style={{
                     textShadow:
@@ -262,11 +265,11 @@ export default function Artist_2() {
                 >
                   <img
                     className="object-cover w-full h-full rounded-lg"
-                    src="\images\Artist\tattoo2.jpg"
+                    src="\images\Artist\mecha2.jpg"
                     alt="Image1"
                   />
                   <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
-                    Skull
+                  Mecha Feet
                   </p>
                 </div>
               </div>
@@ -275,7 +278,7 @@ export default function Artist_2() {
               <div
                 className="relative w-64 h-52 cursor-pointer"
                 onClick={() =>
-                  handleImageClick("/images/Artist/tattoo6.jpg", "God and Cats")
+                  handleImageClick("/images/Artist/mecha3.jpg", "Space War")
                 }
                 style={{
                   textShadow:
@@ -284,11 +287,11 @@ export default function Artist_2() {
               >
                 <img
                   className="object-cover w-full h-full rounded-lg"
-                  src="/images/Artist/tattoo6.jpg"
+                  src="/images/Artist/mecha3.jpg"
                   alt="Rainy Days"
                 />
                 <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
-                  God and Cats
+                Space War
                 </p>
               </div>
 
@@ -296,7 +299,7 @@ export default function Artist_2() {
               <div
                 className="relative w-64 h-52 cursor-pointer"
                 onClick={() =>
-                  handleImageClick("/images/Artist/tattoo7.jpg", "Demon")
+                  handleImageClick("/images/Artist/paint6.jpg", "Sinaing")
                 }
                 style={{
                   textShadow:
@@ -305,11 +308,11 @@ export default function Artist_2() {
               >
                 <img
                   className="object-cover w-full h-full rounded-lg"
-                  src="/images/Artist/tattoo7.jpg"
+                  src="/images/Artist/paint6.jpg"
                   alt="Lake"
                 />
                 <p className="absolute bottom-2 left-2 text-white font-bold px-2 py-1 rounded">
-                  Demon
+                  Sinaing
                 </p>
               </div>
 

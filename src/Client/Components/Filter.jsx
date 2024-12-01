@@ -33,7 +33,7 @@ const FilterPopup = ({ onFilterChange }) => {
   };
 
   const categories = ["Painter", "Digital Artist", "Tattoo Artist"];
-  const locations = ["Butuan City"];
+  const locations = ["Butuan City", "Bayugan City"];
 
   return (
     <div>

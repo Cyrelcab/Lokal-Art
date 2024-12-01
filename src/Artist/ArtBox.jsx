@@ -4,7 +4,7 @@ const ArtBox = ({ isOpen, onClose, artwork }) => {
   return (
     <div>
       <div className="bg-white rounded-md w-full p-4 relative">
-        <div className="h-full grid grid-cols-3 justify-center items-center gap-5 w-full">
+        <div className="h-full grid grid-cols-1 lg:grid-cols-3 justify-center items-center gap-5 w-full">
           {artwork ? (
             <div
               className="relative w-64 h-52"

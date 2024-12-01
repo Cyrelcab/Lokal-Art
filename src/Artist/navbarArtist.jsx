@@ -41,7 +41,7 @@ export default function NavbarArtist({ fullName }) {
         <div className="hidden sm:flex flex-1 px-8 justify-center items-center">
           <ul className="flex justify-center space-x-14">
             <li>
-              <Link to="/client/discover" className="text-black hover:text-cyan-500">
+              <Link to="/artist/discover" className="text-black hover:text-cyan-500">
                 Discover
               </Link>
             </li>

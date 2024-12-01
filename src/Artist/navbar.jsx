@@ -51,7 +51,7 @@ export default function Navbar({ fullName }) {
               </Link>
             </li>
             <li>
-              <Link to="/messages" className="text-black hover:text-cyan-500">
+              <Link to="/message" className="text-black hover:text-cyan-500">
                 Messages
               </Link>
             </li>

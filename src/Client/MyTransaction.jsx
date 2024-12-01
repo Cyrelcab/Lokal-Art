@@ -7,6 +7,9 @@ export default function MyTransactions() {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [amount, setPaymentAmount] = useState("");
   const [name, setName] = useState("");
+  const firstName = localStorage.getItem("first_name") || "John";
+  const lastName = localStorage.getItem("last_name") || "Doe";
+  const fullName = `${firstName} ${lastName}`;
 
   // Retrieve data from session storage when the component mounts
   useEffect(() => {
@@ -19,12 +22,12 @@ export default function MyTransactions() {
     setTransactionDate(storedDate || "N/A");
     setPaymentMethod(storedPaymentMethod || "N/A");
     setPaymentAmount(storedAmount || "N/A")
-    setName(storedName || "N/A");
+    setName(storedName);
   }, []);
 
   return (
     <div>
-      <Navbar />
+      <Navbar fullName={fullName}/>
       <div className="mt-20 grid grid-cols-1">
         <div className="flex flex-col justify-center items-center">
           <div className="border-2 rounded-xl w-[70%] sm:w-[40%] border-cyan-500">

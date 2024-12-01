@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 
 export default function Transaction() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +13,7 @@ export default function Transaction() {
   const [contactNumber, setContactNumber] = useState("");
   const [selectedService, setSelectedService] = useState("");
   const [date, setDate] = useState("");
+  
 
   const options = ["G-Cash", "Paypal", "Pay Maya"]; // Define dropdown options
   const services = [
@@ -20,7 +22,6 @@ export default function Transaction() {
     "Temporary Tattoo",
     "Custom Painting",
   ];
-
   
 
   // Set initial values from session storage when the component mounts
@@ -311,6 +312,12 @@ export default function Transaction() {
       {showConfirmPopup && (
         <div className="fixed top-9 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center z-10">
           <div className="bg-white w-[30rem] h-[20rem] rounded-md shadow-lg relative p-5 flex flex-col items-center">
+          <button
+              onClick={handleClosePopup}
+              className="absolute top-2 right-2 text-white bg-red-500 px-3 pb-1 rounded"
+            >
+              x
+            </button>
             <div className="flex flex-col justify-center items-center flex-grow">
               <Icon
                 icon="lets-icons:check-fill"
@@ -321,13 +328,12 @@ export default function Transaction() {
                 Your transaction has been processed successfully
               </p>
             </div>
-
-            <button
-              onClick={handleClosePopup}
-              className="text-cyan-500 border-2 border-cyan-500 hover:bg-cyan-600 hover:text-white mt-5 py-3 px-7 rounded-full"
-            >
-              Done
+            
+            <button className="text-cyan-500 border-2 border-cyan-500 hover:bg-cyan-600 hover:text-white mt-5 py-3 px-7 rounded-full">
+              <Link to="/transactions">View Transactions</Link>
             </button>
+            
+            
           </div>
         </div>
       )}

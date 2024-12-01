@@ -52,13 +52,12 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
   const toggleArtBox = () => {
     setIsArtBoxOpen(true);
     setIsEventBoxOpen(false);
-    
-  };  
+  };
 
   const toggleEventBox = () => {
     setIsEventBoxOpen(true);
     setIsArtBoxOpen(false);
-  };  
+  };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -136,7 +135,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
       <NavbarArtist fullName={fullName} />
       <main className="pt-10">
         {/* Banner Photo Upload Section */}
-        <div className="relative w-full h-48 bg-gray-200 mb-16">
+        <div className="relative w-full h-60 bg-gray-200 mb-16">
           <input
             type="file"
             accept="image/*"
@@ -159,7 +158,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                 icon="mdi:image-plus"
                 width="48"
                 height="48"
-                className="text-gray-400 mb-2"
+                className="text-cyan-400 mb-2"
               />
               <span className="text-gray-600">
                 Click to upload banner photo
@@ -168,7 +167,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
           )}
 
           {/* Profile Photo Upload Section */}
-          <div className="absolute -bottom-16 left-8">
+          <div className="absolute -bottom-16 left-4 sm:left-8">
             <input
               type="file"
               accept="image/*"
@@ -181,15 +180,15 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                 <img
                   src={profileImage}
                   alt="Profile"
-                  className="w-40 h-40 rounded-full object-cover border-4 border-white"
+                  className="w-40 h-40 sm:w-70 sm:h-70 rounded-full object-cover border-4 border-white"
                 />
               ) : (
-                <div className="w-40 h-40 rounded-full bg-gray-200 border-2 border-white flex flex-col items-center justify-center hover:bg-gray-300 transition-colors">
+                <div className="w-40 h-40 sm:w-70 sm:h-70 rounded-full bg-gray-200 border-2 border-white flex flex-col items-center justify-center hover:bg-gray-300 transition-colors">
                   <Icon
                     icon="mdi:account-plus"
                     width="40"
                     height="40"
-                    className="text-gray-400 mb-1"
+                    className="text-cyan-400 mb-1"
                   />
                   <span className="text-xs text-gray-600">Add photo</span>
                 </div>
@@ -199,13 +198,12 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
         </div>
 
         {/* User Information Section */}
-        <div className="mt-20 px-8">
-          {/* Create a flex container to hold both sections */}
-          <div className="flex">
-            {/* Left section - existing user info */}
-            <div className="flex-1 max-w-md border-r border-black pr-10">
+        <div className="mt-20 px-4 sm:px-8">
+          <div className="flex flex-col lg:flex-row lg:space-x-8">
+            {/* Left Section */}
+            <div className="flex-1 max-w-full lg:max-w-[20rem] lg:border-r lg:border-b-0 border-black pb-8 lg:pr-10">
               <div className="flex items-center space-x-4">
-                <h1 className="text-3xl font-bold">{fullName}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold">{fullName}</h1>
                 <button
                   className="p-2 text-gray-600 hover:text-cyan-500 rounded-full hover:bg-gray-100"
                   title="Edit Profile"
@@ -223,99 +221,115 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
                   {bio && <i>"{bio}"</i>}
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Icon icon="mdi:map-marker" width="20" height="20" />
+                  <Icon
+                    icon="mdi:map-marker"
+                    width="20"
+                    height="20"
+                    className="text-cyan-400"
+                  />
                   <span>{address}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Icon icon="mdi:calendar" width="20" height="20" />
+                  <Icon
+                    icon="mdi:calendar"
+                    width="20"
+                    height="20"
+                    className="text-cyan-400"
+                  />
                   <span>{birthday}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Icon icon="mdi:email" width="20" height="20" />
+                  <Icon
+                    icon="mdi:email"
+                    width="20"
+                    height="20"
+                    className="text-cyan-400"
+                  />
                   <span>{email}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Icon icon="mdi:phone" width="20" height="20" />
+                  <Icon
+                    icon="mdi:phone"
+                    width="20"
+                    height="20"
+                    className="text-cyan-400"
+                  />
                   <span>+63 912 345 6789</span>
                 </div>
               </div>
-              {/* Stats Section - moved outside the flex container */}
-              <div className="mt-16 flex space-x-8">
+
+              <div className="mt-16 flex justify-around lg:justify-start lg:space-x-8">
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold">9</span>
-                  <div className="flex items-center space-x-1 text-gray-600 text-sm">
-                    <Icon icon="ix:workspace" width="16" height="16" />
+                  <span className="text-lg sm:text-2xl font-bold">1</span>
+                  <div className="inline-flex space-x-1">
+                    <Icon
+                      icon="ix:workspace"
+                      width="16"
+                      height="16"
+                      className="text-cyan-400 mt-1"
+                    />
                     <span>Works</span>
                   </div>
                 </div>
-
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold">13.5k</span>
-                  <div className="flex items-center space-x-1 text-gray-600 text-sm">
-                    <Icon icon="mdi:account-group" width="16" height="16" />
+                  <span className="text-lg sm:text-2xl font-bold">0</span>
+                  <div className="inline-flex space-x-1">
+                    <Icon
+                      icon="mdi:account-group"
+                      width="16"
+                      height="16"
+                      className="text-cyan-400 mt-1"
+                    />
                     <span>Followers</span>
                   </div>
                 </div>
-
                 <div className="flex flex-col items-center">
-                  <span className="text-2xl font-bold">3.4</span>
-                  <div className="flex items-center space-x-1 text-gray-600 text-sm">
-                    <Icon icon="mdi:star" width="16" height="16" />
+                  <span className="text-lg sm:text-2xl font-bold">0</span>
+                  <div className="inline-flex space-x-1">
+                    <Icon
+                      icon="ix:star"
+                      width="16"
+                      height="16"
+                      className="text-cyan-400 mt-1"
+                    />
                     <span>Ratings</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right section with border - Fixed structure */}
-            <div className="w-full pl-6 ml-6">
-              <div className="space-y-4">
-                <div className="flex space-x-8">
-                  <button
-                    onClick={toggleArtBox}
-                    className="font-semibold text-gray-700 pb-1 hover:border-b-2 hover:border-cyan-500 hover:text-cyan-500"
-                  >
-                    Works
-                  </button>
-
-                  <button
-                    onClick={toggleEventBox}
-                    className="font-semibold text-gray-700 pb-1 hover:border-b-2 hover:border-cyan-500 hover:text-cyan-500"
-                    >
-                    Events
-                  </button>
-                  <button className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2">
-                    Followers
-                  </button>
-                  <button
-                    onClick={handleUploadClick}
-                    className="font-semibold text-gray-700 hover:text-cyan-500 hover:border-black pb-2 flex items-center gap-1"
-                  >
-                    Upload
-                    <Icon icon="material-symbols:upload" />
-                  </button>
-                </div>
-                <div>
-                  <EventBox
-                    isOpen={isEventBoxOpen}
-                    events={events}
-                  />
-                </div>
-
-                {/* Display the Uploaded Artwork */}
-                <div>
-                  <ArtBox
-                    isOpen={isArtBoxOpen}
-                    artwork={artwork}
-                  />
-                </div>
-                <div></div>
+            {/* Right Section */}
+            <div className="flex-1 mt-8 lg:mt-0">
+              <div className="flex justify-center lg:justify-start mt-4 lg:mt-0 gap-10">
+                <button
+                  onClick={toggleArtBox}
+                  className={`font-semibold pb-1 hover:text-cyan-500 ${
+                    isArtBoxOpen ? "" : ""
+                  }`}
+                >
+                  Works
+                </button>
+                <button
+                  className="font-semibold pb-1 hover:text-cyan-500"
+                  onClick={toggleEventBox}
+                >
+                  Events
+                </button>
+                <button
+                  className="font-semibold pb-1 hover:text-cyan-500 flex items-center"
+                  onClick={handleUploadClick}
+                >
+                  Upload <Icon icon="material-symbols:upload" />
+                </button>
+              </div>
+              <div className="pt-4">
+                <EventBox isOpen={isEventBoxOpen} events={events} />
+                <ArtBox isOpen={isArtBoxOpen} artwork={artwork} />
               </div>
             </div>
           </div>
         </div>
       </main>
-
       {/* Add Modal */}
       <Modal
         isOpen={isModalOpen}

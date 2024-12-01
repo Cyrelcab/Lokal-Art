@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { setDocumentTitle } from "@/utils/document";
+import { Icon } from "@iconify/react";
 import UploadPopup from "../Popup";
-import Navbar from "../navbar";
+
 import Transaction from "./Transaction";
+import Message from "../Message";
+import NavbarArtist from "../navbarArtist";
 
 export default function Artist_1() {
-  setDocumentTitle("Jonathan | LokalArt");
+  setDocumentTitle("Jonathan Wick | LokalArt");
   const [isTransactionOpen, setIsTransactionOpen] = useState(false);
   const firstName = localStorage.getItem("first_name") || "John";
   const lastName = localStorage.getItem("last_name") || "Doe";
@@ -60,12 +63,14 @@ export default function Artist_1() {
 
   useEffect(() => {
     const name = "Jonathan Wick";
+    const profilePic = "/images/profile-photo.jpg";
     sessionStorage.setItem("userName", name);
+    sessionStorage.setItem("profilePic", profilePic);
   }, []);
 
   return (
     <section>
-      <Navbar fullName={fullName} />
+      <NavbarArtist fullName={fullName} />
 
       {/* Profile Cover Photo */}
       <div className="h-[250px] w-full overflow-hidden">
@@ -79,67 +84,97 @@ export default function Artist_1() {
       <div className="mt-4 px-4">
         <div className="flex flex-col items-center lg:flex-row lg:items-start lg:gap-10">
           {/* Profile Info */}
-          <div className="w-full lg:w-1/4 border-r-2 border-gray-300">
+          <div className="w-full lg:w-1/4">
             <img
               className="cursor-pointer mt-[-150px] shadow-md object-cover mx-auto lg:ml-10 rounded-full h-[200px] w-[200px]"
               src="/images/profile-photo.jpg"
               alt="Profile Photo"
             />
-            <div className="mt-4 text-center lg:text-left px-4">
-              <h1 className="text-xl lg:text-2xl font-bold">Jonathan Wick</h1>
-              <p className="text-gray-500">Painter, Digital Artist</p>
-              <p className="mt-4">
-                "If I could say it in words there would be no reason to paint.”
-              </p>
-            </div>
-
-            <div className="w-full flex flex-col justify-center items-center space-y-2 font-bold pt-5">
-              <div className="space-x-1 flex">
-                <button className="border px-8 py-2 rounded-full bg-cyan-400 text-white hover:bg-cyan-500">
-                  Message
-                </button>
-                <button
-                  className="border px-8 py-2 rounded-full bg-cyan-400 text-white hover:bg-cyan-500"
-                  onClick={handleClick}
-                >
-                  {isFollowed ? "Unfollow" : "Follow"}
-                </button>
+            <div className="mt-4 border-r-2 border-gray-400">
+              <div className="mt-4 text-center lg:text-left px-4">
+                <h1 className="text-xl lg:text-2xl font-bold">Jonathan Wick</h1>
+                <p className="text-gray-500">Painter, Digital Artist</p>
+                <p className="mt-4">
+                  "If I could say it in words there would be no reason to
+                  paint.”
+                </p>
               </div>
-              <Transaction />
-            </div>
 
-            <div className="flex flex-col justify-center items-center mt-4 text-sm ml-3">
-              <p>
-                <i className="fa-solid fa-globe text-cyan-500 pr-2"></i>
-                Libertad, Butuan City, Philippines
-              </p>
-              <p>
-                <i className="fa-solid fa-cake-candles text-cyan-500 pr-2"></i>
-                January 19, 2003
-              </p>
-            </div>
+              <div className="w-full flex flex-col justify-center items-center space-y-2 font-bold pt-5">
+                <div className="space-x-1 flex">
+                  <Message />
+                  <button
+                    className="border px-8 py-2 rounded-full bg-cyan-400 text-white hover:bg-cyan-500"
+                    onClick={handleClick}
+                  >
+                    {isFollowed ? "Unfollow" : "Follow"}
+                  </button>
+                </div>
+                <Transaction />
+              </div>
 
-            <div className="flex justify-around mt-7 text-center">
-              <div>
-                <h1 className="text-lg font-bold">6</h1>
-                <i className="fa-solid fa-suitcase text-gray-500"></i>{" "}
-                <span>Works</span>
+              <div className="flex flex-col items-center lg:items-start mt-4 text-sm ml-3">
+                <p>
+                  <i className="fa-solid fa-globe text-cyan-500 pr-2"></i>
+                  Libertad, Butuan City, Philippines
+                </p>
+                <p>
+                  <i className="fa-solid fa-cake-candles text-cyan-500 pr-2"></i>
+                  January 19, 2003
+                </p>
+                <p>
+                  <i className="fa-solid fa-envelope text-cyan-500 pr-2"></i>
+                  jonathanWick@email.com
+                </p>
+                <p>
+                  <i className="fa-solid fa-phone text-cyan-500 pr-2"></i>
+                  +63 912 345 6789
+                </p>
               </div>
-              <div>
-                <h1 className="text-lg font-bold">13.5k</h1>
-                <i className="fa-solid fa-users text-gray-500"></i>{" "}
-                <span>Followers</span>
-              </div>
-              <div>
-                <h1 className="text-lg font-bold">3.4</h1>
-                <i className="fa-solid fa-star text-gray-500"></i>{" "}
-                <span>Ratings</span>
+
+              <div className="flex justify-around mt-7 text-center">
+                <div>
+                  <h1 className="text-lg font-bold">6</h1>
+                  <div className="inline-flex space-x-1">
+                    <Icon
+                      icon="ix:workspace"
+                      width="16"
+                      height="16"
+                      className="text-cyan-400 mt-1"
+                    />
+                    <span>Works</span>
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-lg font-bold">13.5k</h1>
+                  <div className="inline-flex space-x-1">
+                    <Icon
+                      icon="mdi:account-group"
+                      width="16"
+                      height="16"
+                      className="text-cyan-400 mt-1"
+                    />
+                    <span>Followers</span>
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-lg font-bold">3.4</h1>
+                  <div className="inline-flex space-x-1">
+                    <Icon
+                      icon="ix:star"
+                      width="16"
+                      height="16"
+                      className="text-cyan-400 mt-1"
+                    />
+                    <span>Ratings</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Works Section */}
-          <div className="w-full lg:w-3/4">
+          <div className="w-full lg:w-3/4 mt-16">
             <div className="flex justify-center lg:justify-start mt-4 lg:mt-0 gap-10">
               <a href="#" className="font-bold hover:text-cyan-500">
                 Works
@@ -156,7 +191,7 @@ export default function Artist_1() {
             <div className="h-full py-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center mr-1 gap-y-6">
               {/* image-card */}
               <div
-                className="relative w-64 h-52"
+                className="cursor-pointer relative w-64 h-52"
                 onClick={() =>
                   handleImageClick("/images/Artist/img2.jpg", "City Night")
                 }
@@ -176,7 +211,7 @@ export default function Artist_1() {
               </div>
 
               <div
-                className="relative w-64 h-52"
+                className="cursor-pointer relative w-64 h-52"
                 onClick={() =>
                   handleImageClick("/images/Artist/img14.jpg", "Beach")
                 }
@@ -196,7 +231,7 @@ export default function Artist_1() {
               </div>
 
               <div
-                className="relative w-64 h-52"
+                className="cursor-pointer relative w-64 h-52"
                 onClick={() =>
                   handleImageClick("/images/Artist/img16.jpg", "Sunlight")
                 }
@@ -217,7 +252,7 @@ export default function Artist_1() {
 
               <div>
                 <div
-                  className="relative w-64 h-52"
+                  className="cursor-pointer relative w-64 h-52"
                   onClick={() =>
                     handleImageClick("/images/Artist/img5.jpg", "Model")
                   }
