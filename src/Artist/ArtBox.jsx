@@ -4,7 +4,7 @@ const ArtBox = ({ isOpen, onClose, artwork }) => {
   return (
     <div>
       <div className="bg-white rounded-md w-full p-4 relative">
-        <div className="h-full grid grid-cols-3 justify-center items-center gap-5">
+        <div className="h-full grid grid-cols-3 justify-center items-center gap-5 w-full">
           {artwork ? (
             <div
               className="relative w-64 h-52"
@@ -23,7 +23,9 @@ const ArtBox = ({ isOpen, onClose, artwork }) => {
               </p>
             </div>
           ) : (
-            <p className="text-gray-500 text-center">No artworks uploaded yet.</p>
+            <div className="flex flex-col justify-center items-center h-full col-span-3">
+              <p>No artworks uploaded yet.</p>
+            </div>
           )}
         </div>
       </div>

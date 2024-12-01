@@ -18,7 +18,7 @@ export default function Search({ onSearch = () => {} }) {
         value={searchTerm}
         onChange={handleInputChange}
         placeholder="Search"
-        className="w-[7rem] md:w-96 lg:w-[100%] px-4 py-2 border-b-2 shadow-md border-gray-300 rounded-2xl focus:outline-none hover:shadow-cyan-500"
+        className="w-[10rem] md:w-[15rem] lg:w-[20rem] px-4 py-2 border-b-2 shadow-md border-gray-300 rounded-2xl focus:outline-none hover:shadow-cyan-500"
       />
       <Icon
         icon="material-symbols:search"

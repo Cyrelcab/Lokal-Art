@@ -103,7 +103,7 @@ export default function Transaction() {
     <div>
       <button
         onClick={openPopup}
-        className="p-2 bg-cyan-400 px-[53px] text-white rounded-full hover:bg-cyan-500 mt-4"
+        className="p-2 bg-cyan-400 px-[53px] text-white rounded-full hover:bg-cyan-500 mt-2"
       >
         Book a Transaction
       </button>

@@ -27,7 +27,7 @@ const artistsData = [
       "/images/Artist/tattoo3.jpg",
       "/images/Artist/tattoo4.jpg"
     ],
-    route: "/upload"
+    route: "/artist-2"
   },
   {
     id: 3,
@@ -112,7 +112,7 @@ export default function ArtistBox({ searchQuery, categoryFilter, locationFilter 
   }
 
   return (
-    <div className="pb-5 grid grid-cols-1 gap-6 xl:grid-cols-2 justify-center items-center border">
+    <div className="pb-5 grid grid-cols-1 gap-6 xl:grid-cols-2 justify-center items-center">
       {filteredArtists.map((artist) => (
         <div key={artist.id} className="flex flex-col justify-center items-center">
           <a href={artist.route}>

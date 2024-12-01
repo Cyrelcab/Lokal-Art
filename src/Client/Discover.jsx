@@ -12,6 +12,9 @@ export default function Discover() {
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [locationFilter, setLocationFilter] = useState([]);
+  const firstName = localStorage.getItem("first_name") || "John";
+  const lastName = localStorage.getItem("last_name") || "Doe";
+  const fullName = `${firstName} ${lastName}`;
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -48,7 +51,7 @@ export default function Discover() {
 
   return (
     <section>
-      <Navbar />
+      <Navbar fullName={fullName}/>
       <div className="flex flex-col">
         {/* Filter, Search, and Sort Section */}
         <div className="fixed top-[60px] flex flex-wrap justify-center items-center gap-6 px-4 w-full py-4 pt-5 z-10 bg-white">

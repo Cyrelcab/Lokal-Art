@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Navbar from "@/Artist/navbar";
 
-export default function MyTransactions() {
+export default function ArtistMyTransactions() {
   const [serviceType, setServiceType] = useState("");
   const [transactionDate, setTransactionDate] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
   const [amount, setPaymentAmount] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   // Retrieve data from session storage when the component mounts
   useEffect(() => {
@@ -14,12 +15,14 @@ export default function MyTransactions() {
     const storedDate = sessionStorage.getItem("date");
     const storedPaymentMethod = sessionStorage.getItem("selectedOption");
     const storedAmount = sessionStorage.getItem("paymentAmount");
-    const storedName = sessionStorage.getItem("userName");
+    const storedFirstName = localStorage.getItem("first_name");
+    const storedLastName = localStorage.getItem("last_name");
     setServiceType(storedServiceType || "N/A");
     setTransactionDate(storedDate || "N/A");
     setPaymentMethod(storedPaymentMethod || "N/A");
-    setPaymentAmount(storedAmount || "N/A")
-    setName(storedName || "N/A");
+    setPaymentAmount(storedAmount || "N/A");
+    setFirstName(storedFirstName || "N/A");
+    setLastName(storedLastName || "N/A");
   }, []);
 
   return (
@@ -33,8 +36,8 @@ export default function MyTransactions() {
             </h1>
             <div className="space-y-3 mt-2 px-5 pb-5">
             <div className="sm:flex space-x-3">
-                <h1 className="font-bold">Artist Name: </h1>
-                <p>{name}</p>
+                <h1 className="font-bold">Customer Name: </h1>
+                <p>N/A</p>
               </div>
               <div className="sm:flex space-x-3">
                 <h1 className="font-bold">Date: </h1>

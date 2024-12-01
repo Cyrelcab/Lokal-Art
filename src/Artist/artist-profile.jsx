@@ -4,9 +4,9 @@ import { setDocumentTitle } from "@/utils/document";
 import { useState, useEffect } from "react";
 import Modal from "./modal";
 import UploadPopup from "./Popup";
-import Navbar from "./navbar";
 import EventBox from "./EventBox";
 import ArtBox from "./ArtBox";
+import NavbarArtist from "./navbarArtist";
 
 const ArtistProfile = ({ artistData: initialArtistData }) => {
   setDocumentTitle("Profile | Lokal-Art");
@@ -133,7 +133,7 @@ const ArtistProfile = ({ artistData: initialArtistData }) => {
 
   return (
     <div className="h-full bg-gray-100">
-      <Navbar fullName={fullName} />
+      <NavbarArtist fullName={fullName} />
       <main className="pt-10">
         {/* Banner Photo Upload Section */}
         <div className="relative w-full h-48 bg-gray-200 mb-16">

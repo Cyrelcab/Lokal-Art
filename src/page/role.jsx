@@ -11,7 +11,7 @@ const Role = () => {
     localStorage.setItem("userRole", role);
 
     if (role === "Client") {
-      navigate("/client/setup-profile");
+      navigate("/client/discover");
     } else if (role === "Artist") {
       navigate("/artist/setup-profile");
     }
