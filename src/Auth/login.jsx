@@ -58,7 +58,7 @@ const Login = () => {
         limit={1}
         closeButton={false}
       />
-      <div className="relative w-full md:w-1/2">
+      <div className="hidden lg:block relative w-full md:w-1/2">
         <div
           className="bg-image w-full flex bg-blue-100 p-8 md:p-0 h-screen"
           style={{ aspectRatio: "16/9" }}
@@ -71,7 +71,7 @@ const Login = () => {
       </div>
 
       {/*login field*/}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
+      <div className="w-full md:w-1/2 flex items-center justify-center h-screen p-4 md:p-8">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
           <h1 className="text-3xl font-bold text-center mb-8">Login</h1>
 

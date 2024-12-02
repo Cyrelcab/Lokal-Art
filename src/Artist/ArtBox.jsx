@@ -23,7 +23,7 @@ const ArtBox = ({ isOpen, onClose, artwork }) => {
               </p>
             </div>
           ) : (
-            <div className="flex flex-col justify-center items-center h-full col-span-3">
+            <div className="flex flex-col justify-center items-center h-full col-span-3 text-gray-500">
               <p>No artworks uploaded yet.</p>
             </div>
           )}

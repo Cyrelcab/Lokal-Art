@@ -79,7 +79,7 @@ export default function NavbarArtist({ fullName }) {
             />
           </div>
           <div className="w-8 h-8 border border-gray-300 rounded-full bg-[#ffffff] text-black flex items-center justify-center cursor-pointer">
-            {getInitials(fullName)}
+            <Link to="/artist/setup-profile">{getInitials(fullName)}</Link>
           </div>
           <button
             onClick={logoutBtn}

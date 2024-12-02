@@ -17,14 +17,13 @@ import Artist_3 from "./Artist/Profile/Artist_3";
 import Artist_4 from "./Artist/Profile/Artist_4";
 import Artist_5 from "./Artist/Profile/Artist_5";
 import Messages from "./Client/Messages";
-import Message from "./Artist/Message";
 import Artist_6 from "./Artist/Profile/Artist_6";
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<Signup />} />
           <Route path="/home" element={<Home />} />
           <Route path="/client/discover" element={<Discover />} />
           <Route path="/artist/discover" element={<Discover />} />

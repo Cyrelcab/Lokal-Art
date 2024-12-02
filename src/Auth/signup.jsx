@@ -95,7 +95,7 @@ const Signup = () => {
         closeButton={false}
       />
       {/* Signup Form Section */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8">
+      <div className="w-full md:w-1/2 flex items-center justify-center h-screen p-4 md:p-8">
         <div className="w-full max-w-md border rounded-lg p-8 shadow-md bg-white">
           <h1 className="text-3xl font-bold mb-8 text-center">Signup</h1>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -236,7 +236,7 @@ const Signup = () => {
       </div>
 
       {/* Right Side - Image Section */}
-      <div className="relative w-full md:w-1/2 h-screen">
+      <div className="hidden lg:block relative w-full md:w-1/2 h-screen">
         <div className="bg-image w-full h-full bg-blue-100" />
         <div className="absolute top-4 right-4">
           <Link to="/">
